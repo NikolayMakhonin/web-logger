@@ -19,8 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="Fix Intern test">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="Added index files. Fix lint.">
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +91,10 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
@@ -106,7 +114,7 @@
     <property name="node.js.path.for.package.standard" value="node" />
     <property name="node.js.path.for.package.stylelint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/../nodejs-templates/node_modules/eslint" />
+    <property name="node.js.selected.package.eslint" value="L:\Work\_GIT\GitHub\NodeJs\modules\nodejs-templates\node_modules\eslint" />
     <property name="node.js.selected.package.standard" value="L:\Work\_GIT\GitHub\NodeJs\templates\nodejs-templates\node_modules\eslint" />
     <property name="node.js.selected.package.stylelint" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -118,9 +126,22 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
-    <property name="ts.external.directory.path" value="L:\Work\_GIT\GitHub\NodeJs\apps\app-template\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\node_modules\typescript\lib" />
   </component>
-  <component name="RunManager" selected="npm.Test Dev">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger" />
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\test\tests\common" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger" />
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\env" />
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\test\tests\common\main" />
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\browser" />
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Mocha.Watch">
     <configuration default="true" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/env/karma/configs/dev.js" />
       <karma-package-dir value="$PROJECT_DIR$/node_modules/karma" />
@@ -170,12 +191,16 @@
       <item itemvalue="Karma.Dev" />
       <item itemvalue="Karma.CI" />
       <item itemvalue="Karma.Performance" />
+      <item itemvalue="Mocha.Intern Debug" />
+      <item itemvalue="Mocha.Intern Debug Video" />
       <item itemvalue="Mocha.Coverage" />
       <item itemvalue="Mocha.Watch" />
       <item itemvalue="Mocha.Intern Export" />
       <item itemvalue="Mocha.Intern Dev Video" />
       <item itemvalue="Mocha.Intern Dev" />
       <item itemvalue="Mocha.Intern Export with rebuild" />
+      <item itemvalue="npm.Build Test All" />
+      <item itemvalue="npm.Build Test Dev" />
       <item itemvalue="npm.Test Dev" />
       <item itemvalue="npm.Test All" />
     </list>
@@ -198,8 +223,33 @@
       <option name="project" value="LOCAL" />
       <updated>1590574580136</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="Fix Intern test" />
+      <created>1590901822896</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590901822896</updated>
+      <workItem from="1590901824672" duration="4891000" />
+    </task>
+    <task id="LOCAL-00003" summary="Fill module info">
+      <created>1590918205751</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1590918205751</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added main code">
+      <created>1590919316731</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1590919316732</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -273,17 +323,19 @@
     <MESSAGE value="TODO changed" />
     <MESSAGE value="Remove pug" />
     <MESSAGE value="Merge fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge fix" />
+    <MESSAGE value="Fill module info" />
+    <MESSAGE value="Added main code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added main code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590574332632">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1590574332632" />
-    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2" timestamp="1590646671065">
+    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2" timestamp="1590920074708">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1590646671065" />
+    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1590920074708" />
     <state x="91" y="91" width="1738" height="700" key="DiffContextDialog" timestamp="1590574333082">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -292,6 +344,22 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="686" y="134" key="FileChooserDialogImpl/0.0.1920.882@0.0.1920.882" timestamp="1590574197995" />
+    <state width="1892" height="354" key="GridCell.Tab.0.bottom" timestamp="1590919324386">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.bottom/0.0.1920.882@0.0.1920.882" timestamp="1590919324386" />
+    <state width="1892" height="354" key="GridCell.Tab.0.center" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.center/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
+    <state width="1892" height="354" key="GridCell.Tab.0.left" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.left/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
+    <state width="1892" height="354" key="GridCell.Tab.0.right" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.right/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
     <state x="1" y="1" width="1915" height="880" key="MergeDialog" timestamp="1590646632693">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -304,10 +372,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="654" y="68" key="RollbackChangesDialog/0.0.1920.882@0.0.1920.882" timestamp="1590572876005" />
-    <state x="602" y="108" width="716" height="666" key="find.popup" timestamp="1590574627745">
+    <state x="-1" y="2" width="1921" height="878" key="find.popup" timestamp="1590918146655">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="602" y="108" width="716" height="666" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1590574627745" />
+    <state x="-1" y="2" width="1921" height="878" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1590918146655" />
     <state x="688" y="81" key="git4idea.branch.GitSmartOperationDialog" timestamp="1590572868876">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

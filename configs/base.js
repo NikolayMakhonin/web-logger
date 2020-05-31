@@ -1,7 +1,7 @@
 /* eslint-disable no-process-env */
 module.exports = {
-	packageName: 'app-template',
-	description: 'App Template',
+	packageName: 'web-logger',
+	description: 'Web Logger',
 	tests: {
 		intern: {
 

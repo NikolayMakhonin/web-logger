@@ -1,3 +1,9 @@
-export function main() {
-	return true
-}
+export * from './log/contracts'
+export * from './log/objectToString'
+export * from './log/EmitEventHandler'
+export * from './log/CombineLogHandlers'
+export * from './log/LogHandler'
+export * from './log/SendLogHandler'
+export * from './log/WriteToConsoleHandler'
+export * from './log/LogEvent'
+export * from './log/Logger'
