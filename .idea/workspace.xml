@@ -19,12 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/tests/common/main/log/objectToString.ts" afterDir="false" />
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="Added index files. Fix lint.">
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/tests/common/main/css-to-xpath.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/tests/common/main/helpers/helpers.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/tests/common/main/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
     <property name="js.buildTools.grunt.grunt-cli.package" value="$USER_HOME$/AppData/Roaming/npm/node_modules/grunt-cli" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$USER_HOME$/AppData/Roaming/npm/node_modules/gulp" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/tests/common" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.stylelint" value="true" />
@@ -130,14 +130,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\test\tests\common" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\env" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\test\tests\common\main" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\browser" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\common" />
-      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\node" />
     </key>
   </component>
   <component name="RunManager" selected="Mocha.Watch">
@@ -228,7 +229,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1590901822896</updated>
-      <workItem from="1590901824672" duration="3540000" />
+      <workItem from="1590901824672" duration="4891000" />
     </task>
     <task id="LOCAL-00003" summary="Fill module info">
       <created>1590918205751</created>
@@ -237,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590918205751</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added main code">
+      <created>1590919316731</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1590919316732</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,17 +324,18 @@
     <MESSAGE value="Remove pug" />
     <MESSAGE value="Merge fix" />
     <MESSAGE value="Fill module info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fill module info" />
+    <MESSAGE value="Added main code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added main code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590574332632">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="409" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.882@0.0.1920.882" timestamp="1590574332632" />
-    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2" timestamp="1590918203664">
+    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2" timestamp="1590920074708">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1590918203664" />
+    <state x="65" y="0" width="1583" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1590920074708" />
     <state x="91" y="91" width="1738" height="700" key="DiffContextDialog" timestamp="1590574333082">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -335,6 +344,22 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="686" y="134" key="FileChooserDialogImpl/0.0.1920.882@0.0.1920.882" timestamp="1590574197995" />
+    <state width="1892" height="354" key="GridCell.Tab.0.bottom" timestamp="1590919324386">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.bottom/0.0.1920.882@0.0.1920.882" timestamp="1590919324386" />
+    <state width="1892" height="354" key="GridCell.Tab.0.center" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.center/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
+    <state width="1892" height="354" key="GridCell.Tab.0.left" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.left/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
+    <state width="1892" height="354" key="GridCell.Tab.0.right" timestamp="1590919324385">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state width="1892" height="354" key="GridCell.Tab.0.right/0.0.1920.882@0.0.1920.882" timestamp="1590919324385" />
     <state x="1" y="1" width="1915" height="880" key="MergeDialog" timestamp="1590646632693">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

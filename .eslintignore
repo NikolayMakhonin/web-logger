@@ -9,3 +9,4 @@ static
 *.ts
 **/v8/**/runtime.js
 env/logger/server/**/*
+server
