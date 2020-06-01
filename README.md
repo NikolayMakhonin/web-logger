@@ -21,10 +21,10 @@ Powerful NodeJS logger on server and client side with PHP / MySQL logs collector
 [npm-url]: https://npmjs.org/package/@flemist/web-logger
 [node-version-image]: https://img.shields.io/node/v/@flemist/web-logger.svg
 [node-version-url]: https://nodejs.org/en/download/
-[travis-image]: https://travis-ci.org/NikolayMakhonin/web-logger.svg?branch=browser-helpers
-[travis-url]: https://travis-ci.org/NikolayMakhonin/web-logger?branch=browser-helpers
-[coveralls-image]: https://coveralls.io/repos/github/NikolayMakhonin/web-logger/badge.svg?branch=browser-helpers
-[coveralls-url]: https://coveralls.io/github/NikolayMakhonin/web-logger?branch=browser-helpers
+[travis-image]: https://travis-ci.org/NikolayMakhonin/web-logger.svg
+[travis-url]: https://travis-ci.org/NikolayMakhonin/web-logger
+[coveralls-image]: https://coveralls.io/repos/github/NikolayMakhonin/web-logger/badge.svg
+[coveralls-url]: https://coveralls.io/github/NikolayMakhonin/web-logger
 [downloads-image]: https://img.shields.io/npm/dm/@flemist/web-logger.svg
 [downloads-url]: https://npmjs.org/package/@flemist/web-logger
 [npm-url]: https://npmjs.org/package/@flemist/web-logger
