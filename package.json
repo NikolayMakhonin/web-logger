@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -31,20 +31,26 @@
 		"log-collector"
 	],
 	"files": [
-		"dist/**"
+		"dist/**",
+		"browser/**/*.js",
+		"browser/**/*.d.ts",
+		"node/**/*.js",
+		"node/**/*.d.ts"
 	],
-	"types": "dist/types/browser/index.d.ts",
-	"main": "dist/dev/js/main/browser/index.js",
-	"jsnext:main": "dist/dev/mjs/main/browser/index.js",
-	"module": "dist/dev/mjs/main/browser/index.js",
+	"types": "dist/types/common/index.d.ts",
+	"main": "dist/dev/js/main/common/index.js",
+	"jsnext:main": "dist/dev/mjs/main/common/index.js",
+	"module": "dist/dev/mjs/main/common/index.js",
 	"engines": {
 		"node": ">= 8.6.0"
 	},
 	"scripts": {
 		"precommit": "npm run build-test:ci",
-		"prepublishOnly": "npm run test:dev",
+		"prepublishOnly": "npm run build-test:dev",
 		"ci": "npm run build-test:ci && ncat \"tmp/*/coverage/all/lcov/**/lcov.info\" --banner \"\" | coveralls",
 		"lint": "node ./env/scripts/run.js \"require('./env/scripts/common').lint().stopOnError()\"",
+
+		"build:indexes": "node ./env/scripts/run.js \"require('./env/scripts/common').buildIndexes().stopOnError()\"",
 		"build:polyfill": "node ./env/scripts/run.js \"require('./env/scripts/common').buildPolyfill().stopOnError()\"",
 		"build:libs": "node ./env/scripts/run.js \"require('./env/scripts/common').buildLibs().stopOnError()\"",
 		"build:dev": "node ./env/scripts/run.js \"require('./env/scripts').buildAll(['dev']).stopOnError()\"",

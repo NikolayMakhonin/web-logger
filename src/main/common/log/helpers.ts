@@ -7,14 +7,6 @@ export function md5(str: string): string {
 	return spark.end()
 }
 
-export function escapeJs(str: string): string {
-	return str && str
-		.replace(/[\\"']/g, '\\$&')
-		.replace(/\u0000/g, '\\0')
-		.replace(/\n/g, '\\n')
-		.replace(/\r/g, '\\r')
-}
-
 export function escapeHtml(str: string): string {
 	return html.escape(str)
 }
