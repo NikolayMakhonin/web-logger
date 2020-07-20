@@ -21,6 +21,7 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 		emitEventLevels = LogLevel.Any,
 		filter,
 		appState,
+		interceptEval,
 	}: {
 		appName: string,
 		appVersion: string,
@@ -32,6 +33,8 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 		emitEventLevels?: LogLevel,
 		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
 		appState?: object,
+		/** Use this only with strict mode */
+		interceptEval?: false,
 	}) {
 		if (typeof window !== 'undefined') {
 			// @ts-ignore

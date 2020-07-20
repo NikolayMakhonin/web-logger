@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",

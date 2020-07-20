@@ -33,12 +33,15 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		handlers,
 		filter,
 		appState,
+		interceptEval,
 	}: {
 		appName: string,
 		appVersion: string,
 		handlers: Array<ILogHandler<HandlersNames>>,
 		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
 		appState?: object,
+		/** Use this only with strict mode */
+		interceptEval?: false,
 	}) {
 		if (this._initialized) {
 			this.error('Logger already initialized')
@@ -62,7 +65,9 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		this.filter = filter
 		this.appState = appState
 
-		this.interceptEval()
+		if (interceptEval) {
+			this.interceptEval()
+		}
 
 		const logEvent: ILogEventParams<HandlersNames> = {
 			level: LogLevel.Info,

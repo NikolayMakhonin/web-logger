@@ -21,6 +21,7 @@ export class LoggerNode extends Logger<HandlersNames> {
 		emitEventLevels = LogLevel.Any,
 		filter,
 		appState,
+		interceptEval,
 	}: {
 		appName: string,
 		appVersion: string,
@@ -33,6 +34,8 @@ export class LoggerNode extends Logger<HandlersNames> {
 		emitEventLevels?: LogLevel,
 		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
 		appState?: object,
+		/** Use this only with strict mode */
+		interceptEval?: false,
 	}) {
 		this.logUnhandledErrors()
 
