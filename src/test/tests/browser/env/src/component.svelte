@@ -8,6 +8,6 @@
 	import {test} from './test'
 
 	// const x = {}
-	// export const value = Array.from((Object.assign(x, {x: {y: [['test']]}}))?.x?.y)?.flatMap(o => o)?.[0]
+	// export const value = Array.from(Object.assign(x, {x: {y: [['test']]}})?.x?.y)?.flatMap(o => o)?.[0]
 	export let count = test ? test.length : test
 </script>
