@@ -23,7 +23,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="" />
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/app-template.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-logger.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,11 +50,12 @@
   </component>
   <component name="NamedScopeManager">
     <order>
+      <scope name="src+env" />
+      <scope name="src+env ts" />
       <scope name="src-test" />
       <scope name="src-main" />
       <scope name="all" />
       <scope name="env" />
-      <scope name="all-ts" />
     </order>
   </component>
   <component name="PackageJsonUpdateNotifier">
@@ -220,6 +223,7 @@
       <workItem from="1604762711020" duration="1324000" />
       <workItem from="1606039457815" duration="4394000" />
       <workItem from="1606458874653" duration="720000" />
+      <workItem from="1606561731281" duration="528000" />
     </task>
     <task id="LOCAL-00017" summary="Lint fixes">
       <created>1590570787647</created>

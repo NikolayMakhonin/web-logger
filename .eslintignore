@@ -12,3 +12,4 @@ browser/**/*
 node/**/*
 env/logger/server/**/*
 server
+src/test/**/*.html
