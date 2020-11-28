@@ -40,18 +40,18 @@ function sendFetch(
 	statusCode: number,
 }> {
 	return fetch(logUrl, {
-		method: 'POST',
-		mode: 'cors', // no-cors, cors, *same-origin
-		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		method     : 'POST',
+		mode       : 'cors', // no-cors, cors, *same-origin
+		cache      : 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
-		headers: {
+		headers    : {
 			'Content-Type': 'application/json; charset=UTF-8',
-			'X-HASH': message.Hash,
-			'X-TOKEN': message.Token,
+			'X-HASH'      : message.Hash,
+			'X-TOKEN'     : message.Token,
 		},
 		redirect: 'follow', // manual, *follow, error
 		referrer: 'no-referrer', // no-referrer, *client
-		body: JSON.stringify(message), // body data type must match "Content-Type" header
+		body    : JSON.stringify(message), // body data type must match "Content-Type" header
 	})
 	.then(response => ({
 		statusCode: response.status,

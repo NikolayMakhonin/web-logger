@@ -147,8 +147,8 @@ export function handleLogErrorHandler<HandlersNames extends string|number>(
 
 	const lastLogEvent = logEvents[logEvents.length - 1]
 	logger.log(_changeNewLogEvent({
-		level: LogLevel.Error,
+		level           : LogLevel.Error,
 		messagesOrErrors: ['Logger self error', error],
-		handlersModes: lastLogEvent.handlersModes,
+		handlersModes   : lastLogEvent.handlersModes,
 	}))
 }

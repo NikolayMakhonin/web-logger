@@ -4,9 +4,9 @@ import {objectToString} from './objectToString'
 
 const consoleOrig = {
 	debug: console.debug.bind(console),
-	info: console.info.bind(console),
-	log: console.log.bind(console),
-	warn: console.warn.bind(console),
+	info : console.info.bind(console),
+	log  : console.log.bind(console),
+	warn : console.warn.bind(console),
 	error: console.error.bind(console),
 }
 
@@ -26,11 +26,11 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
 	private interceptConsole() {
 		const self = this
 		const createInterceptFunc = (level: LogLevel, consoleFunc: (...args) => void) => {
-			return function(...args) {
+			return function (...args) {
 				self._logger.log({
 					level,
 					messagesOrErrors: args,
-					handlersModes: {
+					handlersModes   : {
 						writeToConsole: consoleFunc ? ActionMode.Never : ActionMode.Default,
 					} as any,
 				})

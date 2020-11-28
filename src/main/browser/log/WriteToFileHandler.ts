@@ -36,11 +36,11 @@ export class WriteToFileHandler extends LogHandler<'writeToFile'> {
 
 		const sendLogEvents: Array<IWriteToFileLogEvent<any>> = logEvents.map(o => {
 			return {
-				level: o.level,
-				dateString: o.dateString,
-				appInfo: o.appInfo,
+				level        : o.level,
+				dateString   : o.dateString,
+				appInfo      : o.appInfo,
 				handlersModes: {
-					_all: ActionMode.Never,
+					_all       : ActionMode.Never,
 					writeToFile: ActionMode.Always,
 				},
 				bodyString: o.bodyString,

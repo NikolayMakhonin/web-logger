@@ -2,7 +2,7 @@
 module.exports = {
 	packageName: 'web-logger',
 	description: 'Web Logger',
-	tests: {
+	tests      : {
 		intern: {
 
 		},

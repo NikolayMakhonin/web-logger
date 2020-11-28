@@ -70,9 +70,9 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		}
 
 		const logEvent: ILogEventParams<HandlersNames> = {
-			level: LogLevel.Info,
+			level           : LogLevel.Info,
 			messagesOrErrors: `Start App: ${appName} v${appVersion}`,
-			handlersModes: {
+			handlersModes   : {
 				_all: ActionMode.Always,
 			} as any,
 		}
@@ -157,7 +157,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 
 	private createLogEvent(params: ILogEventParams<HandlersNames>): ILogEvent<HandlersNames> {
 		(params as any).appState = {
-			appName: this.appName,
+			appName   : this.appName,
 			appVersion: this.appVersion,
 			...this.appState,
 		}
@@ -212,7 +212,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 				} catch (error) {
 					this._subscribers.splice(i, 1)
 					this.log(new LogEvent({
-						level: LogLevel.Error,
+						level           : LogLevel.Error,
 						messagesOrErrors: [`onLog() error in ${subscriber}`, error],
 					}))
 				}

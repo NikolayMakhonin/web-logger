@@ -44,7 +44,7 @@ export abstract class SendLogHandler extends LogHandler<'sendLog'> {
 		const lastLogEvent = logEvents[logEvents.length - 1]
 		const selfError = (...messagesOrErrors) => {
 			this._logger.log({
-				level: LogLevel.Error,
+				level        : LogLevel.Error,
 				messagesOrErrors,
 				handlersModes: {
 					...lastLogEvent.handlersModes,
@@ -86,13 +86,13 @@ export abstract class SendLogHandler extends LogHandler<'sendLog'> {
 		const token = md5(lastLogEvent.md5Hash + '607bf405-a5a8-4b8c-aa61-41e8c1208dba')
 
 		const message: ISendLogMessage = {
-			Token: token,
-			Hash: lastLogEvent.md5Hash,
-			AppName: this._logger.appName,
-			AppVersion: this._logger.appVersion,
-			Type: LogLevel[lastLogEvent.level],
-			Time: lastLogEvent.time.toISOString(),
-			MessageFull: body,
+			Token       : token,
+			Hash        : lastLogEvent.md5Hash,
+			AppName     : this._logger.appName,
+			AppVersion  : this._logger.appVersion,
+			Type        : LogLevel[lastLogEvent.level],
+			Time        : lastLogEvent.time.toISOString(),
+			MessageFull : body,
 			MessageShort: removeExcessSpaces(lastLogEvent.bodyString.substring(0, 200)),
 		}
 

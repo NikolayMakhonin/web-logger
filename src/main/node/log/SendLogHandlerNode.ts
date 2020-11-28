@@ -11,11 +11,11 @@ export class SendLogHandlerNode extends SendLogHandler {
 			logUrl,
 			message,
 			{
-				json: true,
+				json      : true,
 				compressed: true,
-				timeout: 20000,
-				headers: {
-					'X-HASH': message.Hash,
+				timeout   : 20000,
+				headers   : {
+					'X-HASH' : message.Hash,
 					'X-TOKEN': message.Token,
 				},
 			},
