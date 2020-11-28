@@ -24,7 +24,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/app-template.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web-logger.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/LogEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/LogEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/SendLogHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/SendLogHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/helpers-cjs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/helpers-cjs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/log/WriteToFileHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/log/WriteToFileHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +111,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="plint" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="ts.external.directory.path" value="L:\Work\_GIT\GitHub\NodeJs\templates\app-template\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -223,21 +227,7 @@
       <workItem from="1604762711020" duration="1324000" />
       <workItem from="1606039457815" duration="4394000" />
       <workItem from="1606458874653" duration="720000" />
-      <workItem from="1606561731281" duration="528000" />
-    </task>
-    <task id="LOCAL-00017" summary="Lint fixes">
-      <created>1590570787647</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1590570787647</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Precommit OK.">
-      <created>1590571665630</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1590571665630</updated>
+      <workItem from="1606561731281" duration="1320000" />
     </task>
     <task id="LOCAL-00019" summary="Precommit OK.">
       <created>1590572150098</created>
@@ -568,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606478293623</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Small fixes">
+      <created>1606562531401</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1606562531401</updated>
+    </task>
+    <task id="LOCAL-00067" summary="lint:fix">
+      <created>1606562545114</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1606562545114</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +608,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Disabled windows travis tests. Rollback karma-edge-launcher" />
     <MESSAGE value="Fix scripts errors color" />
     <MESSAGE value="travis OK" />
     <MESSAGE value="Upgrade mocha 5.2.0 -&gt; 7.2.0" />
@@ -625,11 +628,12 @@
     <MESSAGE value="Try to add svelte eslint: not now" />
     <MESSAGE value="Added svelte eslint. Lint fixes" />
     <MESSAGE value="Lint fixes completed" />
-    <MESSAGE value="Small fixes" />
     <MESSAGE value="Small changes" />
     <MESSAGE value="Integrated @flemist/run-script module" />
     <MESSAGE value="Suppress experimental warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Suppress experimental warnings" />
+    <MESSAGE value="Small fixes" />
+    <MESSAGE value="lint:fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="lint:fix" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -653,10 +657,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="651" y="253" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.882@0.0.1920.882" timestamp="1601730650956" />
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1606478292902">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1606562544243">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1606478292902" />
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1606562544243" />
     <state width="1843" height="581" key="DebuggerActiveHint" timestamp="1601784278582">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -741,10 +745,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="969" height="450" key="XDebugger.FullValuePopup/0.0.1920.882@0.0.1920.882" timestamp="1601716969584" />
-    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1606476360851">
+    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1606562805809">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1606476360851" />
+    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1606562805809" />
     <state x="43" y="43" width="1793" height="805" key="scopes" timestamp="1606461475596">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
