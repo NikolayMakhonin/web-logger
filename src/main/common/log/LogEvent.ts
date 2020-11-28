@@ -17,9 +17,9 @@ function getStackTraceCountFrames(level: LogLevel): number
 			return 10
 		case LogLevel.Warning:
 			return 5
+		default:
+			return 0
 	}
-
-	return 0
 }
 
 export interface AppState {

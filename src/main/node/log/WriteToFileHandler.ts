@@ -1,4 +1,4 @@
-/* tslint:disable:no-var-requires */
+/* eslint-disable global-require */
 import {ILogEvent, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
 
@@ -6,13 +6,15 @@ const fs = require('fs')
 export const path = require('path')
 
 function asPromise<TResult = any>(func: (callback: (err: Error, result?: TResult) => void) => void): Promise<TResult> {
-	return new Promise((resolve, reject) => func((err, result) => {
-		if (err) {
-			reject(err)
-			return
-		}
-		resolve(result)
-	}))
+	return new Promise((resolve, reject) => {
+		func((err, result) => {
+			if (err) {
+				reject(err)
+				return
+			}
+			resolve(result)
+		})
+	})
 }
 
 async function autoCutLogFile(filePath: string, maxSize: number, cutToSize: number) {

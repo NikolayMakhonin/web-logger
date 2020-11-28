@@ -12,12 +12,14 @@ export function escapeHtml(str: string): string {
 }
 
 export function delay(timeMilliseconds) {
-	return new Promise(resolve => setTimeout(resolve, timeMilliseconds))
+	return new Promise(resolve => {
+		setTimeout(resolve, timeMilliseconds)
+	})
 }
 
-const _spacesRegex: RegExp = new RegExp('\\s+')
-const _spacesWithoutNewLinesRegex: RegExp = new RegExp('[^\\S\\n]+')
-const _fixNewLines: RegExp = new RegExp('([^\\S\\n]*\\n[^\\S\\n]*)')
+const _spacesRegex = /\s+/
+const _spacesWithoutNewLinesRegex = /[^\S\n]+/
+const _fixNewLines = /([^\S\n]*\n[^\S\n]*)/
 
 export function removeExcessSpaces(text: string, keepLines?: number) {
 	if (!text) {

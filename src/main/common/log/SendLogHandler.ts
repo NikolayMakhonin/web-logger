@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import {ActionMode, ILogEvent, ILogger, LogLevel} from './contracts'
 import {delay, escapeHtml, md5, removeExcessSpaces} from './helpers'
 import {LogHandler} from './LogHandler'
@@ -81,7 +82,7 @@ export abstract class SendLogHandler extends LogHandler<'sendLog'> {
 			})
 			.join('\r\n<hr>\r\n')
 
-		body = lastLogEvent.md5Hash + '\r\n' + '\r\n' + body
+		body = lastLogEvent.md5Hash + '\r\n\r\n' + body
 
 		const token = md5(lastLogEvent.md5Hash + '607bf405-a5a8-4b8c-aa61-41e8c1208dba')
 
@@ -122,7 +123,7 @@ export abstract class SendLogHandler extends LogHandler<'sendLog'> {
 			}
 
 			await delay(delayTime)
-			delayTime = delayTime * 2
+			delayTime *= 2
 			if (delayTime > maxDelayTime) {
 				delayTime = maxDelayTime
 			}

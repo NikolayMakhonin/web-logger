@@ -1,4 +1,4 @@
-/* tslint:disable:no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const SparkMD5 = require('spark-md5')
 const html = require('html-escaper')
 
