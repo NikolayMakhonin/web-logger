@@ -6,9 +6,9 @@ __sapper__
 **/polyfill*/**
 src/assets/**/*
 static
-*.ts
 **/v8/**/runtime.js
+docs/**/*
+browser/**/*
+node/**/*
 env/logger/server/**/*
-browser/**/*.js
-node/**/*.js
 server

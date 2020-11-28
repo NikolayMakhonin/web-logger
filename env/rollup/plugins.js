@@ -1,18 +1,22 @@
 /* eslint-disable object-curly-newline,prefer-template,no-process-env */
+const path = require('path')
 const {terser} = require('rollup-plugin-terser')
 const istanbul = require('rollup-plugin-istanbul')
-// const globals = require('rollup-plugin-node-globals')
-// const builtins = require('rollup-plugin-node-builtins')
-const resolve  = require('rollup-plugin-node-resolve')
-const commonjs  = require('rollup-plugin-commonjs')
+const globals = require('rollup-plugin-node-globals')
+const builtins = require('rollup-plugin-node-builtins')
+const polyfills = require('rollup-plugin-node-polyfills')
+const resolve  = require('@rollup/plugin-node-resolve').default
+const commonjs = require('@rollup/plugin-commonjs')
 const nycrc  = require('../../nyc.config')
 const replace = require('rollup-plugin-replace')
+const alias = require('@rollup/plugin-alias')
 const {fileExtensions} = require('../common/constants')
 const metric = require('./metric')
 const babel = require('./babel')
 const svelte = require('./svelte')
 const postcss = require('./postcss')
 const dedupe = importee => /^(svelte|@babel|core-js[^\\/]*|regenerator-runtime)([\\/]|$)/.test(importee)
+const json = require('@rollup/plugin-json')
 
 if (!process.env.APP_CONFIG) {
 	console.error('Environment variable APP_CONFIG is not defined', __filename)
@@ -29,8 +33,18 @@ const plugins = {
 		...nycrc,
 		...options,
 	}),
-	// globals    : (options = {}) =>globals(options),
-	// builtins   : (options = {}) =>builtins(options),
+	json: (options = {}) => json({
+		...options,
+	}),
+	alias: (options = {}) => alias({
+		entries: [
+			{ find: 'path', replacement: 'path-browserify' },
+		],
+		...options,
+	}),
+	globals  : (options = {}) => globals(options),
+	builtins : (options = {}) => builtins(options),
+	polyfills: (options = {}) => polyfills(options),
 	// resolve: (options = {}) => resolve({
 	// 	extensions: [...fileExtensions.js],
 	// 	// preferBuiltins      : true,
@@ -40,15 +54,15 @@ const plugins = {
 	// 	// },
 	// 	...options
 	// }),
-	replace: (options = {}) => replace({
+	replace  : (options = {}) => replace({
 		APP_CONFIG_PATH       : require.resolve('../../configs/' + process.env.APP_CONFIG).replace(/\\/g, '/'),
 		'process.env.NODE_ENV': JSON.stringify(mode),
 		...options,
 	}),
 	resolve: (options = {}) => resolve({
-		extensions: [...fileExtensions.js, ...fileExtensions.ts],
+		extensions    : [...fileExtensions.js, ...fileExtensions.ts],
 		dedupe,
-		// preferBuiltins      : true,
+		preferBuiltins: false,
 		// customResolveOptions: {
 		// 	// moduleDirectory: 'node_modules',
 		// 	// preserveSymlinks: false,
@@ -91,8 +105,12 @@ const plugins = {
 	metricEnd  : metric.metricEnd,
 }
 
-plugins.resolveWebrain = (options = {}) => plugins.resolveTs({
-	only: ['webrain', /\bwebrain\/src\/main\/.*$/],
+plugins.resolveExternal = (options = {}) => plugins.resolve({
+	resolveOnly: [
+		// 'util',
+		// 'webrain',
+		// /@flemist\/web-logger(\/(browser|node)\/.*)?$/
+	],
 	// preferBuiltins: false,
 	...options,
 })
@@ -104,14 +122,16 @@ module.exports = {
 		return [
 			plugins.babel.minimal(),
 			plugins.replace(),
+			plugins.json(),
 			plugins.svelte.client(),
 			coverage && plugins.istanbul(),
-			plugins.resolveWebrain(),
+			plugins.alias(),
+			plugins.resolveExternal(),
 			plugins.resolve({
 				browser: true,
 			}),
 			plugins.commonjs(),
-			legacy && plugins.babel.browser(),
+			legacy && plugins.babel.browserModule(),
 			!dev && plugins.terser(),
 		]
 	},
@@ -119,14 +139,16 @@ module.exports = {
 		return [
 			plugins.babel.minimal(),
 			plugins.replace(),
+			plugins.json(),
 			plugins.svelte.client(),
 			coverage && plugins.istanbul(),
-			plugins.resolveWebrain(),
+			plugins.alias(),
+			plugins.resolveExternal(),
 			plugins.resolve({
 				browser: true,
 			}),
 			plugins.commonjs(),
-			legacy && plugins.babel.browser(),
+			legacy && plugins.babel.browserModule(),
 			...getFileCodePlugins,
 			!dev && plugins.terser(),
 		]
@@ -137,11 +159,14 @@ module.exports = {
 				compact: true,
 			}),
 			// plugins.replace(),
+			plugins.json(),
+			plugins.postCss(),
+			plugins.alias(),
 			plugins.resolve({
 				browser: true,
 			}),
 			plugins.commonjs(),
-			legacy && plugins.babel.browser({
+			legacy && plugins.babel.browserModule({
 				compact: true,
 			}),
 			!dev && plugins.terser(),
@@ -151,15 +176,18 @@ module.exports = {
 		return [
 			plugins.babel.minimal(),
 			plugins.replace(),
+			plugins.json(),
 			plugins.svelte.client({
 				emitCss: false,
 			}),
-			plugins.resolveWebrain(),
+			plugins.alias(),
+			plugins.builtins(),
+			plugins.resolveExternal(),
 			plugins.resolve({
 				browser: true,
 			}),
 			plugins.commonjs(),
-			legacy && plugins.babel.browser(),
+			legacy && plugins.babel.browserModule(),
 		]
 	},
 }

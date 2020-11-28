@@ -18,9 +18,9 @@ const transformJsToCss = toCachedFunc(
 		}
 
 		return {
-			code: parsed || ''
+			code: parsed || '',
 		}
-	}
+	},
 )
 
 function rollupCommon(options = {}) {
@@ -32,7 +32,7 @@ function rollupCommon(options = {}) {
 			// 	plugins  : postcss.plugins,
 			// 	sourceMap: false // 'inline',
 			// }
-		}
+		},
 	})
 
 	const preprocessMarkup = toCachedFunc(
@@ -42,15 +42,15 @@ function rollupCommon(options = {}) {
 			content = content.replace(/^<script-ts>/mg, '<script lang="ts">')
 			content = content.replace(/^(<\/?(?:style|script))-(?:jss?|ts)\b/mg, '$1')
 			return content
-		}
+		},
 	)
 
 	const preprocess = {
 		markup({content}) {
 			return {
-				code: preprocessMarkup(content)
+				code: preprocessMarkup(content),
 			}
-		}
+		},
 	}
 
 	// eslint-disable-next-line no-unused-vars
@@ -73,7 +73,7 @@ function rollupCommon(options = {}) {
 				const result = await preprocess.style({
 					content,
 					filename,
-					...others
+					...others,
 				})
 
 				// see this bug: https://github.com/sveltejs/svelte/issues/4313
@@ -119,6 +119,9 @@ function rollupCommon(options = {}) {
 			if (warning.code === 'unused-export-let') {
 				return false
 			}
+			if (warning.code.startsWith('a11y-')) {
+				return false
+			}
 			return onwarn(warning)
 		},
 		...options,
@@ -130,14 +133,15 @@ module.exports = {
 		common: rollupCommon,
 		client: (options = {}) => rollupCommon({
 			hydratable: true,
-			emitCss   : true,
+			emitCss   : false,
 			babelrc   : babelConfigMinimal,
-			...options
+			...options,
 		}),
 		server: (options = {}) => rollupCommon({
+			emitCss : true,
 			generate: 'ssr',
 			babelrc : babelConfigMinimal,
-			...options
-		})
-	}
+			...options,
+		}),
+	},
 }

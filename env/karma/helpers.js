@@ -13,12 +13,12 @@ if (!process.env.APP_CONFIG) {
 }
 
 const paths = {
-	tmp: `tmp/${process.env.APP_CONFIG}`
+	tmp: `tmp/${process.env.APP_CONFIG}`,
 }
 module.exports.paths = paths
 
 module.exports.rollup = {
-	plugins: rollupPlugins
+	plugins: rollupPlugins,
 }
 
 module.exports.concatArrays = concatArrays
@@ -60,7 +60,7 @@ function servedPattern(file) {
 		pattern : file,
 		included: true,
 		served  : true,
-		watched : false
+		watched : false,
 	}
 }
 
@@ -71,7 +71,7 @@ module.exports.watchPatterns = function (...globbyPatterns) {
 			pattern : file,
 			included: false,
 			served  : false,
-			watched : true
+			watched : true,
 		}))
 }
 
@@ -106,27 +106,27 @@ module.exports.configCommon = function (config) {
 					+ "\t\tthrow new Error('polyfill was not run first:\\n' + log.join('\\n'));\n"
 					+ '\t}\n'
 					+ "\tconsole.log('karma polyfill activating...');\n"
-					+ '})();\n'
+					+ '})();\n',
 				)),
 				// Load polyfill
 				// servedPattern(require.resolve('../../static/libs/polyfill')),
 				// servedPattern(require.resolve('@babel/polyfill/dist/polyfill')), // For IE / PhantomJS
 				servedPattern(writeTextFileSync(
 					`${paths.tmp}/karma/polyfill-after.js`,
-					"console.log('karma polyfill activated!');"
-				))
-			]
+					"console.log('karma polyfill activated!');",
+				)),
+			],
 		],
 
 		client: {
 			mocha: {
 				opts: path.resolve(__dirname, '../mocha.opts'),
-			}
+			},
 		},
 
 		logReporter: {
 			outputPath: 'reports/', // default name is current directory
-			outputName: 'performance.log' // default name is logFile_month_day_year_hr:min:sec.log
+			outputName: 'performance.log', // default name is logFile_month_day_year_hr:min:sec.log
 		},
 
 		plugins: [
@@ -137,8 +137,6 @@ module.exports.configCommon = function (config) {
 			'karma-opera-launcher',
 			'karma-edge-launcher',
 			// 'karma-ie-launcher',
-			'karma-phantomjs-launcher',
-			'karma-electron',
 
 			'karma-mocha',
 			'karma-rollup-preprocessor',
@@ -172,7 +170,7 @@ module.exports.configCommon = function (config) {
 						}
 					}),
 				],
-			}
+			},
 		],
 
 		// optionally, configure the reporter
@@ -203,7 +201,7 @@ module.exports.configCommon = function (config) {
 			'E2E_Chromium39',
 			'E2E_Chromium44',
 			'E2E_ChromeLatest',
-			'Electron',
+			'ChromeDev',
 		],
 
 		// Firefox:
@@ -219,12 +217,12 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'l:/Program Files (x86)/Chromium/33.0.1750.170/chrome.exe'
+					win32: 'l:/Program Files (x86)/Chromium/33.0.1750.170/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
 			E2E_Chromium39: {
 				base       : 'Custom',
@@ -235,12 +233,12 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'l:/Program Files (x86)/Chromium/39.0.2171.99/chrome.exe'
+					win32: 'l:/Program Files (x86)/Chromium/39.0.2171.99/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
 			E2E_Chromium44: {
 				base       : 'Custom',
@@ -251,12 +249,12 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'l:/Program Files (x86)/Chromium/44.0.2403.119/chrome.exe'
+					win32: 'l:/Program Files (x86)/Chromium/44.0.2403.119/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
 			E2E_ChromiumLatest: {
 				base  : 'Custom',
@@ -266,12 +264,12 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'l:/Program Files (x86)/Chromium/44.0.2403.119/chrome.exe'
+					win32: 'l:/Program Files (x86)/Chromium/44.0.2403.119/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
 			E2E_ChromeLatest: {
 				base  : 'Custom',
@@ -281,12 +279,12 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'E:/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
+					win32: 'E:/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
 			ChromeDev: {
 				base  : 'Custom',
@@ -296,14 +294,14 @@ module.exports.configCommon = function (config) {
 					'--no-sandbox',
 					'--disable-web-security',
 					'--allow-cross-origin-auth-prompt',
-					'--disable-site-isolation-trials'
+					'--disable-site-isolation-trials',
 				],
 				DEFAULT_CMD: {
-					win32: 'E:/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
+					win32: 'E:/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe',
 				},
-				ENV_CMD: null
+				ENV_CMD: null,
 			},
-		}
+		},
 	})
 }
 
@@ -339,11 +337,10 @@ function configDetectBrowsers(config) {
 
 						return availableBrowser
 					})
-					.concat('Electron')
-			}
+			},
 		},
 
-		plugins: concatArrays(config.plugins, ['karma-detect-browsers'])
+		plugins: concatArrays(config.plugins, ['karma-detect-browsers']),
 	})
 }
 
@@ -358,7 +355,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'android',
 			device    : 'Samsung Galaxy Tab 4',
 			os_version: '4.4',
-			realMobile: true
+			realMobile: true,
 		},
 		Android6: {
 			base      : 'BrowserStack',
@@ -366,7 +363,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'android',
 			device    : 'Samsung Galaxy S7',
 			os_version: '6.0',
-			realMobile: true
+			realMobile: true,
 		},
 		Android7: {
 			base      : 'BrowserStack',
@@ -374,7 +371,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'android',
 			device    : 'Samsung Galaxy S8',
 			os_version: '7.0',
-			realMobile: true
+			realMobile: true,
 		},
 		Android8: {
 			base      : 'BrowserStack',
@@ -382,7 +379,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'android',
 			device    : 'Samsung Galaxy S9',
 			os_version: '8.0',
-			realMobile: true
+			realMobile: true,
 		},
 		iOS10_3: {
 			base      : 'BrowserStack',
@@ -390,7 +387,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'iOS',
 			device    : 'iPhone 7',
 			os_version: '10.3',
-			realMobile: true
+			realMobile: true,
 		},
 		iOS11: {
 			base      : 'BrowserStack',
@@ -398,7 +395,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'iOS',
 			device    : 'iPhone 8',
 			os_version: '11.0',
-			realMobile: true
+			realMobile: true,
 		},
 		iOS12: {
 			base      : 'BrowserStack',
@@ -406,7 +403,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			os        : 'iOS',
 			device    : 'iPhone XS',
 			os_version: '12.1',
-			realMobile: true
+			realMobile: true,
 		},
 	}
 
@@ -473,7 +470,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			browser_version: '14.12',
 			os             : 'Windows',
 			os_version     : '10',
-		}
+		},
 	}
 
 	const launchers = [{}]
@@ -496,7 +493,7 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 		project  : thisPackage.name,
 		username : process.env.BROWSERSTACK_USERNAME.replace(/-travis$/, ''),
 		accessKey: process.env.BROWSERSTACK_ACCESS_KEY,
-		video    : false
+		video    : false,
 	}
 
 	if (process.env.TRAVIS) {
@@ -517,14 +514,14 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 			config.browsers,
 			process.env.TRAVIS
 				? Object.keys(customLaunchers)
-				: Object.keys(customLaunchers).slice(0, 1)
+				: Object.keys(customLaunchers).slice(0, 1),
 		),
 
 		plugins: concatArrays(config.plugins, ['karma-browserstack-launcher']),
 
 		browserConsoleLogOptions: {
 			level   : 'debug',
-			terminal: true
+			terminal: true,
 		},
 	})
 
@@ -533,6 +530,6 @@ module.exports.configBrowserStack = function (config, desktop = true, mobile = f
 	delete config.singleRun
 	Object.defineProperty(config, 'singleRun', {
 		value   : true,
-		writable: false
+		writable: false,
 	})
 }

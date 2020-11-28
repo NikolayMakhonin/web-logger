@@ -1,5 +1,6 @@
 /* eslint-disable no-sync */
 const fs = require('fs')
+const path = require('path')
 const {requireFromString: _requireFromString} = require('require-from-memory')
 const postcss = require('postcss')
 const postcssRollup = require('rollup-plugin-postcss')
@@ -20,6 +21,10 @@ const requireFromString = (code, filename, options) => _requireFromString(code, 
 		if (logEvent.vars && logEvent.vars.request && (
 			logEvent.vars.request.startsWith('@sapper')
 			|| logEvent.vars.request === 'encoding'
+			|| logEvent.message === 'Found filePath == false' && (
+				logEvent.filename.endsWith('.svelte.js')
+				|| logEvent.filename.endsWith('.jss.js')
+			)
 			// || logEvent.vars.request === '@babel/runtime-corejs3/package.json'
 		)) {
 			return false
@@ -55,21 +60,21 @@ const syntax = require('postcss-syntax')({
 	rules: [
 		{
 			test: /\.jss$/,
-			lang: 'jss'
-		}
+			lang: 'jss',
+		},
 	],
 	jss: {
 		parse(content, options) {
 			const parsed = postcssJsSyntax.parse(content, {
 				requireFromString,
 				...options,
-				from: `${options.from}.js`
+				from: `${options.from}.js`,
 			})
 			// console.log(parsed)
 			return parsed
 		},
 		// stringify: postcssJsSyntax.stringify
-	}
+	},
 })
 
 const plugins = [
@@ -87,7 +92,7 @@ const plugins = [
 				return `/app/${asset.url}`
 			}
 			return asset.url
-		}
+		},
 	}),
 	// postcssNested(),
 	// postcssGlobalWrapper(),
@@ -109,7 +114,7 @@ const plugins = [
 				},
 				calc: false,
 				// normalizeUnicode: false,
-			}
+			},
 		],
 	}),
 	// postcssBeautify({
@@ -126,7 +131,11 @@ function rollupCommon(options = {}) {
 		// use: [['sass', nodeSassOptions]],
 		// see: https://github.com/postcss/postcss
 		plugins,
-		...options
+		...options,
+		// see this issue: https://github.com/rollup/rollup/issues/3669
+		// extract: typeof options.extract === 'string'
+		// 	? path.resolve(options.extract)
+		// 	: options.extract,
 	}
 }
 
@@ -175,7 +184,7 @@ async function jsToCss(content, filename) {
 			},
 			from: filename.endsWith('.js')
 				? filename
-				: `${filename}.js`
+				: `${filename}.js`,
 		})
 
 		parsedCss = result.css
@@ -200,7 +209,7 @@ function cssToJs(content, filename) {
 				throw ex
 			}
 		},
-		from: filename
+		from: filename,
 	})
 
 	const stringified = result.css
@@ -223,12 +232,12 @@ module.exports = {
 		jsToCss,
 		cssToJs,
 		jsFileToCss,
-		cssFileToJs
+		cssFileToJs,
 	},
 	instance: instanceJsToCss,
 	syntax,
 	plugins,
 	rollup  : {
 		common: rollupCommon,
-	}
+	},
 }

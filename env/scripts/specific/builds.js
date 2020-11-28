@@ -1,4 +1,4 @@
-const {run, singleCall} = require('../helpers/helpers')
+const {run, singleCall} = require('@flemist/run-script')
 const common = require('../common')
 const {reCreateDir, deletePaths} = require('../../common/helpers')
 
@@ -16,7 +16,7 @@ const buildComponents = singleCall(async appConfigType => {
 	await deletePaths(`dist/${appConfigType}/components`)
 	await run(
 		'rollup --config ./env/rollup/components.js',
-		{env: {APP_CONFIG: appConfigType}}
+		{env: {APP_CONFIG: appConfigType}},
 	)
 })
 
