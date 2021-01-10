@@ -1,5 +1,6 @@
 /* eslint-disable quotes,no-eval */
 import {subscribeUnhandledErrors} from '../../../../../main/common/log/subscribeUnhandledErrors'
+import {globalScope} from '../../../../../main/common/log/globalScope'
 import {delay} from '../../../../../main/common/log/delay'
 
 describe('common > main > subscribeUnhandledErrors', function () {
@@ -28,11 +29,28 @@ describe('common > main > subscribeUnhandledErrors', function () {
 	const errorGenerators = [
 		{
 			func: () => {
-				eval(`throw 'Test Error'`)
+				globalScope.evalErrors = evalErrors
+				eval(`evalErrors.push('eval'); throw 'Test Error'`)
 			},
-			check: {
-				unhandledErrors: [['Test Error', `throw 'Test Error'`]],
-				logs           : [`Unhandled Error Detected: "Test Error"\n"throw 'Test Error'"`],
+			checkSubscribed: {
+				evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
+				logs      : [`Unhandled Error Detected: "eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
+			},
+			checkUnsubscribed: {
+				evalErrors: ['eval'],
+			},
+		},
+		{
+			func: () => {
+				globalScope.evalErrors = evalErrors
+				eval(`evalErrors.push('eval'); throw 'Test Error'`)
+			},
+			checkSubscribed: {
+				evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
+				logs      : [`Unhandled Error Detected: "eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
+			},
+			checkUnsubscribed: {
+				evalErrors: ['eval'],
 			},
 		},
 		// async () => {
@@ -76,7 +94,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 
 			unsubscribe()
 
-			assertErrors(errorGenerator.check)
+			assertErrors(errorGenerator.checkSubscribed)
 
 			try {
 				errorGenerator.func()
@@ -84,7 +102,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 			} catch {
 			}
 
-			assertErrors()
+			assertErrors(errorGenerator.checkUnsubscribed)
 		}
 	})
 })
