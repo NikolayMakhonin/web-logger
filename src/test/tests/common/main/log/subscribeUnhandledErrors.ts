@@ -1,4 +1,4 @@
-/* eslint-disable quotes,no-eval */
+/* eslint-disable quotes */
 import {subscribeUnhandledErrors} from '../../../../../main/common/log/subscribeUnhandledErrors'
 import {globalScope} from '../../../../../main/common/log/globalScope'
 import {delay} from '../../../../../main/common/log/delay'
@@ -9,25 +9,45 @@ describe('common > main > subscribeUnhandledErrors', function () {
 	let evalErrors = []
 	let logs = []
 
+	type TPattern = string | RegExp | false
+
 	type TCheck = {
-		unhandledErrors?: (string[]|string)[],
-		evalErrors?: (string[]|string)[],
-		consoleErrors?: (string[]|string)[],
-		logs?: (string|RegExp)[],
+		unhandledErrors?: (TPattern[]|TPattern)[],
+		evalErrors?: (TPattern[]|TPattern)[],
+		consoleErrors?: (TPattern[]|TPattern)[],
+		logs?: TPattern[],
+	}
+
+	function assertValue(actual: any, expected: any) {
+		if (Array.isArray(actual)) {
+			for (let i = 0, len = actual.length; i < len; i++) {
+				assertValue(actual[i], expected[i])
+			}
+			return
+		}
+
+		if (expected === false) {
+			return
+		}
+		if (typeof expected === 'string') {
+			assert.strictEqual(actual, expected)
+		} else {
+			assert.ok(expected.test(actual), actual)
+		}
 	}
 
 	function assertErrors(check: TCheck = {}) {
-		assert.deepStrictEqual(unhandledErrors, check.unhandledErrors || [])
-		assert.deepStrictEqual(consoleErrors, check.consoleErrors || [])
-		assert.deepStrictEqual(evalErrors, check.evalErrors || [])
+		assertValue(unhandledErrors, check.unhandledErrors || [])
+		assertValue(consoleErrors, check.consoleErrors || [])
+		assertValue(evalErrors, check.evalErrors || [])
 		if (!check.logs) {
-			assert.deepStrictEqual(logs, [])
+			assertValue(logs, [])
 		} else {
 			for (let i = 0, len = logs.length; i < len; i++) {
 				if (typeof check.logs[i] === 'string') {
-					assert.strictEqual(logs[i], check.logs[i])
+					assertValue(logs[i], check.logs[i])
 				} else {
-					;(check.logs[i] as RegExp).test(logs[i])
+					(check.logs[i] as RegExp).test(logs[i])
 				}
 			}
 		}
@@ -46,7 +66,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 		{
 			func: () => {
 				globalScope.evalErrors = evalErrors
-				eval(`evalErrors.push('eval'); throw 'Test Error'`)
+				globalScope.eval(`evalErrors.push('eval'); throw 'Test Error'`)
 			},
 			checkSubscribed: {
 				evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
@@ -73,7 +93,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 				throw 'Test Error'
 			},
 			checkSubscribed: {
-				unhandledErrors: [['process.unhandledRejection', 'Test Error']],
+				unhandledErrors: [[/[\w\.]*?(unhandledRejection)[\w\.]*?/, 'Test Error', false]],
 				logs      : [/"([\w\.]*?(unhandled|uncaught)[\w\.]*?)"\n"Test Error"/],
 			},
 			checkUnsubscribed: {
@@ -108,23 +128,15 @@ describe('common > main > subscribeUnhandledErrors', function () {
 				},
 			})
 
-			let promise
 			try {
-				promise = errorGenerator.func()
+				errorGenerator.func()
 				await delay(100)
 			} catch {
 			}
 
 			unsubscribe()
 
-			assertErrors(promise
-				? {
-					...errorGenerator.checkSubscribed,
-					unhandledErrors: errorGenerator.checkSubscribed.unhandledErrors.map(o => {
-						return [...o, promise]
-					}),
-				}
-				: errorGenerator.checkSubscribed)
+			assertErrors(errorGenerator.checkSubscribed)
 
 			try {
 				errorGenerator.func()

@@ -1,14 +1,25 @@
 import {ActionMode, ILogEvent, ILogger, LogLevel} from './contracts'
+import {interceptConsole, consoleOrig, TConsoleLevel} from './intercept/interceptConsole'
 import {LogHandler} from './LogHandler'
 import {objectToString} from './objectToString'
-import {interceptConsole} from './intercept/catchUnhandledErrors'
 
-const consoleOrig = {
-	debug: console.debug.bind(console),
-	info : console.info.bind(console),
-	log  : console.log.bind(console),
-	warn : console.warn.bind(console),
-	error: console.error.bind(console),
+function consoleLevelToLogLevel(consoleLevel: TConsoleLevel) {
+	switch (consoleLevel) {
+		case 'trace':
+			return LogLevel.Debug
+		case 'debug':
+			return LogLevel.Debug
+		case 'info':
+			return LogLevel.Info
+		case 'log':
+			return LogLevel.Info
+		case 'warn':
+			return LogLevel.Warning
+		case 'error':
+			return LogLevel.Error
+		default:
+			return LogLevel.Error
+	}
 }
 
 export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
@@ -26,41 +37,31 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
 
 	private interceptConsole() {
 		const self = this
-		const createInterceptFunc = (level: LogLevel, consoleFunc: (...args) => void) => {
+		interceptConsole((_level, handlerOrig) => {
+			const level = consoleLevelToLogLevel(_level)
+			const writeToConsole = _level === 'warn' || _level === 'error'
+				? ActionMode.Never
+				: ActionMode.Default
+
 			return function consoleHandler(...args) {
 				self._logger.log({
 					level,
 					messagesOrErrors: args,
-					handlersModes   : {
-						writeToConsole: consoleFunc ? ActionMode.Never : ActionMode.Default,
+					handlersModes: {
+						writeToConsole,
 					} as any,
 				})
 
-				if (consoleFunc) {
-					consoleFunc.apply(console, args.map(o => {
-						if (o instanceof Error) {
-							return objectToString(o)
-						}
-						return o
-					}))
-				}
+				handlerOrig.apply(console, args.map(o => {
+					if (o instanceof Error) {
+						return objectToString(o)
+					}
+					return o
+				}))
 
 				return true
 			}
-		}
-
-		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-		interceptConsole('debug', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
-
-		console.debug = createInterceptFunc(LogLevel.Debug, consoleOrig.debug)
-		console.info = createInterceptFunc(LogLevel.Info, consoleOrig.info)
-		console.log = createInterceptFunc(LogLevel.Info, consoleOrig.log)
-		console.warn = createInterceptFunc(LogLevel.Warning, null)
-		console.error = createInterceptFunc(LogLevel.Error, null)
+		})
 	}
 
 	protected handleLog(logEvents: Array<ILogEvent<any>>): void | Promise<void> {

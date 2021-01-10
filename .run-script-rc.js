@@ -26,7 +26,6 @@ module.exports = {
 			return false
 		}
 
-
 		if (/\[webpack\.Progress]/.test(text)) {
 			return false
 		}
@@ -114,6 +113,10 @@ module.exports = {
 		}
 
 		if (/\[webpack\.Progress]/.test(text)) {
+			return false
+		}
+
+		if (/Test Error|(^"(process.unhandledRejection|process.uncaughtException|unhandledrejection|unhandled error)"$)/.test(text)) {
 			return false
 		}
 

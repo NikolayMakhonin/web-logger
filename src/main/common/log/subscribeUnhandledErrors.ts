@@ -9,7 +9,7 @@ export function subscribeUnhandledErrors({
 	catchUnhandled = true,
 	catchEval = true,
 	catchConsoleLevels = ['error'],
-	alert: _alert = true,
+	alert: _alert = false,
 	maxLogLength = 2048,
 	customLog,
 }: {
