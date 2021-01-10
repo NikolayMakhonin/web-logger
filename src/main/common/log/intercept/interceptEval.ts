@@ -5,10 +5,6 @@ const evalOrig = globalScope.eval.bind(globalScope.eval)
 export function interceptEval(handler: TEvalHandler) {
 	delete globalScope.eval
 	globalScope.eval = str => {
-		if (str.indexOf('async function') >= 0) {
-			return evalOrig.call(globalScope, str)
-		}
-
 		return handler(str, evalOrig)
 	}
 
