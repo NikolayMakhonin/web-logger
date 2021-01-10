@@ -14,12 +14,17 @@ export function interceptEval(handler: TEvalHandler) {
 	}
 }
 
-export function catchEvalErrors(errorHandler: (...args: any[]) => void) {
+export function catchEvalErrors(
+	errorHandler: (...args: any[]) => void,
+	filter?: (str: string) => boolean,
+) {
 	return interceptEval((str, _evalOrig) => {
 		try {
 			return _evalOrig.call(globalScope, str)
 		} catch (ex) {
-			errorHandler('eval error', ex, str)
+			if (!filter || filter(str)) {
+				errorHandler('eval error', ex, str)
+			}
 			throw ex
 		}
 	})

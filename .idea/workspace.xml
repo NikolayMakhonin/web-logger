@@ -23,8 +23,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v1.0.8">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/intercept/interceptEval.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/intercept/interceptEval.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/subscribeUnhandledErrors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/subscribeUnhandledErrors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unhandled-errors.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/unhandled-errors.min.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,13 +248,7 @@
       <workItem from="1606561731281" duration="5063000" />
       <workItem from="1610264188830" duration="2977000" />
       <workItem from="1610267318977" duration="22427000" />
-    </task>
-    <task id="LOCAL-00034" summary="Merged with app2">
-      <created>1599247614252</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1599247614252</updated>
+      <workItem from="1610292913451" duration="493000" />
     </task>
     <task id="LOCAL-00035" summary="Fix lint">
       <created>1599248159616</created>
@@ -588,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610291382982</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="v1.0.9">
+      <created>1610293051766</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1610293051767</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +629,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix lint" />
     <MESSAGE value="Rollback postcss-nested to v4.2.1 due to: https://github.com/egoist/rollup-plugin-postcss/issues/205" />
     <MESSAGE value="Fix travis" />
     <MESSAGE value="Fix travis: try to enable Electron in karma" />
@@ -649,7 +653,8 @@
     <MESSAGE value="Develop interceptors completed. Precommit OK." />
     <MESSAGE value="v1.0.7" />
     <MESSAGE value="v1.0.8" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.0.8" />
+    <MESSAGE value="v1.0.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.0.9" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -677,10 +682,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="651" y="253" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.882@0.0.1920.882" timestamp="1601730650956" />
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610292387182">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610293050444">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610292387182" />
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610293050444" />
     <state width="1843" height="581" key="DebuggerActiveHint" timestamp="1610281290637">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -773,10 +778,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="722" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.882@0.0.1920.882" timestamp="1610287927322" />
-    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1610281388971">
+    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1610292999857">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1610281388971" />
+    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1610292999857" />
     <state x="531" y="190" key="run.anything.popup" timestamp="1610276630304">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -810,26 +815,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/common/log/subscribeUnhandledErrors.ts</url>
-          <line>52</line>
-          <properties lambdaOrdinal="-1" />
+          <line>54</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/test/tests/common/main/log/subscribeUnhandledErrors.ts</url>
           <line>118</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/env/common/build.js</url>
           <line>16</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/env/libs/helpers.js</url>
           <line>9</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>

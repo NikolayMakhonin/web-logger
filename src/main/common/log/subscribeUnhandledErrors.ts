@@ -9,6 +9,7 @@ export function subscribeUnhandledErrors({
 	catchUnhandled = true,
 	catchEval = true,
 	catchConsoleLevels = ['error'],
+	filterEval = null,
 	alert: _alert = false,
 	maxLogLength = 2048,
 	customLog,
@@ -16,6 +17,7 @@ export function subscribeUnhandledErrors({
 	catchUnhandled?: boolean | ((...args: any[]) => boolean|void),
 	catchEval?: boolean | ((...args: any[]) => boolean|void),
 	catchConsoleLevels?: string[] | TConsoleHandlerFactory,
+	filterEval?: (str: string) => boolean,
 	alert?: boolean,
 	maxLogLength?: number,
 	customLog?: (log: string) => boolean|void,
@@ -65,7 +67,7 @@ export function subscribeUnhandledErrors({
 			if (catchEval) {
 				errorHandler(...args)
 			}
-		}))
+		}, filterEval))
 	}
 
 	function errorHandler(...args) {
