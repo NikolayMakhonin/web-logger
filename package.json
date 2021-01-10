@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -37,7 +37,8 @@
 		"browser/**/*.js",
 		"browser/**/*.d.ts",
 		"node/**/*.js",
-		"node/**/*.d.ts"
+		"node/**/*.d.ts",
+		"unhandled-errors.min.js"
 	],
 	"types": "dist/types/common/index.d.ts",
 	"main": "dist/dev/js/main/common/index.js",

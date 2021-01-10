@@ -23,16 +23,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v1.0.7">
-      <change afterPath="$PROJECT_DIR$/env/babel/configs/libs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.browserslistrc" beforeDir="false" afterPath="$PROJECT_DIR$/.browserslistrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/rollup/babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/rollup/babel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/rollup/plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/rollup/plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,21 +245,7 @@
       <workItem from="1606458874653" duration="720000" />
       <workItem from="1606561731281" duration="5063000" />
       <workItem from="1610264188830" duration="2977000" />
-      <workItem from="1610267318977" duration="20283000" />
-    </task>
-    <task id="LOCAL-00031" summary="Fix resolveExternal">
-      <created>1590942171314</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1590942171314</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Fix resolveExternal">
-      <created>1590942567339</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1590942567339</updated>
+      <workItem from="1610267318977" duration="21413000" />
     </task>
     <task id="LOCAL-00033" summary="Merged with app2">
       <created>1593263199226</created>
@@ -596,7 +576,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610284413937</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="v1.0.7">
+      <created>1610287917526</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1610287917526</updated>
+    </task>
+    <task id="LOCAL-00081" summary="v1.0.7">
+      <created>1610287953067</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1610287953067</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,10 +679,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="651" y="253" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.882@0.0.1920.882" timestamp="1601730650956" />
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610287456907">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610287952370">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610287456907" />
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610287952370" />
     <state width="1843" height="581" key="DebuggerActiveHint" timestamp="1610281290637">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -769,10 +763,18 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="343" y="0" key="SettingsEditor/0.0.1920.882@0.0.1920.882" timestamp="1606473503591" />
+    <state x="451" y="106" key="Vcs.Push.Dialog.v2" timestamp="1610287962647">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state x="451" y="106" key="Vcs.Push.Dialog.v2/0.0.1920.882@0.0.1920.882" timestamp="1610287962647" />
     <state width="969" height="450" key="XDebugger.FullValuePopup" timestamp="1601716969584">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="969" height="450" key="XDebugger.FullValuePopup/0.0.1920.882@0.0.1920.882" timestamp="1601716969584" />
+    <state x="722" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610287927322">
+      <screen x="0" y="0" width="1920" height="882" />
+    </state>
+    <state x="722" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.882@0.0.1920.882" timestamp="1610287927322" />
     <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1610281388971">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
