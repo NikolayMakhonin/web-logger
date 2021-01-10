@@ -5,7 +5,9 @@ const {buildLib} = require('../helpers')
 
 buildLib({
 	fileInput : require.resolve('./all.js'),
-	fileOutput: 'static/libs/polyfill.js',
+	fileOutput: './unhandled-errors.min.js',
+	name: 'UnhandledErrors',
+	rebuild: true,
 })
 	.then(() => {
 		console.log('polyfill build completed')

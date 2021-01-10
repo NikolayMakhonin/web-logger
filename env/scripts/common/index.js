@@ -20,8 +20,13 @@ const buildPolyfill = singleCall(() => run(
 	'node env/libs/polyfill/build.js',
 	{env: {APP_CONFIG: 'dev'}},
 ))
+const buildUnhandledErrors = singleCall(() => run(
+	'node env/libs/unhandled-errors/build.js',
+	{env: {APP_CONFIG: 'dev'}},
+))
 const buildLibs = singleCall(() => Promise.all([
 	buildPolyfill(),
+	buildUnhandledErrors(),
 ]))
 const clean = singleCall(() => deletePaths('{*.log,__sapper__}'))
 const build = singleCall(() => Promise.all([

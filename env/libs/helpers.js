@@ -2,11 +2,18 @@
 const {build} = require('../common/build')
 const rollupPlugins = require('../rollup/plugins')
 const fs = require('fs')
+const path = require('path')
 
-function buildLib({fileInput, fileOutput, name}) {
+function buildLib({fileInput, fileOutput, name, rebuild}) {
+	fileOutput = path.resolve(fileOutput)
+
 	if (fs.existsSync(fileOutput)) {
-		console.log(`Lib already built: ${fileOutput}`)
-		return Promise.resolve()
+		if (rebuild) {
+			fs.unlinkSync(fileOutput)
+		} else {
+			console.log(`Lib already built: ${fileOutput}`)
+			return Promise.resolve()
+		}
 	}
 
 	return build(
