@@ -9,16 +9,28 @@ describe('common > main > subscribeUnhandledErrors', function () {
 	let evalErrors = []
 	let logs = []
 
-	function assertErrors(check: {
-		unhandledErrors?: string[][],
-		evalErrors?: string[][],
-		consoleErrors?: string[][],
-		logs?: string[],
-	} = {}) {
+	type TCheck = {
+		unhandledErrors?: (string[]|string)[],
+		evalErrors?: (string[]|string)[],
+		consoleErrors?: (string[]|string)[],
+		logs?: (string|RegExp)[],
+	}
+
+	function assertErrors(check: TCheck = {}) {
 		assert.deepStrictEqual(unhandledErrors, check.unhandledErrors || [])
 		assert.deepStrictEqual(consoleErrors, check.consoleErrors || [])
 		assert.deepStrictEqual(evalErrors, check.evalErrors || [])
-		assert.deepStrictEqual(logs, check.logs || [])
+		if (!check.logs) {
+			assert.deepStrictEqual(logs, [])
+		} else {
+			for (let i = 0, len = logs.length; i < len; i++) {
+				if (typeof check.logs[i] === 'string') {
+					assert.strictEqual(logs[i], check.logs[i])
+				} else {
+					;(check.logs[i] as RegExp).test(logs[i])
+				}
+			}
+		}
 
 		unhandledErrors = []
 		consoleErrors = []
@@ -26,7 +38,11 @@ describe('common > main > subscribeUnhandledErrors', function () {
 		logs = []
 	}
 
-	const errorGenerators = [
+	const errorGenerators: Array<{
+		func: () => void,
+		checkSubscribed?: TCheck,
+		checkUnsubscribed?: TCheck,
+	}> = [
 		{
 			func: () => {
 				globalScope.evalErrors = evalErrors
@@ -34,7 +50,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 			},
 			checkSubscribed: {
 				evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
-				logs      : [`Unhandled Error Detected: "eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
+				logs      : [`"eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
 			},
 			checkUnsubscribed: {
 				evalErrors: ['eval'],
@@ -42,21 +58,27 @@ describe('common > main > subscribeUnhandledErrors', function () {
 		},
 		{
 			func: () => {
-				globalScope.evalErrors = evalErrors
-				eval(`evalErrors.push('eval'); throw 'Test Error'`)
+				console.error('Test Error')
 			},
 			checkSubscribed: {
-				evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
-				logs      : [`Unhandled Error Detected: "eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
+				consoleErrors: [['Test Error']],
+				logs      : [`"console error"\n"Test Error"`],
 			},
 			checkUnsubscribed: {
-				evalErrors: ['eval'],
 			},
 		},
-		// async () => {
-		// 	await delay(1)
-		// 	throw 'Test Error'
-		// },
+		{
+			func: async () => {
+				await delay(1)
+				throw 'Test Error'
+			},
+			checkSubscribed: {
+				unhandledErrors: [['process.unhandledRejection', 'Test Error']],
+				logs      : [/"([\w\.]*?(unhandled|uncaught)[\w\.]*?)"\n"Test Error"/],
+			},
+			checkUnsubscribed: {
+			},
+		},
 	]
 
 	it('eval', async function () {
@@ -86,15 +108,23 @@ describe('common > main > subscribeUnhandledErrors', function () {
 				},
 			})
 
+			let promise
 			try {
-				errorGenerator.func()
+				promise = errorGenerator.func()
 				await delay(100)
 			} catch {
 			}
 
 			unsubscribe()
 
-			assertErrors(errorGenerator.checkSubscribed)
+			assertErrors(promise
+				? {
+					...errorGenerator.checkSubscribed,
+					unhandledErrors: errorGenerator.checkSubscribed.unhandledErrors.map(o => {
+						return [...o, promise]
+					}),
+				}
+				: errorGenerator.checkSubscribed)
 
 			try {
 				errorGenerator.func()

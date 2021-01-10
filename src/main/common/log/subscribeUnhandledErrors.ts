@@ -47,7 +47,7 @@ export function subscribeUnhandledErrors({
 				}
 
 				if (catchConsoleLevels) {
-					errorHandler(...args)
+					errorHandler('console error', ...args)
 				}
 			}
 		}))
@@ -66,7 +66,7 @@ export function subscribeUnhandledErrors({
 	}
 
 	function errorHandler(...args) {
-		let log = 'Unhandled Error Detected: ' + args
+		let log = args
 			.map(o => objectToString(o))
 			.join('\n')
 

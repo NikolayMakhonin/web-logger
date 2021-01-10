@@ -10,21 +10,24 @@ function prepareArgs(args: any[]) {
 export type TErrorHandler = (...args: any[]) => void
 
 export function catchUnhandledErrors(errorHandler: TErrorHandler) {
-	const processUnhandledRejectionHandler = (...args: any[]) => {
-		errorHandler('process.unhandledRejection', ...prepareArgs(args))
+	let handled = false
+
+	function handlerFactory(message: string) {
+		return (...args: any[]) => {
+			if (handled) {
+				return
+			}
+
+			handled = true
+			setTimeout(() => handled = false)
+			errorHandler(message, ...prepareArgs(args))
+		}
 	}
 
-	const processUncaughtExceptionHandler = (...args: any[]) => {
-		errorHandler('process.uncaughtException', ...prepareArgs(args))
-	}
-
-	const unhandledrejectionHandler = (...args: any[]) => {
-		errorHandler('unhandledrejection', ...prepareArgs(args))
-	}
-
-	const unhandledErrorHandler = (...args: any[]) => {
-		errorHandler('unhandled error', ...prepareArgs(args))
-	}
+	const processUnhandledRejectionHandler = handlerFactory('process.unhandledRejection')
+	const processUncaughtExceptionHandler = handlerFactory('process.uncaughtException')
+	const unhandledrejectionHandler = handlerFactory('unhandledrejection')
+	const unhandledErrorHandler = handlerFactory('unhandled error')
 
 	if (typeof process !== 'undefined' && process.on) {
 		process

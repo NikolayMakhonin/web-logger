@@ -30,7 +30,7 @@ export function interceptConsole(
 		const handlerOrig = consoleOrig[level]
 
 		const _handler = handlerFactory(level, handlerOrig)
-		const handler = () => {
+		const handler = function handler() {
 			if (_handler.apply(globalScope.console, arguments)) {
 				return
 			}
