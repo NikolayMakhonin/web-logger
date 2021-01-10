@@ -1,6 +1,7 @@
-import '../../../src/main/common/log/intercept/catchUnhandledErrors'
-// import './polyfills/url.min'
-// import './polyfills/promise.min'
-import './polyfills/fetch.iife'
-import 'abortcontroller-polyfill/src/abortcontroller-polyfill'
-import './polyfills/dom'
+export {
+	interceptConsole,
+	interceptEval,
+	objectToString,
+	catchUnhandledErrors,
+	subscribeUnhandledErrors,
+} from '../../../src/main/common'

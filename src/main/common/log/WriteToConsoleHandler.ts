@@ -5,8 +5,6 @@ import {objectToString} from './objectToString'
 
 function consoleLevelToLogLevel(consoleLevel: TConsoleLevel) {
 	switch (consoleLevel) {
-		case 'trace':
-			return LogLevel.Debug
 		case 'debug':
 			return LogLevel.Debug
 		case 'info':

@@ -39,6 +39,9 @@ export function subscribeUnhandledErrors({
 			let handler
 			if (typeof catchConsoleLevels === 'function') {
 				handler = catchConsoleLevels(level, handlerOrig)
+				if (typeof handler !== 'function' && handler) {
+					return handler
+				}
 			}
 
 			return (...args: any[]) => {

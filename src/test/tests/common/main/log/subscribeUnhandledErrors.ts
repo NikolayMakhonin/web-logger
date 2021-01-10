@@ -114,7 +114,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
 				},
 				catchConsoleLevels(level, handlerOrig) {
 					if (level !== 'error') {
-						return
+						return true
 					}
 					return (...args) => {
 						consoleErrors.push(args)
@@ -133,6 +133,11 @@ describe('common > main > subscribeUnhandledErrors', function () {
 				await delay(100)
 			} catch {
 			}
+
+			console.debug('debug')
+			console.info('info')
+			console.log('log')
+			console.warn('warn')
 
 			unsubscribe()
 

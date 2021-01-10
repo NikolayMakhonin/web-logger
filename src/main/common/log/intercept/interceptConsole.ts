@@ -1,14 +1,13 @@
 import {globalScope} from '../globalScope'
 
-export type TConsoleLevel = 'trace' | 'debug' | 'info' | 'log' | 'warn' | 'error'
+export type TConsoleLevel = 'debug' | 'info' | 'log' | 'warn' | 'error'
 export type TConsoleHandlerFactory = (
 	level: TConsoleLevel, handlerOrig: (...args) => void,
-) => (...args: any[]) => boolean|void
-export const CONSOLE_LEVELS: ['trace', 'debug', 'info', 'log', 'warn', 'error'] =
-	Object.freeze(['trace', 'debug', 'info', 'log', 'warn', 'error']) as any
+) => ((...args: any[]) => boolean|void)|boolean|void
+export const CONSOLE_LEVELS: ['debug', 'info', 'log', 'warn', 'error'] =
+	Object.freeze(['debug', 'info', 'log', 'warn', 'error']) as any
 
 export const consoleOrig = {
-	trace: globalScope.console.trace.bind(globalScope.console),
 	debug: globalScope.console.debug.bind(globalScope.console),
 	info : globalScope.console.info.bind(globalScope.console),
 	log  : globalScope.console.log.bind(globalScope.console),
@@ -30,14 +29,20 @@ export function interceptConsole(
 		const handlerOrig = consoleOrig[level]
 
 		const _handler = handlerFactory(level, handlerOrig)
-		const handler = function handler() {
-			if (_handler.apply(globalScope.console, arguments)) {
-				return
-			}
-			handlerOrig.apply(globalScope.console, arguments)
+		if (typeof _handler !== 'function' && _handler) {
+			continue
 		}
 
-		globalScope.console[level] = handler
+		if (_handler) {
+			const handler = function handler() {
+				if ((_handler as any).apply(globalScope.console, arguments)) {
+					return
+				}
+				handlerOrig.apply(globalScope.console, arguments)
+			}
+
+			globalScope.console[level] = handler
+		}
 	}
 
 	return () => {
