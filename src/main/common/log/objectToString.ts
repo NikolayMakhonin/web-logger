@@ -200,7 +200,10 @@ export function objectToString(object: any, {
 				if (index >= _maxListSize) {
 					appendBuffer('...')
 				} else {
-					for (const item of obj) {
+					// for (const item of obj) {
+					for (let _iterator = obj[Symbol.iterator], _step; !(_step = _iterator()).done;) {
+						const item = _step.value
+
 						if (index > 0) {
 							appendBuffer(',\r\n')
 						} else {

@@ -13,3 +13,4 @@ node/**/*
 env/logger/server/**/*
 server
 src/test/**/*.html
+*.min.js

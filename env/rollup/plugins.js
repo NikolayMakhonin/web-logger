@@ -167,10 +167,14 @@ module.exports = {
 				browser: true,
 			}),
 			plugins.commonjs(),
-			legacy && plugins.babel.browserModule({
+			legacy && plugins.babel.libs({
 				compact: true,
 			}),
-			!dev && plugins.terser(),
+			!dev && plugins.terser({
+				compress: {},
+				mangle: {},
+				rename: {},
+			}),
 		]
 	},
 	components({dev = false, legacy = true}) {

@@ -23,14 +23,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v1.0.7">
+      <change afterPath="$PROJECT_DIR$/env/babel/configs/libs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.browserslistrc" beforeDir="false" afterPath="$PROJECT_DIR$/.browserslistrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/libs/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/libs/helpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/libs/unhandled-errors/all.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/libs/unhandled-errors/all.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/libs/unhandled-errors/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/libs/unhandled-errors/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/env/rollup/babel.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/rollup/babel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/env/rollup/plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/rollup/plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env/scripts/common/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/env/scripts/common/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +90,7 @@
     <property name="js.buildTools.gulp.gulp_package_dir" value="$USER_HOME$/AppData/Roaming/npm/node_modules/gulp" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/common/log/catch" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/env/babel/configs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -128,11 +130,11 @@
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\common\log\globalScope.ts" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\env\babel\configs" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\common\log\catch" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\test\tests\common\main\log" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\src\main\common\log" />
       <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger\env\libs" />
-      <recent name="L:\Work\_GIT\GitHub\NodeJs\modules\web-logger" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Build Libs">
@@ -249,14 +251,7 @@
       <workItem from="1606458874653" duration="720000" />
       <workItem from="1606561731281" duration="5063000" />
       <workItem from="1610264188830" duration="2977000" />
-      <workItem from="1610267318977" duration="16951000" />
-    </task>
-    <task id="LOCAL-00030" summary="Moved logger to separated module">
-      <created>1590941568448</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1590941568448</updated>
+      <workItem from="1610267318977" duration="20283000" />
     </task>
     <task id="LOCAL-00031" summary="Fix resolveExternal">
       <created>1590942171314</created>
@@ -594,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610281908439</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="v1.0.7">
+      <created>1610284413937</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1610284413937</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -683,18 +685,18 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="651" y="253" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.882@0.0.1920.882" timestamp="1601730650956" />
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610281907787">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1610287456907">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610281907787" />
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1610287456907" />
     <state width="1843" height="581" key="DebuggerActiveHint" timestamp="1610281290637">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="1843" height="581" key="DebuggerActiveHint/0.0.1920.882@0.0.1920.882" timestamp="1610281290637" />
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1606563093620">
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1610284381891">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1606563093620" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1610284381891" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1610264260129">
       <screen x="0" y="0" width="1920" height="882" />
     </state>

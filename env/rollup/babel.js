@@ -1,6 +1,7 @@
 const {babel} = require('@rollup/plugin-babel')
 const babelConfigMinimal = require('../babel/configs/minimal')
 const babelConfigBrowserModule = require('../babel/configs/browser-module')
+const babelConfigLibs = require('../babel/configs/libs')
 const babelConfigNode = require('../babel/configs/node')
 const babelConfigV8Trace = require('../babel/configs/v8-trace')
 const {fileExtensions} = require('../common/constants')
@@ -30,6 +31,13 @@ const babelRollup = {
 			babelHelpers: 'runtime',
 			extensions  : [...fileExtensions.js, ...fileExtensions.ts, ...fileExtensions.svelte],
 			...babelConfigBrowserModule,
+			...options,
+		}),
+		libs: (options = {}) => babel({
+			...babelCommon,
+			// babelHelpers: 'runtime',
+			extensions  : [...fileExtensions.js, ...fileExtensions.ts, ...fileExtensions.svelte],
+			...babelConfigLibs,
 			...options,
 		}),
 		v8Trace: (options = {}) => babel({

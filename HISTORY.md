@@ -8,6 +8,7 @@
     * interceptConsole
     * interceptEval
     * catchEvalErrors
+    * unhandled-errors.min.js - for quick catch all errors in browser
   
 0.1.2 - 0.1.6 / 2020-09-17
 ===================
