@@ -2,6 +2,7 @@ import {CombineLogHandlers} from '../../common/log/CombineLogHandlers'
 import {ILogEvent, LogLevel} from '../../common/log/contracts'
 import {EmitEventHandler} from '../../common/log/EmitEventHandler'
 import {Logger} from '../../common/log/Logger'
+import {catchUnhandledErrors} from '../../common/log/intercept/catchUnhandledErrors'
 import {WriteToConsoleHandler} from '../../common/log/WriteToConsoleHandler'
 import {SendLogHandlerNode} from './SendLogHandlerNode'
 import {path, WriteToFileHandler} from './WriteToFileHandler'
@@ -16,7 +17,8 @@ export class LoggerNode extends Logger<HandlersNames> {
 		logFileName,
 		logUrls,
 		writeToConsoleLevels = LogLevel.Any,
-		writeToFileLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
+		writeToFileLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning
+			| LogLevel.UserError | LogLevel.UserWarning,
 		sendLogLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
 		emitEventLevels = LogLevel.Any,
 		filter,
@@ -37,7 +39,9 @@ export class LoggerNode extends Logger<HandlersNames> {
 		/** Use this only with strict mode */
 		interceptEval?: false,
 	}) {
-		this.logUnhandledErrors()
+		catchUnhandledErrors((...args) => {
+			this.error(...args)
+		})
 
 		super._init({
 			appName,
@@ -51,17 +55,8 @@ export class LoggerNode extends Logger<HandlersNames> {
 			],
 			filter,
 			appState,
+			interceptEval,
 		})
-	}
-
-	private logUnhandledErrors() {
-		process
-			.on('unhandledRejection', (...args) => {
-				this.error('process.unhandledRejection', ...args)
-			})
-			.on('uncaughtException', (...args) => {
-				this.error('process.uncaughtException', ...args)
-			})
 	}
 }
 

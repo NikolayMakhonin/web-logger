@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import {ActionMode, ILogEvent, ILogger, LogLevel} from './contracts'
-import {delay, escapeHtml, md5, removeExcessSpaces} from './helpers'
+import {delay} from './delay'
+import {escapeHtml, md5, removeExcessSpaces} from './helpers'
 import {LogHandler} from './LogHandler'
 
 export interface ISendLogMessage {

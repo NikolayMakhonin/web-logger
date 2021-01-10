@@ -1,7 +1,7 @@
 import {CombineLogHandlers} from '../../common/log/CombineLogHandlers'
 import {ILogEvent, LogLevel} from '../../common/log/contracts'
 import {EmitEventHandler} from '../../common/log/EmitEventHandler'
-import {globalScope} from '../../common/log/helpers'
+import {catchUnhandledErrors} from '../../common/log/intercept/catchUnhandledErrors'
 import {Logger} from '../../common/log/Logger'
 import {WriteToConsoleHandler} from '../../common/log/WriteToConsoleHandler'
 import {SendLogHandlerBrowser} from './SendLogHandlerBrowser'
@@ -46,7 +46,9 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 			}
 		}
 
-		this.logUnhandledErrors()
+		catchUnhandledErrors((...args) => {
+			this.error(...args)
+		})
 
 		super._init({
 			appName,
@@ -61,28 +63,6 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 			filter,
 			appState,
 		})
-	}
-
-	private logUnhandledErrors() {
-		const errorHandler = (...args) => {
-			this.error(
-				'unhandledrejection',
-				...args.map(arg => (typeof PromiseRejectionEvent !== 'undefined'
-						? arg instanceof PromiseRejectionEvent && arg.reason
-						: arg.reason)
-						|| arg),
-			)
-		}
-
-		if (typeof globalScope !== 'undefined') {
-			globalScope.addEventListener('unhandledrejection', errorHandler)
-
-			globalScope.onunhandledrejection = errorHandler
-
-			globalScope.onerror = (...args) => {
-				this.error('unhandled error', ...args)
-			}
-		}
 	}
 }
 

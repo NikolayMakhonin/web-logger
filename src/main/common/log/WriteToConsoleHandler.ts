@@ -1,6 +1,7 @@
 import {ActionMode, ILogEvent, ILogger, LogLevel} from './contracts'
 import {LogHandler} from './LogHandler'
 import {objectToString} from './objectToString'
+import {interceptConsole} from './intercept/catchUnhandledErrors'
 
 const consoleOrig = {
 	debug: console.debug.bind(console),
@@ -26,7 +27,7 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
 	private interceptConsole() {
 		const self = this
 		const createInterceptFunc = (level: LogLevel, consoleFunc: (...args) => void) => {
-			return function (...args) {
+			return function consoleHandler(...args) {
 				self._logger.log({
 					level,
 					messagesOrErrors: args,
@@ -43,8 +44,17 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
 						return o
 					}))
 				}
+
+				return true
 			}
 		}
+
+		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
+		interceptConsole('debug', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
+		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
+		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
+		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
+		interceptConsole('trace', createInterceptFunc(LogLevel.Debug, consoleOrig.debug))
 
 		console.debug = createInterceptFunc(LogLevel.Debug, consoleOrig.debug)
 		console.info = createInterceptFunc(LogLevel.Info, consoleOrig.info)

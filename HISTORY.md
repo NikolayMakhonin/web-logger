@@ -1,3 +1,8 @@
+0.1.7 / 2020-09-17
+===================
+
+  * Change facade: added globalScope and catchUnhandledErrors
+  
 0.1.2 - 0.1.6 / 2020-09-17
 ===================
 

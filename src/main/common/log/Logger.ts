@@ -7,8 +7,9 @@ import {
 	IUnsubscribe,
 	LogLevel,
 } from './contracts'
-import {globalScope} from './helpers'
+import {globalScope} from './globalScope'
 import {LogEvent} from './LogEvent'
+import {catchEvalErrors} from './intercept/interceptEval'
 
 // region Logger
 
@@ -33,7 +34,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		handlers,
 		filter,
 		appState,
-		interceptEval,
+		interceptEval: _interceptEval,
 	}: {
 		appName: string,
 		appVersion: string,
@@ -65,8 +66,10 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		this.filter = filter
 		this.appState = appState
 
-		if (interceptEval) {
-			this.interceptEval()
+		if (_interceptEval) {
+			catchEvalErrors((...args: any[]) => {
+				this.error(...args)
+			})
 		}
 
 		const logEvent: ILogEventParams<HandlersNames> = {
@@ -78,23 +81,6 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		}
 
 		this.log(logEvent)
-	}
-
-	private interceptEval() {
-		const oldEval = globalScope.eval
-		delete globalScope.eval
-		globalScope.eval = str => {
-			if (str.indexOf('async function') >= 0) {
-				return oldEval.call(globalScope, str)
-			}
-
-			try {
-				return oldEval.call(globalScope, str)
-			} catch (ex) {
-				this.error('eval error', ex, str)
-				throw ex
-			}
-		}
 	}
 
 	// endregion

@@ -11,12 +11,6 @@ export function escapeHtml(str: string): string {
 	return html.escape(str)
 }
 
-export function delay(timeMilliseconds) {
-	return new Promise(resolve => {
-		setTimeout(resolve, timeMilliseconds)
-	})
-}
-
 const _spacesRegex = /\s+/
 const _spacesWithoutNewLinesRegex = /[^\S\n]+/
 const _fixNewLines = /([^\S\n]*\n[^\S\n]*)/
@@ -36,18 +30,3 @@ export function removeExcessSpaces(text: string, keepLines?: number) {
 
 	return text
 }
-
-export function getGlobalScope() {
-	if (typeof window !== 'undefined') {
-		return window
-	}
-	if (typeof self !== 'undefined') {
-		return self
-	}
-	if (typeof global !== 'undefined') {
-		return global
-	}
-	return null
-}
-
-export const globalScope: any = getGlobalScope()
