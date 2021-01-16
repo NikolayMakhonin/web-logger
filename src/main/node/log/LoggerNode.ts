@@ -14,7 +14,7 @@ export class LoggerNode extends Logger<HandlersNames> {
 		appName,
 		appVersion,
 		logDir,
-		logFileName,
+		logFileName = 'log.log',
 		logUrls,
 		writeToConsoleLevels = LogLevel.Any,
 		writeToFileLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning
@@ -27,9 +27,9 @@ export class LoggerNode extends Logger<HandlersNames> {
 	}: {
 		appName: string,
 		appVersion: string,
-		logDir: string,
+		logDir?: string,
 		logFileName: string,
-		logUrls: string[],
+		logUrls?: string[],
 		writeToConsoleLevels?: LogLevel,
 		writeToFileLevels?: LogLevel,
 		sendLogLevels?: LogLevel,
@@ -48,7 +48,7 @@ export class LoggerNode extends Logger<HandlersNames> {
 			appVersion,
 			handlers: [
 				new WriteToConsoleHandler(this, writeToConsoleLevels),
-				new WriteToFileHandler(this, writeToFileLevels, path.resolve(logDir), logFileName),
+				logDir && new WriteToFileHandler(this, writeToFileLevels, path.resolve(logDir), logFileName),
 				logUrls && logUrls.length && new CombineLogHandlers(this,
 					...logUrls.map(logUrl => new SendLogHandlerNode(this, sendLogLevels, logUrl))),
 				new EmitEventHandler(this, emitEventLevels),
