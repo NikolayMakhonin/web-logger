@@ -201,26 +201,30 @@ export function objectToString(object: any, {
 					appendBuffer('...')
 				} else {
 					// for (const item of obj) {
-					for (let _iterator = obj[Symbol.iterator], _step; !(_step = _iterator()).done;) {
-						const item = _step.value
+					try {
+						for (let _iterator = obj[Symbol.iterator], _step; !(_step = _iterator()).done;) {
+							const item = _step.value
 
-						if (index > 0) {
-							appendBuffer(',\r\n')
-						} else {
-							appendBuffer('\r\n')
+							if (index > 0) {
+								appendBuffer(',\r\n')
+							} else {
+								appendBuffer('\r\n')
+							}
+
+							appendBuffer(tabs)
+							appendBuffer(index.toString())
+							appendBuffer(': ')
+							append(item, newTabs, level)
+
+							index++
+							if (index >= _maxListSize) {
+								appendBuffer(newTabs)
+								appendBuffer('...')
+								break
+							}
 						}
-
-						appendBuffer(tabs)
-						appendBuffer(index.toString())
-						appendBuffer(': ')
-						append(item, newTabs, level)
-
-						index++
-						if (index >= _maxListSize) {
-							appendBuffer(newTabs)
-							appendBuffer('...')
-							break
-						}
+					} catch (err) {
+						appendBuffer('<iterate error>')
 					}
 				}
 				if (index > 0) {

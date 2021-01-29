@@ -1,10 +1,23 @@
 import {globalScope} from '../globalScope'
 
 function prepareArgs(args: any[]) {
-	return args.map(arg => (typeof PromiseRejectionEvent !== 'undefined'
-		? arg instanceof PromiseRejectionEvent && arg.reason
-		: arg.reason)
-		|| arg)
+	return args.map(arg => {
+		if (typeof PromiseRejectionEvent !== 'undefined' && arg instanceof PromiseRejectionEvent) {
+			return arg.reason || arg
+		}
+
+		if (
+			typeof Event !== 'undefined' && typeof Element !== 'undefined'
+			&& arg instanceof Event
+			&& arg.target instanceof Element
+		) {
+			if ('src' in arg.target) {
+				return `Error load: ${(arg.target as any).src}\r\n${(arg.target as Element).outerHTML}`
+			}
+		}
+
+		return arg.reason || arg
+	})
 }
 
 export type TErrorHandler = (...args: any[]) => void
@@ -39,6 +52,8 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
 		if (globalScope.addEventListener) {
 			globalScope.addEventListener('unhandledrejection', unhandledrejectionHandler)
 			globalScope.onunhandledrejection = unhandledrejectionHandler
+			// see: https://stackoverflow.com/a/28771916/5221762
+			globalScope.addEventListener('error', unhandledErrorHandler, true)
 			globalScope.onerror = unhandledErrorHandler
 		}
 	}
