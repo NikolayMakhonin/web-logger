@@ -5,7 +5,7 @@ import {
 	ILogger, ILogHandler, ILogHandlers,
 	ISubscriber,
 	IUnsubscribe,
-	LogLevel,
+	LogLevel, TAppState,
 } from './contracts'
 import {globalScope} from './globalScope'
 import {LogEvent} from './LogEvent'
@@ -25,7 +25,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 
 	public appName: string
 	public appVersion: string
-	public appState: object
+	public appState: TAppState
 	private _initialized: boolean
 
 	protected _init({
@@ -40,7 +40,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 		appVersion: string,
 		handlers: Array<ILogHandler<HandlersNames>>,
 		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
-		appState?: object,
+		appState?: TAppState,
 		/** Use this only with strict mode */
 		interceptEval?: false,
 	}) {

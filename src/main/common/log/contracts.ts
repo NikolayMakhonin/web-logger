@@ -76,3 +76,5 @@ export interface ILogger<HandlersNames extends string|number> {
 	subscribe(subscriber: ISubscriber<HandlersNames>): IUnsubscribe
 	onLog(logEvent: ILogEventParams<HandlersNames>)
 }
+
+export type TAppState = { [key: string]: any }

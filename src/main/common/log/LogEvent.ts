@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-var-requires
-import {ILogEvent, ILogEventParams, ILogHandlersModes, LogLevel} from './contracts'
+import {ILogEvent, ILogEventParams, ILogHandlersModes, LogLevel, TAppState} from './contracts'
 import {md5} from './helpers'
 import {objectToString} from './objectToString'
 
@@ -22,10 +22,6 @@ function getStackTraceCountFrames(level: LogLevel): number
 	}
 }
 
-export interface AppState {
-	readonly [key: string]: string
-}
-
 export class LogEvent<HandlersNames extends string|number>
 	implements ILogEvent<HandlersNames>
 {
@@ -37,7 +33,7 @@ export class LogEvent<HandlersNames extends string|number>
 	public readonly time: Date
 	public readonly stack: string
 	public readonly additionalHashString: string
-	public readonly appState: AppState
+	public readonly appState: TAppState
 
 	public constructor({
 		level,
@@ -48,7 +44,7 @@ export class LogEvent<HandlersNames extends string|number>
 		additionalHashString,
 		appState,
 	}: {
-		appState?: AppState,
+		appState?: TAppState,
 	} & ILogEventParams<HandlersNames>)
 	{
 		this.level = level || LogLevel.Error

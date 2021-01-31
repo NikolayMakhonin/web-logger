@@ -1,5 +1,5 @@
 import {CombineLogHandlers} from '../../common/log/CombineLogHandlers'
-import {ILogEvent, LogLevel} from '../../common/log/contracts'
+import {ILogEvent, LogLevel, TAppState} from '../../common/log/contracts'
 import {EmitEventHandler} from '../../common/log/EmitEventHandler'
 import {Logger} from '../../common/log/Logger'
 import {catchUnhandledErrors} from '../../common/log/intercept/catchUnhandledErrors'
@@ -35,7 +35,7 @@ export class LoggerNode extends Logger<HandlersNames> {
 		sendLogLevels?: LogLevel,
 		emitEventLevels?: LogLevel,
 		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
-		appState?: object,
+		appState?: TAppState,
 		/** Use this only with strict mode */
 		interceptEval?: false,
 	}) {

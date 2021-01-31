@@ -23,13 +23,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v0.1.13">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/common/log/intercept/catchUnhandledErrors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/intercept/catchUnhandledErrors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/objectToString.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unhandled-errors.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/unhandled-errors.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/log/LoggerBrowser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/log/LoggerBrowser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/LogEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/LogEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/Logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/Logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/common/log/contracts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/common/log/contracts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/node/log/LoggerNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/node/log/LoggerNode.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,14 +255,8 @@
       <workItem from="1610799712380" duration="537000" />
       <workItem from="1611383573932" duration="2339000" />
       <workItem from="1611507814716" duration="2537000" />
-      <workItem from="1611946400735" duration="2343000" />
-    </task>
-    <task id="LOCAL-00038" summary="Fix travis">
-      <created>1599282318450</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1599282318450</updated>
+      <workItem from="1611946400735" duration="2735000" />
+      <workItem from="1612073468268" duration="789000" />
     </task>
     <task id="LOCAL-00039" summary="Fix travis">
       <created>1599282562006</created>
@@ -600,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610799808054</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="v0.1.14">
+      <created>1611951741111</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1611951741111</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +637,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix travis: disabled Electron in karma" />
     <MESSAGE value="Upgrade node modules" />
     <MESSAGE value="Documenting..." />
     <MESSAGE value="Merged with app" />
@@ -661,7 +661,8 @@
     <MESSAGE value="v1.0.10" />
     <MESSAGE value="v0.1.12" />
     <MESSAGE value="v0.1.13" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.1.13" />
+    <MESSAGE value="v0.1.14" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.1.14" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -673,18 +674,18 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="91" y="91" width="1738" height="700" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.882@0.0.1920.882" timestamp="1610279793483" />
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1611947270022">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1611951740245">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1611947270022" />
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1611951740245" />
     <state width="1843" height="581" key="DebuggerActiveHint" timestamp="1610281290637">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="1843" height="581" key="DebuggerActiveHint/0.0.1920.882@0.0.1920.882" timestamp="1610281290637" />
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1610777474760">
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1611951719366">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1610777474760" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1611951719366" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1610264260129">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -765,10 +766,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state x="722" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.882@0.0.1920.882" timestamp="1610287927322" />
-    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1611951216270">
+    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1612073629302">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1611951216270" />
+    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1612073629302" />
     <state x="531" y="190" key="run.anything.popup" timestamp="1610276630304">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
