@@ -23,10 +23,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v0.1.16">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -256,14 +253,7 @@
       <workItem from="1612073468268" duration="1462000" />
       <workItem from="1612947160884" duration="33000" />
       <workItem from="1620282738369" duration="3188000" />
-      <workItem from="1620286403042" duration="2317000" />
-    </task>
-    <task id="LOCAL-00042" summary="Fix travis: disabled Electron in karma">
-      <created>1599284502182</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1599284502182</updated>
+      <workItem from="1620286403042" duration="2597000" />
     </task>
     <task id="LOCAL-00043" summary="Upgrade node modules">
       <created>1599285337166</created>
@@ -601,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620286082596</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="v0.1.17">
+      <created>1620292898477</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1620292898478</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,7 +634,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Merged with app" />
     <MESSAGE value="Lint config updated" />
     <MESSAGE value="Try to add svelte eslint: not now" />
     <MESSAGE value="Added svelte eslint. Lint fixes" />
@@ -662,18 +658,19 @@
     <MESSAGE value="Small fixes" />
     <MESSAGE value="v0.1.15" />
     <MESSAGE value="v0.1.16" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.1.16" />
+    <MESSAGE value="v0.1.17" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.1.17" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1620292829650">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1620292897581">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1620292829650" />
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1620292827055">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1620292897581" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1620292894822">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1620292827055" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1620292894822" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1620286810771">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
