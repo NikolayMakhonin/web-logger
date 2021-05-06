@@ -1,5 +1,5 @@
 // @ts-ignore
-import {html, SparkMD5} from './helpers-cjs'
+import {SparkMD5} from './helpers-cjs'
 
 export function md5(str: string): string {
 	const spark = new SparkMD5()
@@ -7,8 +7,20 @@ export function md5(str: string): string {
 	return spark.end()
 }
 
-export function escapeHtml(str: string): string {
-	return html.escape(str)
+// from: https://stackoverflow.com/a/28458409/5221762
+export function escapeHtml(text) {
+	return text && text.replace(/[&<"']/g, m => {
+		switch (m) {
+			case '&':
+				return '&amp;'
+			case '<':
+				return '&lt;'
+			case '"':
+				return '&quot;'
+			default:
+				return '&#039;'
+		}
+	})
 }
 
 const _spacesRegex = /\s+/

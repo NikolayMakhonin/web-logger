@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.1.14",
+	"version": "0.1.15",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -176,7 +176,6 @@
 		"webrain": "^1.2.2-a"
 	},
 	"dependencies": {
-		"html-escaper": "^3.0.0",
 		"needle": "^2.6.0",
 		"spark-md5": "^3.0.1"
 	}
