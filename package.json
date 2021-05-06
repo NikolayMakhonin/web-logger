@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.1.15",
+	"version": "0.1.16",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -88,6 +88,7 @@
 		"@babel/runtime-corejs3": "^7.11.2",
 		"@flemist/browser-debug": "0.0.1",
 		"@flemist/css-to-xpath": "0.0.5",
+		"@flemist/ncat": "^4.0.2",
 		"@flemist/run-script": "^0.2.5",
 		"@metahub/karma-rollup-preprocessor": "^6.0.0",
 		"@rollup/plugin-alias": "^3.1.1",
@@ -142,7 +143,6 @@
 		"kleur": "^4.1.1",
 		"lodash": "^4.17.20",
 		"mocha": "^8.1.3",
-		"ncat": "^4.0.2",
 		"nyc": "^15.1.0",
 		"perfectionist": "^2.4.0",
 		"postcss": "^7.0.32",

@@ -2,6 +2,7 @@
 ===================
 
 * Removed dependency: html-escaper
+* Replace ncat with @flemist/ncat@4.0.2
 
 0.1.14 / 2021-01-16
 ===================
