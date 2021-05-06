@@ -1,6 +1,6 @@
 {
 	"name": "@flemist/web-logger",
-	"version": "0.1.16",
+	"version": "0.1.17",
 	"description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
 	"author": {
 		"name": "Nikolay Makhonin",
@@ -50,7 +50,7 @@
 	"scripts": {
 		"precommit": "npm run build-test:ci",
 		"prepublishOnly": "npm run build-test:dev",
-		"ci": "npm run build-test:ci && ncat \"tmp/*/coverage/all/lcov/**/lcov.info\" --banner \"\" | coveralls",
+		"ci": "npm run build-test:ci && concat \"tmp/*/coverage/all/lcov/**/lcov.info\" -s \"\\r\\n\" | coveralls",
 		"lint": "run-script \"require('./env/scripts/common').lint().stopOnError()\"",
 		"lint:fix": "run-script \"require('./env/scripts/common').lint({fix: true}).stopOnError()\"",
 		"-------- build --------": "",
@@ -87,8 +87,8 @@
 		"@babel/register": "^7.12.10",
 		"@babel/runtime-corejs3": "^7.11.2",
 		"@flemist/browser-debug": "0.0.1",
+		"@flemist/concat": "0.0.3",
 		"@flemist/css-to-xpath": "0.0.5",
-		"@flemist/ncat": "^4.0.2",
 		"@flemist/run-script": "^0.2.5",
 		"@metahub/karma-rollup-preprocessor": "^6.0.0",
 		"@rollup/plugin-alias": "^3.1.1",
