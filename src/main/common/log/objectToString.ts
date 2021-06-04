@@ -1,6 +1,9 @@
 /* tslint:disable:no-construct use-primitive-type */
 export function filterDefault(obj) {
-	if (typeof EventTarget !== 'undefined' && obj instanceof EventTarget) {
+	if (
+		typeof EventTarget !== 'undefined' && obj instanceof EventTarget
+		&& (typeof EventSource === 'undefined' || !(obj instanceof EventSource))
+	) {
 		return false
 	}
 
@@ -22,7 +25,7 @@ export function objectToString(object: any, {
 	maxLevel = 15,
 	maxValueSize = 5000,
 	maxFuncSize = 100,
-	maxProperties = 30,
+	maxProperties = 50,
 	maxListSize = 10,
 	maxResultSize = 50000,
 	filter = filterDefault,
@@ -170,17 +173,18 @@ export function objectToString(object: any, {
 						appendBuffer(',\r\n')
 					}
 
+					if (index >= maxCount) {
+						appendBuffer(newTabs)
+						appendBuffer('...\r\n')
+						break
+					}
+
 					appendBuffer(newTabs)
 					appendBuffer(key === '' ? '""' : key)
 					appendBuffer(': ')
 					append(obj[key], newTabs, level)
 
 					index++
-					if (index >= maxCount) {
-						appendBuffer(newTabs)
-						appendBuffer('...')
-						break
-					}
 				}
 			}
 
