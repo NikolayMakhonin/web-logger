@@ -35,7 +35,7 @@ const babelRollup = {
 		}),
 		libs: (options = {}) => babel({
 			...babelCommon,
-			// babelHelpers: 'runtime',
+			babelHelpers: 'runtime',
 			extensions  : [...fileExtensions.js, ...fileExtensions.ts, ...fileExtensions.svelte],
 			...babelConfigLibs,
 			...options,

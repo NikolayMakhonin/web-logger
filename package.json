@@ -177,6 +177,7 @@
 	},
 	"dependencies": {
 		"needle": "^2.6.0",
-		"spark-md5": "^3.0.1"
+		"spark-md5": "^3.0.1",
+		"ua-parser-js": "^0.7.28"
 	}
 }
