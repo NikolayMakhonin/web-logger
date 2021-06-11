@@ -5,10 +5,10 @@ const {buildLib} = require('../helpers')
 
 buildLib({
 	fileInput : require.resolve('./all.js'),
-	fileOutput: './unhandled-errors.min.js',
-	name: 'UnhandledErrors',
+	fileOutput: './web-logger.min.js',
+	name: 'WebLogger',
 	rebuild: true,
 })
 	.then(() => {
-		console.log('unhandled-errors build completed')
+		console.log('web-logger build completed')
 	})

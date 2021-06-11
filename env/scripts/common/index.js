@@ -24,9 +24,14 @@ const buildUnhandledErrors = singleCall(() => run(
 	'node env/libs/unhandled-errors/build.js',
 	{env: {APP_CONFIG: 'dev'}},
 ))
+const buildWebLogger = singleCall(() => run(
+	'node env/libs/web-logger/build.js',
+	{env: {APP_CONFIG: 'dev'}},
+))
 const buildLibs = singleCall(() => Promise.all([
 	buildPolyfill(),
 	buildUnhandledErrors(),
+	buildWebLogger(),
 ]))
 const clean = singleCall(() => deletePaths('{*.log,__sapper__}'))
 const build = singleCall(() => Promise.all([
