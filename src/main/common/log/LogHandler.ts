@@ -29,7 +29,9 @@ export abstract class LogHandler<Name extends string | number>
 	}) {
 		this.name = name
 		this._logger = logger
-		this.allowLogLevels = allowLogLevels || LogLevel.Any
+		this.allowLogLevels = allowLogLevels == null
+			? LogLevel.Any
+			: allowLogLevels
 		this._maxLogSize = maxLogSize || 50000
 	}
 
