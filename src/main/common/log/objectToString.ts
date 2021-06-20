@@ -228,7 +228,7 @@ export function objectToString(object: any, {
 							}
 						}
 					} catch (err) {
-						appendBuffer('<iterate error>')
+						appendBuffer('<iterate error>: ' + err.message)
 					}
 				}
 				if (index > 0) {
