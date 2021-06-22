@@ -10,6 +10,72 @@ export function filterDefault(obj) {
 	return true
 }
 
+function getEventTargets(event: Event): any[] {
+	const elements = []
+	function _push(target: any|any[]) {
+		if (!target || elements.indexOf(target) >= 0) {
+			return
+		}
+		elements.push(target)
+	}
+	function push(target: any|any[]) {
+		if (Array.isArray(target)) {
+			for (let i = 0, len = target.length; i < len; i++) {
+				_push(target[i])
+			}
+		} else {
+			_push(target)
+		}
+	}
+	push(event.target)
+	push(event.currentTarget)
+	push(event.srcElement)
+	push((event as any).path)
+	if (typeof event.composedPath === 'function') {
+		try {
+			push(event.composedPath())
+		} catch (err) {	}
+	}
+
+	return elements
+}
+
+function getEventErrors(event: Event): any[] {
+	const errors = []
+	const targets = getEventTargets(event)
+	for (let i = 0, len = targets.length; i < len; i++) {
+		const target = targets[i]
+		let countProperties = 0
+		const error = {} as any
+		if (target.error) {
+			error.error = target.error
+			countProperties++
+		}
+		if (target.reason) {
+			error.reason = target.reason
+			countProperties++
+		}
+		if (target.readyState) {
+			error.readyState = target.readyState
+			countProperties++
+		}
+		if (target.status) {
+			error.status = target.status
+			countProperties++
+		}
+		if (target.src || target.currentSrc) {
+			error.src = target.src || target.currentSrc
+			countProperties++
+		}
+
+		if (countProperties > 0) {
+			errors.push(error)
+		}
+	}
+
+	return errors
+}
+
 let nextId = 1
 const objectsMap = new WeakMap()
 function getObjectUniqueId(obj) {
@@ -162,8 +228,29 @@ export function objectToString(object: any, {
 			const newTabs = tabs + '\t'
 
 			let index = 0
+
+			if (typeof Event === 'function' && obj instanceof Event) {
+				const errors = getEventErrors(obj)
+
+				if (index === 0) {
+					appendBuffer('\r\n')
+				} else {
+					appendBuffer(',\r\n')
+				}
+
+				appendBuffer(newTabs)
+				appendBuffer('_errors')
+				appendBuffer(': ')
+				append(errors, newTabs, level)
+
+				index++
+			}
+
 			if (index >= maxCount) {
 				appendBuffer('...')
+				if (index > 0) {
+					appendBuffer('\r\n')
+				}
 			} else {
 				// tslint:disable-next-line:forin
 				for (const key in obj) {
