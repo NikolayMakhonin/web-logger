@@ -64,9 +64,13 @@ export abstract class LogHandler<Name extends string | number>
 	public enqueueLog(logEvent: ILogEvent<Name>) {
 		const canLog = this.canLog(logEvent)
 
+		if (!canLog) {
+			return
+		}
+
 		this._queue.push(logEvent)
 
-		if (!canLog || this._inProcess) {
+		if (this._inProcess) {
 			return
 		}
 
