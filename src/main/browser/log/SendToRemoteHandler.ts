@@ -1,12 +1,12 @@
 /* tslint:disable:no-var-requires */
-import {ActionMode, ILogEvent, ILogger, LogLevel} from '../../common/log/contracts'
+import {ActionMode, ILogEvent, ILogEventParams, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
-import {IRemoteLogger, IWriteToFileLogEvent} from './remoteLogger'
+import {IRemoteLogger} from './IRemoteLogger'
 
-export class WriteToFileHandler extends LogHandler<'writeToFile'> {
+export class SendToRemoteHandler extends LogHandler<'sendToRemote'> {
 	constructor(logger: ILogger<any>, allowLogLevels: LogLevel, logFileName: string) {
 		super({
-			name: 'writeToFile',
+			name: 'sendToRemote',
 			logger,
 			allowLogLevels,
 		})
@@ -34,19 +34,8 @@ export class WriteToFileHandler extends LogHandler<'writeToFile'> {
 			return
 		}
 
-		const sendLogEvents: Array<IWriteToFileLogEvent<any>> = logEvents.map(o => {
-			return {
-				level        : o.level,
-				dateString   : o.dateString,
-				appInfo      : o.appInfo,
-				handlersModes: {
-					_all       : ActionMode.Never,
-					writeToFile: ActionMode.Always,
-				},
-				bodyString: o.bodyString,
-			}
-		})
+		const sendLogEvents: Array<ILogEventParams<any>> = logEvents
 
-		await remoteLogger.writeToFile(...sendLogEvents)
+		await remoteLogger.send(...sendLogEvents)
 	}
 }

@@ -1,3 +1,8 @@
+1.0.0 / 2021-08-08
+===================
+
+* changed remoteLogger.writeToFile -> remoteLogger.send()
+
 0.1.21 / 2021-07-21
 ===================
 

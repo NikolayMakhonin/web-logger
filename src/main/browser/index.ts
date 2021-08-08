@@ -1,5 +1,5 @@
 export * from '../common/index'
 export * from './log/LoggerBrowser'
-export * from './log/WriteToFileHandler'
+export * from './log/SendToRemoteHandler'
 export * from './log/SendLogHandlerBrowser'
-export * from './log/remoteLogger'
+export * from './log/IRemoteLogger'

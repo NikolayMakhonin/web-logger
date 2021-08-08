@@ -23,9 +23,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="">
+    <list default="true" id="d52e1996-07d3-4492-b0b2-6fba29f4b076" name="Default Changelist" comment="v0.1.21">
+      <change afterPath="$PROJECT_DIR$/src/main/browser/log/IRemoteLogger.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HISTORY.md" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/log/LoggerBrowser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/log/LoggerBrowser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/log/WriteToFileHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/browser/log/SendToRemoteHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/browser/log/remoteLogger.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +43,7 @@
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="node-module" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -270,13 +276,10 @@
       <workItem from="1624351388304" duration="2729000" />
       <workItem from="1624597581210" duration="614000" />
       <workItem from="1626862902478" duration="1474000" />
-    </task>
-    <task id="LOCAL-00052" summary="Lint config updated">
-      <created>1601698691759</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1601698691759</updated>
+      <workItem from="1626867369021" duration="382000" />
+      <workItem from="1627796332189" duration="118000" />
+      <workItem from="1627796509686" duration="48000" />
+      <workItem from="1628415287053" duration="2006000" />
     </task>
     <task id="LOCAL-00053" summary="Lint fixes">
       <created>1601706093977</created>
@@ -614,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624353406921</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="v0.1.21">
+      <created>1626867585308</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1626867585308</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +660,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Lint fixes" />
     <MESSAGE value="v0.1.4" />
     <MESSAGE value="v0.1.5" />
     <MESSAGE value="v0.1.6" />
@@ -675,18 +684,19 @@
     <MESSAGE value="v0.0.19" />
     <MESSAGE value="v0.0.20" />
     <MESSAGE value="v0.1.20" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.1.20" />
+    <MESSAGE value="v0.1.21" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.1.21" />
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1624353403741">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2" timestamp="1628417271427">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1624353403741" />
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1624353368047">
+    <state x="0" y="0" width="1919" height="882" key="CommitChangelistDialog2/0.0.1920.882@0.0.1920.882" timestamp="1628417271427" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog" timestamp="1628417178811">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1624353368047" />
+    <state x="0" y="2" width="1920" height="879" key="DiffContextDialog/0.0.1920.882@0.0.1920.882" timestamp="1628417178811" />
     <state x="686" y="134" key="FileChooserDialogImpl" timestamp="1620286810771">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
@@ -755,10 +765,10 @@
       <screen x="0" y="0" width="1920" height="882" />
     </state>
     <state width="1892" height="294" key="GridCell.Tab.3.right/0.0.1920.882@0.0.1920.882" timestamp="1626867122244" />
-    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1624597593775">
+    <state x="0" y="0" width="1920" height="882" key="find.popup" timestamp="1628417199602">
       <screen x="0" y="0" width="1920" height="882" />
     </state>
-    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1624597593775" />
+    <state x="0" y="0" width="1920" height="882" key="find.popup/0.0.1920.882@0.0.1920.882" timestamp="1628417199602" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

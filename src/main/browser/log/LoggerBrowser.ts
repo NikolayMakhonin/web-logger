@@ -5,9 +5,9 @@ import {catchUnhandledErrors} from '../../common/log/intercept/catchUnhandledErr
 import {Logger} from '../../common/log/Logger'
 import {WriteToConsoleHandler} from '../../common/log/WriteToConsoleHandler'
 import {SendLogHandlerBrowser} from './SendLogHandlerBrowser'
-import {WriteToFileHandler} from './WriteToFileHandler'
+import {SendToRemoteHandler} from './SendToRemoteHandler'
 
-type HandlersNames = 'writeToFile' | 'writeToConsole' | 'sendLog' | 'emitEvent'
+type HandlersNames = 'writeToConsole' | 'sendToRemote' | 'sendLog' | 'emitEvent'
 
 export class LoggerBrowser extends Logger<HandlersNames> {
 	public init({
@@ -15,7 +15,7 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 		appVersion,
 		logUrls,
 		logFileName,
-		writeToFileLevels = LogLevel.Any,
+		sendToRemoteLevels = LogLevel.Any,
 		writeToConsoleLevels = LogLevel.Any,
 		sendLogLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
 		emitEventLevels = LogLevel.Any,
@@ -27,7 +27,7 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 		appVersion: string,
 		logUrls: string[],
 		logFileName: string,
-		writeToFileLevels?: LogLevel,
+		sendToRemoteLevels?: LogLevel,
 		writeToConsoleLevels?: LogLevel,
 		sendLogLevels?: LogLevel,
 		emitEventLevels?: LogLevel,
@@ -58,7 +58,7 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 				logUrls && logUrls.length && new CombineLogHandlers(this,
 					...logUrls.map(logUrl => new SendLogHandlerBrowser(this, sendLogLevels, logUrl))),
 				new EmitEventHandler(this, emitEventLevels),
-				new WriteToFileHandler(this, writeToFileLevels, logFileName),
+				new SendToRemoteHandler(this, sendToRemoteLevels, logFileName),
 			],
 			filter,
 			appState,
