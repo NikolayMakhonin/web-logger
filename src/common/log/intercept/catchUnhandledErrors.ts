@@ -1,4 +1,5 @@
 import {globalScope} from '../globalScope'
+import {InstrumentedPromise, OriginalPromise} from 'src/common/log/intercept/InstrumentedPromise'
 
 function prepareArgs(args: any[]) {
   return args.map(arg => {
@@ -44,13 +45,17 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   const unhandledrejectionHandler = handlerFactory('unhandledrejection')
   const unhandledErrorHandler = handlerFactory('unhandled error')
 
+  if (!globalScope.PromiseRejectionEvent) {
+    globalScope.Promise = InstrumentedPromise
+  }
+
   if (typeof process !== 'undefined' && process.on) {
     process
       .on('unhandledRejection', processUnhandledRejectionHandler)
       .on('uncaughtException', processUncaughtExceptionHandler)
   }
 
-  if (globalScope?.addEventListener) {
+  if (globalScope.addEventListener) {
     globalScope.addEventListener('unhandledrejection', unhandledrejectionHandler)
     globalScope.onunhandledrejection = unhandledrejectionHandler
     // see: https://stackoverflow.com/a/28771916/5221762
@@ -59,13 +64,17 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   }
 
   return () => {
+    if (!globalScope.PromiseRejectionEvent) {
+      globalScope.Promise = OriginalPromise
+    }
+
     if (typeof process !== 'undefined' && process.removeListener) {
       process
         .removeListener('unhandledRejection', processUnhandledRejectionHandler)
         .removeListener('uncaughtException', processUncaughtExceptionHandler)
     }
 
-    if (globalScope?.removeEventListener) {
+    if (globalScope.removeEventListener) {
       globalScope.removeEventListener('unhandledrejection', unhandledrejectionHandler)
       globalScope.onunhandledrejection = null
       globalScope.removeEventListener('error', unhandledErrorHandler, true)

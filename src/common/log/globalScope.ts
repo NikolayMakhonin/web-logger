@@ -8,7 +8,7 @@ export function getGlobalScope() {
   if (typeof global !== 'undefined') {
     return global
   }
-  return null
+  throw new Error('globalScope is not found')
 }
 
 export const globalScope: any = getGlobalScope()

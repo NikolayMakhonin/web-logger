@@ -6,7 +6,7 @@ import {CONSOLE_LEVELS, TConsoleLevel} from './intercept/interceptConsole'
 import {globalScope} from './globalScope'
 
 async function runWithDisabledOnError<T>(func: () => Promise<T>|T): Promise<T> {
-  if (!globalScope?.onerror) {
+  if (!globalScope.onerror) {
     return func()
   }
 
@@ -35,7 +35,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
     ErrorType.Console,
     ErrorType.Eval,
     // ErrorType.PromiseCreateRejected,
-    // ErrorType.PromiseReject,
+    ErrorType.PromiseReject,
     // ErrorType.PromiseRejectComplex,
     ErrorType.SetTimeout,
     // ErrorType.BrowserNetwork,
@@ -48,6 +48,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
   }
 
   type CatchConsoleType = null | 'empty' | 'excluded' | 'included' | 'all'
+
+  let iteration = 0
 
   const testVariants = createTestVariants(async ({
     catchUnhandled,
@@ -62,6 +64,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
     catchConsoleType: CatchConsoleType,
     consoleErrorLevel: TConsoleLevel,
   }) => {
+    iteration++
+
     const TEST_ERROR_MESSAGE = errorType
       + (consoleErrorLevel ? '.' + consoleErrorLevel : '')
       + ': TEST ERROR'
@@ -144,7 +148,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
             })
           }
         case ErrorType.BrowserNetwork:
-          document.body.style.backgroundImage = `url(${TEST_ERROR_MESSAGE})`
+          document.body.style.backgroundImage = `url("${TEST_ERROR_MESSAGE} ${iteration}")`
           return delay(10)
         default:
           throw new Error('Unknown ErrorType: ' + errorType)
