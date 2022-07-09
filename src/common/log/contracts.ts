@@ -34,8 +34,7 @@ export interface ILogEventParams<HandlersNames extends string|number> {
 }
 
 export interface ILogEvent<HandlersNames extends string|number>
-  extends ILogEventParams<HandlersNames>
-{
+  extends ILogEventParams<HandlersNames> {
   readonly messages: string[]
   readonly messagesString: string
   readonly errors: Error[]

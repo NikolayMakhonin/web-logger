@@ -21,7 +21,8 @@ export function catchEvalErrors(
   return interceptEval((str, _evalOrig) => {
     try {
       return _evalOrig.call(globalScope, str)
-    } catch (ex) {
+    }
+    catch (ex) {
       if (!filter || filter(str)) {
         errorHandler('eval error', ex, str)
       }

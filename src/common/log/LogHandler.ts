@@ -6,8 +6,7 @@ export function canDoAction(actionMode: ActionMode, allowedLevels: LogLevel, lev
 }
 
 export abstract class LogHandler<Name extends string | number>
-implements ILogHandler<Name>
-{
+implements ILogHandler<Name> {
   private readonly _queue: Array<ILogEvent<Name>> = []
   private _inProcess: boolean
   private readonly _maxLogSize: number
@@ -115,11 +114,13 @@ implements ILogHandler<Name>
 
         try {
           await this.handleLog(logEvents)
-        } catch (err) {
+        }
+        catch (err) {
           this.onError(logEvents, err)
         }
       } while (_queue.some(o => this.canLog(o)))
-    } finally {
+    }
+    finally {
       this._inProcess = false
     }
   }

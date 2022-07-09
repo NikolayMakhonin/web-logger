@@ -2,10 +2,8 @@ import {ILogEvent, ILogEventParams, ILogHandlersModes, LogLevel, TAppState} from
 import {md5} from './helpers'
 import {objectToString} from './objectToString'
 
-function getStackTraceCountFrames(level: LogLevel): number
-{
-  switch (level)
-  {
+function getStackTraceCountFrames(level: LogLevel): number {
+  switch (level) {
     case LogLevel.Error:
       return 50
     case LogLevel.Fatal:
@@ -22,8 +20,7 @@ function getStackTraceCountFrames(level: LogLevel): number
 }
 
 export class LogEvent<HandlersNames extends string|number>
-implements ILogEvent<HandlersNames>
-{
+implements ILogEvent<HandlersNames> {
   // region constructor
 
   public readonly level: LogLevel
@@ -44,8 +41,7 @@ implements ILogEvent<HandlersNames>
     appState,
   }: {
     appState?: TAppState,
-  } & ILogEventParams<HandlersNames>)
-  {
+  } & ILogEventParams<HandlersNames>) {
     this.level = level || LogLevel.Error
     this.messagesOrErrors = messagesOrErrors
     this.handlersModes = handlersModes

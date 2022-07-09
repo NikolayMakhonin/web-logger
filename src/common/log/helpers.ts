@@ -36,7 +36,8 @@ export function removeExcessSpaces(text: string, keepLines?: number) {
     text = text.replace(_spacesWithoutNewLinesRegex, ' ').trim()
     text = text.replace(_fixNewLines, '\\r\\n')
     text = text.replace(new RegExp('((\\r\\n){' + keepLines + '})[\\r\\n]*'), '$1')
-  } else {
+  }
+  else {
     text = text.replace(_spacesRegex, ' ').trim()
   }
 

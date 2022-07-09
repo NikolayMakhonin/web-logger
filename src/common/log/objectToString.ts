@@ -22,7 +22,8 @@ function getEventTargets(event: Event): any[] {
       for (let i = 0, len = target.length; i < len; i++) {
         _push(target[i])
       }
-    } else {
+    }
+    else {
       _push(target)
     }
   }
@@ -33,7 +34,8 @@ function getEventTargets(event: Event): any[] {
   if (typeof event.composedPath === 'function') {
     try {
       push(event.composedPath())
-    } catch (err) { }
+    }
+    catch (err) { }
   }
 
   return elements
@@ -204,14 +206,16 @@ export function objectToString(object: any, {
       if (objectsSet.has(obj)) {
         maxCount = 0
         _maxListSize = 0
-      } else {
+      }
+      else {
         objectsSet.add(obj)
       }
 
       if (Array.isArray(obj)) {
         appendBuffer('[')
         maxCount = _maxListSize
-      } else if (obj.constructor) {
+      }
+      else if (obj.constructor) {
         appendBuffer('<')
         appendBuffer(obj.constructor.name)
         const id = getObjectUniqueId(obj)
@@ -220,7 +224,8 @@ export function objectToString(object: any, {
           appendBuffer(id.toString())
         }
         appendBuffer('> {')
-      } else {
+      }
+      else {
         appendBuffer('{')
       }
 
@@ -233,7 +238,8 @@ export function objectToString(object: any, {
 
         if (index === 0) {
           appendBuffer('\r\n')
-        } else {
+        }
+        else {
           appendBuffer(',\r\n')
         }
 
@@ -250,11 +256,13 @@ export function objectToString(object: any, {
         if (index > 0) {
           appendBuffer('\r\n')
         }
-      } else {
+      }
+      else {
         for (const key in obj) {
           if (index === 0) {
             appendBuffer('\r\n')
-          } else {
+          }
+          else {
             appendBuffer(',\r\n')
           }
 
@@ -279,7 +287,8 @@ export function objectToString(object: any, {
       }
       if (Array.isArray(obj)) {
         appendBuffer(']')
-      } else {
+      }
+      else {
         appendBuffer('}')
       }
 
@@ -288,7 +297,8 @@ export function objectToString(object: any, {
         index = 0
         if (index >= _maxListSize) {
           appendBuffer('...')
-        } else {
+        }
+        else {
           // for (const item of obj) {
           try {
             for (let _iterator = obj[Symbol.iterator], _step; !(_step = _iterator()).done;) {
@@ -296,7 +306,8 @@ export function objectToString(object: any, {
 
               if (index > 0) {
                 appendBuffer(',\r\n')
-              } else {
+              }
+              else {
                 appendBuffer('\r\n')
               }
 
@@ -312,7 +323,8 @@ export function objectToString(object: any, {
                 break
               }
             }
-          } catch (err) {
+          }
+          catch (err) {
             appendBuffer('<iterate error>: ' + err.message)
           }
         }
@@ -328,14 +340,16 @@ export function objectToString(object: any, {
 
     if (typeof obj === 'function') {
       appendBuffer(obj.toString(), maxFuncSize)
-    } else {
+    }
+    else {
       appendBuffer(obj.toString())
     }
   }
 
   try {
     append(object, '', null)
-  } catch (error) {
+  }
+  catch (error) {
     if (error !== OVERFLOW) {
       throw error
     }

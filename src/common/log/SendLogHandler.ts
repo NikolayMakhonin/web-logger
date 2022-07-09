@@ -110,11 +110,13 @@ export abstract class SendLogHandler extends LogHandler<'sendLog'> {
 
         if (statusCode === 429 || statusCode === 502 || statusCode === 504) {
           console.debug('Send log failed: Bad Connection')
-        } else if (!errorWasWrite) {
+        }
+        else if (!errorWasWrite) {
           errorWasWrite = true
           selfError('Send log status code == ' + statusCode)
         }
-      } catch (error) {
+      }
+      catch (error) {
         console.debug('Send log failed: Bad Connection')
         // if (!errorWasWrite) {
         //  errorWasWrite = true

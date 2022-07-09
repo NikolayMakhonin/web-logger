@@ -43,7 +43,8 @@ export function subscribeUnhandledErrors({
         if (typeof handler !== 'function' && handler) {
           return handler
         }
-      } else if (Array.isArray(catchConsoleLevels) && catchConsoleLevels.indexOf(level) < 0) {
+      }
+      else if (Array.isArray(catchConsoleLevels) && catchConsoleLevels.indexOf(level) < 0) {
         return null
       }
 

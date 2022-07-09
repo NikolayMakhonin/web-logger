@@ -21,8 +21,7 @@ function sendXhr(
     // xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate')
     // xhr.setRequestHeader('Content-Encoding', 'gzip')
     xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4)
-      {
+      if (xhr.readyState === 4) {
         resolve({
           statusCode: xhr.status,
         })

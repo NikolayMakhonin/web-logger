@@ -128,7 +128,8 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
       this._log(logEventOrLevel instanceof LogEvent
         ? logEventOrLevel
         : this.createLogEvent(logEventOrLevel))
-    } else {
+    }
+    else {
       this._log(this.createLogEvent({
         level: logEventOrLevel as LogLevel,
         messagesOrErrors,
@@ -194,7 +195,8 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
         const subscriber = this._subscribers[i]
         try {
           await subscriber(logEvent)
-        } catch (error) {
+        }
+        catch (error) {
           this._subscribers.splice(i, 1)
           this.log(new LogEvent({
             level           : LogLevel.Error,
