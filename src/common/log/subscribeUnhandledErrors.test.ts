@@ -30,7 +30,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
     }
     if (typeof expected === 'string') {
       assert.strictEqual(actual, expected)
-    } else {
+    }
+    else {
       assert.ok(expected.test(actual), actual)
     }
   }
@@ -41,11 +42,13 @@ describe('common > main > subscribeUnhandledErrors', function () {
     assertValue(evalErrors, check.evalErrors || [])
     if (!check.logs) {
       assertValue(logs, [])
-    } else {
+    }
+    else {
       for (let i = 0, len = logs.length; i < len; i++) {
         if (typeof check.logs[i] === 'string') {
           assertValue(logs[i], check.logs[i])
-        } else {
+        }
+        else {
           (check.logs[i] as RegExp).test(logs[i])
         }
       }
@@ -130,7 +133,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
       try {
         errorGenerator.func()
         await delay(100)
-      } catch {
+      }
+      catch {
       }
 
       console.debug('debug')
@@ -145,7 +149,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
       try {
         errorGenerator.func()
         await delay(100)
-      } catch {
+      }
+      catch {
       }
 
       assertErrors(errorGenerator.checkUnsubscribed)
