@@ -2,10 +2,10 @@ import {globalScope} from '../globalScope'
 
 export type TConsoleLevel = 'debug' | 'info' | 'log' | 'warn' | 'error'
 export type TConsoleHandlerFactory = (
-	level: TConsoleLevel, handlerOrig: (...args) => void,
+  level: TConsoleLevel, handlerOrig: (...args) => void,
 ) => ((...args: any[]) => boolean|void)|boolean|void
 export const CONSOLE_LEVELS: ['debug', 'info', 'log', 'warn', 'error'] =
-	Object.freeze(['debug', 'info', 'log', 'warn', 'error']) as any
+  Object.freeze(['debug', 'info', 'log', 'warn', 'error']) as any
 
 export const consoleOrig = {
   debug: globalScope.console.debug.bind(globalScope.console),

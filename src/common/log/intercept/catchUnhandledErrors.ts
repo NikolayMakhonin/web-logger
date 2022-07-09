@@ -8,8 +8,8 @@ function prepareArgs(args: any[]) {
 
     if (
       typeof Event !== 'undefined' && typeof Element !== 'undefined'
-			&& arg instanceof Event
-			&& arg.target instanceof Element
+      && arg instanceof Event
+      && arg.target instanceof Element
     ) {
       if ('src' in arg.target) {
         return `Error load: ${(arg.target as any).src}\r\n${(arg.target as Element).outerHTML}`

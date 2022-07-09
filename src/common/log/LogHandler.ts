@@ -2,7 +2,7 @@ import {ActionMode, ILogEvent, ILogEventParams, ILogger, ILogHandler, LogLevel} 
 
 export function canDoAction(actionMode: ActionMode, allowedLevels: LogLevel, level: LogLevel) {
   return actionMode === ActionMode.Always
-		|| actionMode !== ActionMode.Never && (allowedLevels & level) !== 0
+    || actionMode !== ActionMode.Never && (allowedLevels & level) !== 0
 }
 
 export abstract class LogHandler<Name extends string | number>
@@ -22,11 +22,11 @@ implements ILogHandler<Name>
     allowLogLevels,
     maxLogSize,
   }: {
-		name: Name,
-		logger: ILogger<Name>,
-		allowLogLevels?: LogLevel,
-		maxLogSize?: number,
-	}) {
+    name: Name,
+    logger: ILogger<Name>,
+    allowLogLevels?: LogLevel,
+    maxLogSize?: number,
+  }) {
     this.name = name
     this._logger = logger
     this.allowLogLevels = allowLogLevels == null
@@ -59,71 +59,71 @@ implements ILogHandler<Name>
     })
   }
 
-	protected abstract handleLog(logEvents: Array<ILogEvent<Name>>): void | Promise<void>
+  protected abstract handleLog(logEvents: Array<ILogEvent<Name>>): void | Promise<void>
 
-	public enqueueLog(logEvent: ILogEvent<Name>) {
-	  const canLog = this.canLog(logEvent)
+  public enqueueLog(logEvent: ILogEvent<Name>) {
+    const canLog = this.canLog(logEvent)
 
-	  if (!canLog) {
-	    return
-	  }
+    if (!canLog) {
+      return
+    }
 
-	  this._queue.push(logEvent)
+    this._queue.push(logEvent)
 
-	  if (this._inProcess) {
-	    return
-	  }
+    if (this._inProcess) {
+      return
+    }
 
-	  // noinspection JSIgnoredPromiseFromCall
-	  this.handleLogs()
-	}
+    // noinspection JSIgnoredPromiseFromCall
+    this.handleLogs()
+  }
 
-	private async handleLogs() {
-	  if (this._inProcess) {
-	    return
-	  }
-	  try {
-	    const {_queue} = this
-	    do {
-	      const len = _queue.length
-	      let endIndex = 0
-	      for (; endIndex < len; endIndex++) {
-	        if (this.canLog(_queue[endIndex])) {
-	          break
-	        }
-	      }
+  private async handleLogs() {
+    if (this._inProcess) {
+      return
+    }
+    try {
+      const {_queue} = this
+      do {
+        const len = _queue.length
+        let endIndex = 0
+        for (; endIndex < len; endIndex++) {
+          if (this.canLog(_queue[endIndex])) {
+            break
+          }
+        }
 
-	      if (endIndex >= _queue.length) {
-	        _queue.length = 0
-	        break
-	      }
+        if (endIndex >= _queue.length) {
+          _queue.length = 0
+          break
+        }
 
-	      let startIndex = endIndex
-	      let logSize = 0
-	      while (true) {
-	        logSize += _queue[startIndex].bodyString.length
-	        if (logSize >= this._maxLogSize) {
-	          break
-	        }
-	        if (startIndex === 0) {
-	          break
-	        }
-	        startIndex--
-	      }
+        let startIndex = endIndex
+        let logSize = 0
+        while (true) {
+          logSize += _queue[startIndex].bodyString.length
+          if (logSize >= this._maxLogSize) {
+            break
+          }
+          if (startIndex === 0) {
+            break
+          }
+          startIndex--
+        }
 
-	      const logEvents = _queue.slice(startIndex, endIndex + 1)
-	      _queue.splice(0, endIndex + 1)
+        const logEvents = _queue.slice(startIndex, endIndex + 1)
+        _queue.splice(0, endIndex + 1)
 
-	      try {
-	        await this.handleLog(logEvents)
-	      } catch (err) {
-	        this.onError(logEvents, err)
-	      }
-	    } while (_queue.some(o => this.canLog(o)))
-	  } finally {
-	    this._inProcess = false
-	  }
-	}
+        try {
+          await this.handleLog(logEvents)
+        } catch (err) {
+          this.onError(logEvents, err)
+        }
+      } while (_queue.some(o => this.canLog(o)))
+    } finally {
+      this._inProcess = false
+    }
+  }
 }
 
 export function handleLogErrorHandler<HandlersNames extends string|number>(
@@ -138,17 +138,17 @@ export function handleLogErrorHandler<HandlersNames extends string|number>(
   }
 
   // for (let i = 0, len = logEvents.length; i < len; i++) {
-  // 	const logEvent = logEvents[i]
-  // 	logger.log(_changeNewLogEvent({
-  // 		level: logEvent.level,
-  // 		message: logEvent.message,
-  // 		error: logEvent.error,
-  // 		stack: logEvent.stack,
-  // 		time: logEvent.time,
-  // 		writeConsoleMode: logEvent.writeConsoleMode,
-  // 		sendLogMode: logEvent.sendLogMode,
-  // 		writeFileMode: logEvent.writeFileMode,
-  // 	}))
+  //  const logEvent = logEvents[i]
+  //  logger.log(_changeNewLogEvent({
+  //    level: logEvent.level,
+  //    message: logEvent.message,
+  //    error: logEvent.error,
+  //    stack: logEvent.stack,
+  //    time: logEvent.time,
+  //    writeConsoleMode: logEvent.writeConsoleMode,
+  //    sendLogMode: logEvent.sendLogMode,
+  //    writeFileMode: logEvent.writeFileMode,
+  //  }))
   // }
 
   const lastLogEvent = logEvents[logEvents.length - 1]

@@ -18,27 +18,27 @@ export class LoggerNode extends Logger<HandlersNames> {
     logUrls,
     writeToConsoleLevels = LogLevel.Any,
     writeToFileLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning
-			| LogLevel.UserError | LogLevel.UserWarning,
+      | LogLevel.UserError | LogLevel.UserWarning,
     sendLogLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
     emitEventLevels = LogLevel.Any,
     filter,
     appState,
     interceptEval,
   }: {
-		appName: string,
-		appVersion: string,
-		logDir?: string,
-		logFileName: string,
-		logUrls?: string[],
-		writeToConsoleLevels?: LogLevel,
-		writeToFileLevels?: LogLevel,
-		sendLogLevels?: LogLevel,
-		emitEventLevels?: LogLevel,
-		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
-		appState?: TAppState,
-		/** Use this only with strict mode */
-		interceptEval?: false,
-	}) {
+    appName: string,
+    appVersion: string,
+    logDir?: string,
+    logFileName: string,
+    logUrls?: string[],
+    writeToConsoleLevels?: LogLevel,
+    writeToFileLevels?: LogLevel,
+    sendLogLevels?: LogLevel,
+    emitEventLevels?: LogLevel,
+    filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
+    appState?: TAppState,
+    /** Use this only with strict mode */
+    interceptEval?: false,
+  }) {
     catchUnhandledErrors((...args) => {
       this.error(...args)
     })

@@ -68,7 +68,7 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
 
       // let messagesOrErrors = logEvent.messagesOrErrors
       // if (!Array.isArray(messagesOrErrors)) {
-      // 	messagesOrErrors = [messagesOrErrors]
+      //  messagesOrErrors = [messagesOrErrors]
       // }
 
       switch (logEvent.level) {

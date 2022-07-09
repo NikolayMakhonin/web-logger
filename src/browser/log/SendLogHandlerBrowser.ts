@@ -6,7 +6,7 @@ function sendXhr(
   message: ISendLogMessage,
   selfError?: (...messagesOrErrors) => void,
 ): Promise<{
-	statusCode: number,
+  statusCode: number,
 }> {
   return new Promise((resolve, reject) => {
     // construct an HTTP request
@@ -37,7 +37,7 @@ function sendFetch(
   logUrl: string,
   message: ISendLogMessage,
 ): Promise<{
-	statusCode: number,
+  statusCode: number,
 }> {
   return fetch(logUrl, {
     method     : 'POST',
@@ -60,8 +60,8 @@ function sendFetch(
 
 export class SendLogHandlerBrowser extends SendLogHandler {
   protected sendLog(...args): Promise<{
-		statusCode: number,
-	}> {
+    statusCode: number,
+  }> {
     // tslint:disable-next-line:no-all-duplicated-branches
     return typeof XMLHttpRequest !== 'undefined'
       ? (sendFetch as any)(...args)

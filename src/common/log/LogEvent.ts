@@ -44,8 +44,8 @@ implements ILogEvent<HandlersNames>
     additionalHashString,
     appState,
   }: {
-		appState?: TAppState,
-	} & ILogEventParams<HandlersNames>)
+    appState?: TAppState,
+  } & ILogEventParams<HandlersNames>)
   {
     this.level = level || LogLevel.Error
     this.messagesOrErrors = messagesOrErrors
@@ -231,7 +231,7 @@ implements ILogEvent<HandlersNames>
         buffer.push(this.appInfo)
       }
       // if (!buffer.length && this.messagesString) {
-      // 	buffer.push(this.messagesString)
+      //   buffer.push(this.messagesString)
       // }
       const hashString = buffer.join('\r\n')
 

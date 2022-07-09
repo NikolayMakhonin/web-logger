@@ -23,19 +23,19 @@ export class LoggerBrowser extends Logger<HandlersNames> {
     appState,
     interceptEval,
   }: {
-		appName: string,
-		appVersion: string,
-		logUrls: string[],
-		logFileName: string,
-		sendToRemoteLevels?: LogLevel,
-		writeToConsoleLevels?: LogLevel,
-		sendLogLevels?: LogLevel,
-		emitEventLevels?: LogLevel,
-		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
-		appState?: TAppState,
-		/** Use this only with strict mode */
-		interceptEval?: false,
-	}) {
+    appName: string,
+    appVersion: string,
+    logUrls: string[],
+    logFileName: string,
+    sendToRemoteLevels?: LogLevel,
+    writeToConsoleLevels?: LogLevel,
+    sendLogLevels?: LogLevel,
+    emitEventLevels?: LogLevel,
+    filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
+    appState?: TAppState,
+    /** Use this only with strict mode */
+    interceptEval?: false,
+  }) {
     if (typeof window !== 'undefined') {
       // @ts-ignore
       const {unsubscribeUnhandledErrors} = window

@@ -14,13 +14,13 @@ export function subscribeUnhandledErrors({
   maxLogLength = 2048,
   customLog,
 }: {
-	catchUnhandled?: boolean | ((...args: any[]) => boolean|void),
-	catchEval?: boolean | ((...args: any[]) => boolean|void),
-	catchConsoleLevels?: string[] | TConsoleHandlerFactory,
-	filterEval?: (str: string) => boolean,
-	alert?: boolean,
-	maxLogLength?: number,
-	customLog?: (log: string) => boolean|void,
+  catchUnhandled?: boolean | ((...args: any[]) => boolean|void),
+  catchEval?: boolean | ((...args: any[]) => boolean|void),
+  catchConsoleLevels?: string[] | TConsoleHandlerFactory,
+  filterEval?: (str: string) => boolean,
+  alert?: boolean,
+  maxLogLength?: number,
+  customLog?: (log: string) => boolean|void,
 } = {}) {
   const unsubscribers = []
 

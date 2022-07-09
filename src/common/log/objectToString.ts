@@ -2,7 +2,7 @@
 export function filterDefault(obj) {
   if (
     typeof EventTarget !== 'undefined' && obj instanceof EventTarget
-		&& (typeof EventSource === 'undefined' || !(obj instanceof EventSource))
+    && (typeof EventSource === 'undefined' || !(obj instanceof EventSource))
   ) {
     return false
   }
@@ -34,7 +34,7 @@ function getEventTargets(event: Event): any[] {
   if (typeof event.composedPath === 'function') {
     try {
       push(event.composedPath())
-    } catch (err) {	}
+    } catch (err) { }
   }
 
   return elements
@@ -96,13 +96,13 @@ export function objectToString(object: any, {
   maxResultSize = 50000,
   filter = filterDefault,
 }: {
-	maxLevel: number,
-	maxValueSize: number,
-	maxFuncSize: number,
-	maxProperties: number,
-	maxListSize: number,
-	maxResultSize: number,
-	filter: (object: any) => boolean,
+  maxLevel: number,
+  maxValueSize: number,
+  maxFuncSize: number,
+  maxProperties: number,
+  maxListSize: number,
+  maxResultSize: number,
+  filter: (object: any) => boolean,
 } = {} as any): string {
   if (object == null) {
     return object + ''

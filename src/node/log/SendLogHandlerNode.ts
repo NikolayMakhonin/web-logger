@@ -5,8 +5,8 @@ const needle = require('needle')
 
 export class SendLogHandlerNode extends SendLogHandler {
   protected sendLog(logUrl: string, message: ISendLogMessage): Promise<{
-		statusCode: number,
-	}> {
+    statusCode: number,
+  }> {
     return new Promise((resolve, reject) => needle.post(
       logUrl,
       message,

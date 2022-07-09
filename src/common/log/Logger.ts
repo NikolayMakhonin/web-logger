@@ -18,8 +18,8 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
   public minTimeBetweenEqualEvents: number = 120000
   public filter: (logEvent: ILogEvent<HandlersNames>) => boolean
   private _logEventsTime: {
-		[key: string]: number,
-	} = {}
+    [key: string]: number,
+  } = {}
 
   // region init
 
@@ -36,14 +36,14 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
     appState,
     interceptEval: _interceptEval,
   }: {
-		appName: string,
-		appVersion: string,
-		handlers: Array<ILogHandler<HandlersNames>>,
-		filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
-		appState?: TAppState,
-		/** Use this only with strict mode */
-		interceptEval?: false,
-	}) {
+    appName: string,
+    appVersion: string,
+    handlers: Array<ILogHandler<HandlersNames>>,
+    filter?: (logEvent: ILogEvent<HandlersNames>) => boolean,
+    appState?: TAppState,
+    /** Use this only with strict mode */
+    interceptEval?: false,
+  }) {
     if (this._initialized) {
       this.error('Logger already initialized')
       return
