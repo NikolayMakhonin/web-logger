@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="src-test" pattern="file:src/test//*" />
-</component>
