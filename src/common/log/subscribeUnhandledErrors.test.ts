@@ -34,9 +34,9 @@ describe('common > main > subscribeUnhandledErrors', function () {
   let errorTypes = [
     ErrorType.Console,
     ErrorType.Eval,
-    // ErrorType.PromiseCreateRejected,
+    ErrorType.PromiseCreateRejected,
     ErrorType.PromiseReject,
-    // ErrorType.PromiseRejectComplex,
+    ErrorType.PromiseRejectComplex,
     ErrorType.SetTimeout,
     // ErrorType.BrowserNetwork,
   ]
@@ -275,169 +275,18 @@ describe('common > main > subscribeUnhandledErrors', function () {
     // return delay(1000)
 
     await testVariants({
-      catchUnhandled   : [false, true],
-      catchEvalType    : [false, true, 'excluded'],
-      catchConsoleType : [null, 'empty', 'excluded', 'included', 'all'],
-      errorType        : errorTypes,
+      catchUnhandled  : [false, true],
+      catchEvalType   : [false, true, 'excluded'],
+      errorType       : errorTypes,
+      catchConsoleType: ({errorType}) => typeof window !== 'undefined'
+        && (errorType === ErrorType.PromiseCreateRejected
+        || errorType === ErrorType.PromiseReject
+        || errorType === ErrorType.PromiseRejectComplex)
+        ? [null, 'empty', 'included']
+        : [null, 'empty', 'included', 'excluded', 'all'],
       consoleErrorLevel: ({errorType}) => errorType === ErrorType.Console
         ? ['debug', 'info', 'log', 'warn', 'error']
         : [null],
     })()
   })
 })
-
-// describe('common > main > subscribeUnhandledErrors old', function () {
-//   let unhandledErrors = []
-//   let consoleErrors = []
-//   let evalErrors = []
-//   let logs = []
-//
-//   type TPattern = string | RegExp | false
-//
-//   type TCheck = {
-//     unhandledErrors?: (TPattern[]|TPattern)[],
-//     evalErrors?: (TPattern[]|TPattern)[],
-//     consoleErrors?: (TPattern[]|TPattern)[],
-//     logs?: TPattern[],
-//   }
-//
-//   function assertValue(actual: any, expected: any) {
-//     if (Array.isArray(actual)) {
-//       for (let i = 0, len = actual.length; i < len; i++) {
-//         assertValue(actual[i], expected[i])
-//       }
-//       return
-//     }
-//
-//     if (expected === false) {
-//       return
-//     }
-//     if (typeof expected === 'string') {
-//       assert.strictEqual(actual, expected)
-//     }
-//     else {
-//       assert.ok(expected.test(actual), actual)
-//     }
-//   }
-//
-//   function assertErrors(check: TCheck = {}) {
-//     assertValue(unhandledErrors, check.unhandledErrors || [])
-//     assertValue(consoleErrors, check.consoleErrors || [])
-//     assertValue(evalErrors, check.evalErrors || [])
-//     if (!check.logs) {
-//       assertValue(logs, [])
-//     }
-//     else {
-//       for (let i = 0, len = logs.length; i < len; i++) {
-//         if (typeof check.logs[i] === 'string') {
-//           assertValue(logs[i], check.logs[i])
-//         }
-//         else {
-//           (check.logs[i] as RegExp).test(logs[i])
-//         }
-//       }
-//     }
-//
-//     unhandledErrors = []
-//     consoleErrors = []
-//     evalErrors = []
-//     logs = []
-//   }
-//
-//   const errorGenerators: Array<{
-//     func: () => void,
-//     checkSubscribed?: TCheck,
-//     checkUnsubscribed?: TCheck,
-//   }> = [
-//     {
-//       func: () => {
-//         globalScope.evalErrors = evalErrors
-//         globalScope.eval(`evalErrors.push('eval'); throw 'Test Error'`)
-//       },
-//       checkSubscribed: {
-//         evalErrors: ['eval', ['eval error', 'Test Error', `evalErrors.push('eval'); throw 'Test Error'`]],
-//         logs      : [`"eval error"\n"Test Error"\n"evalErrors.push('eval'); throw 'Test Error'"`],
-//       },
-//       checkUnsubscribed: {
-//         evalErrors: ['eval'],
-//       },
-//     },
-//     {
-//       func: () => {
-//         console.error('Test Error')
-//       },
-//       checkSubscribed: {
-//         consoleErrors: [['Test Error']],
-//         logs         : [`"console error"\n"Test Error"`],
-//       },
-//       checkUnsubscribed: {
-//       },
-//     },
-//     {
-//       func: async () => {
-//         await delay(1)
-//         throw 'Test Error'
-//       },
-//       checkSubscribed: {
-//         unhandledErrors: [[/[\w.]*?(unhandledRejection)[\w.]*?/i, 'Test Error', false]],
-//         logs           : [/"([\w.]*?(unhandled|uncaught)[\w.]*?)"\n"Test Error"/],
-//       },
-//       checkUnsubscribed: {
-//       },
-//     },
-//   ]
-//
-//   it('eval', async function () {
-//     // Test subscribe unsubscribe
-//     subscribeUnhandledErrors()()
-//
-//     for (let i = 0, len = errorGenerators.length; i < len; i++) {
-//       const errorGenerator = errorGenerators[i]
-//
-//       const unsubscribe = subscribeUnhandledErrors({
-//         catchUnhandled(...args) {
-//           unhandledErrors.push(args)
-//         },
-//         catchConsoleLevels(level, handlerOrig) {
-//           if (level !== 'error') {
-//             return true
-//           }
-//           return (...args) => {
-//             consoleErrors.push(args)
-//           }
-//         },
-//         catchEval(...args) {
-//           evalErrors.push(args)
-//         },
-//         customLog(log) {
-//           logs.push(log)
-//         },
-//       })
-//
-//       try {
-//         errorGenerator.func()
-//         await delay(100)
-//       }
-//       catch {
-//       }
-//
-//       console.debug('debug')
-//       console.info('info')
-//       console.log('log')
-//       console.warn('warn')
-//
-//       unsubscribe()
-//
-//       assertErrors(errorGenerator.checkSubscribed)
-//
-//       try {
-//         errorGenerator.func()
-//         await delay(100)
-//       }
-//       catch {
-//       }
-//
-//       assertErrors(errorGenerator.checkUnsubscribed)
-//     }
-//   })
-// })

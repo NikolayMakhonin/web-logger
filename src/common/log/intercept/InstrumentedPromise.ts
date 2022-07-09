@@ -1,6 +1,8 @@
 // from: https://github.com/rtsao/browser-unhandled-rejection
 
 /* eslint-disable no-proto */
+import {globalScope} from 'src/common'
+
 export const OriginalPromise = Promise
 
 /**
@@ -39,25 +41,54 @@ InstrumentedPromise.prototype.then = function then(onFulfilled, onRejected) {
 }
 
 function dispatchUnhandledRejectionEvent(promise, reason) {
-  const event = document.createEvent('Event')
-  /**
-   * Note: these properties should not be enumerable, which is the default setting
-   */
-  Object.defineProperties(event, {
-    promise: {
-      value   : promise,
-      writable: false,
-    },
-    reason: {
-      value   : reason,
-      writable: false,
-    },
-  })
+  let event
+  if (typeof document !== 'undefined' && document.createEvent) {
+    event = document.createEvent('Event')
+    /**
+     * Note: these properties should not be enumerable, which is the default setting
+     */
+    Object.defineProperties(event, {
+      promise: {
+        value   : promise,
+        writable: false,
+      },
+      reason: {
+        value   : reason,
+        writable: false,
+      },
+    })
 
-  event.initEvent(
-    'unhandledrejection', // Define that the event name is 'unhandledrejection'
-    false, // PromiseRejectionEvent is not bubbleable
-    true, // PromiseRejectionEvent is cancelable
-  )
-  window.dispatchEvent(event)
+    event.initEvent(
+      'unhandledrejection', // Define that the event name is 'unhandledrejection'
+      false, // PromiseRejectionEvent is not bubbleable
+      true, // PromiseRejectionEvent is cancelable
+    )
+  }
+  else {
+    event = new Event('unhandledrejection', {
+      bubbles   : false,
+      cancelable: true,
+    })
+    /**
+     * Note: these properties should not be enumerable, which is the default setting
+     */
+    Object.defineProperties(event, {
+      promise: {
+        value   : promise,
+        writable: false,
+      },
+      reason: {
+        value   : reason,
+        writable: false,
+      },
+    })
+  }
+
+  globalScope.dispatchEvent(event)
+}
+
+export function needUnhandledRejectionPolyfill() {
+  return typeof globalScope.PromiseRejectionEvent !== 'function'
+    && typeof globalScope.dispatchEvent === 'function'
+    && !(typeof process === 'object' && process + '' === '[object process]')
 }

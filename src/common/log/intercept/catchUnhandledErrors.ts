@@ -1,5 +1,9 @@
 import {globalScope} from '../globalScope'
-import {InstrumentedPromise, OriginalPromise} from 'src/common/log/intercept/InstrumentedPromise'
+import {
+  InstrumentedPromise,
+  needUnhandledRejectionPolyfill,
+  OriginalPromise,
+} from 'src/common/log/intercept/InstrumentedPromise'
 
 function prepareArgs(args: any[]) {
   return args.map(arg => {
@@ -45,7 +49,7 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   const unhandledrejectionHandler = handlerFactory('unhandledrejection')
   const unhandledErrorHandler = handlerFactory('unhandled error')
 
-  if (!globalScope.PromiseRejectionEvent) {
+  if (needUnhandledRejectionPolyfill()) {
     globalScope.Promise = InstrumentedPromise
   }
 
@@ -64,7 +68,7 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   }
 
   return () => {
-    if (!globalScope.PromiseRejectionEvent) {
+    if (needUnhandledRejectionPolyfill()) {
       globalScope.Promise = OriginalPromise
     }
 
