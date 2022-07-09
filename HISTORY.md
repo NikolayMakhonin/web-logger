@@ -1,3 +1,8 @@
+2.0.0 / 2022-07-09
+===================
+
+* big refactoring with no changes in the interface
+
 1.0.0 / 2021-08-08
 ===================
 
