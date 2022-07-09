@@ -60,8 +60,8 @@ export class SendLogHandlerBrowser extends SendLogHandler {
   protected sendLog(...args): Promise<{
     statusCode: number,
   }> {
-    return typeof XMLHttpRequest !== 'undefined'
+    return typeof window.fetch !== 'undefined'
       ? (sendFetch as any)(...args)
-      : (sendFetch as any)(...args)
+      : (sendXhr as any)(...args)
   }
 }

@@ -1,4 +1,4 @@
-import {ILogEventParams, ILogHandlersModes, LogLevel} from '../../common/log/contracts'
+import {ILogEventParams} from '../../common/log/contracts'
 
 export interface IRemoteLogger {
   setFileName(value: string)

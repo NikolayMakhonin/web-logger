@@ -1,4 +1,4 @@
-import {ActionMode, ILogEvent, ILogEventParams, ILogger, LogLevel} from '../../common/log/contracts'
+import {ILogEvent, ILogEventParams, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
 import {IRemoteLogger} from './IRemoteLogger'
 

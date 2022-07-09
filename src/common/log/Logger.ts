@@ -6,8 +6,7 @@ import {
   IUnsubscribe,
   LogLevel, TAppState,
 } from './contracts'
-import {globalScope} from './globalScope'
-import {LogEvent} from './LogEvent'
+import {LogEvent, TLogMessage} from './LogEvent'
 import {catchEvalErrors} from './intercept/interceptEval'
 
 // region Logger
@@ -86,44 +85,44 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 
   // region log interface
 
-  debug(...messagesOrErrors: Array<any|Error>) {
+  debug(...messagesOrErrors: TLogMessage[]) {
     this.log({
       level: LogLevel.Debug,
       messagesOrErrors,
     })
   }
 
-  info(...messagesOrErrors: Array<any|Error>) {
+  info(...messagesOrErrors: TLogMessage[]) {
     this.log({
       level: LogLevel.Info,
       messagesOrErrors,
     })
   }
 
-  action(...messagesOrErrors: Array<any|Error>) {
+  action(...messagesOrErrors: TLogMessage[]) {
     this.log({
       level: LogLevel.Action,
       messagesOrErrors,
     })
   }
 
-  warn(...messagesOrErrors: Array<any|Error>) {
+  warn(...messagesOrErrors: TLogMessage[]) {
     this.log({
       level: LogLevel.Warning,
       messagesOrErrors,
     })
   }
 
-  error(...messagesOrErrors: Array<any|Error>) {
+  error(...messagesOrErrors: TLogMessage[]) {
     this.log({
       level: LogLevel.Error,
       messagesOrErrors,
     })
   }
 
-  log(level: LogLevel, ...messagesOrErrors: Array<any|Error>)
+  log(level: LogLevel, ...messagesOrErrors: TLogMessage[])
   log(logEvent: ILogEventParams<HandlersNames>)
-  log(logEventOrLevel: ILogEventParams<HandlersNames> | LogLevel, ...messagesOrErrors: Array<any|Error>) {
+  log(logEventOrLevel: ILogEventParams<HandlersNames> | LogLevel, ...messagesOrErrors: TLogMessage[]) {
     if (logEventOrLevel != null && typeof logEventOrLevel === 'object') {
       this._log(logEventOrLevel instanceof LogEvent
         ? logEventOrLevel

@@ -19,12 +19,17 @@ function getStackTraceCountFrames(level: LogLevel): number {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+export type TLogMessage = any|Error
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+export type TLogMessageOrArray = TLogMessage | TLogMessage[]
+
 export class LogEvent<HandlersNames extends string|number>
 implements ILogEvent<HandlersNames> {
   // region constructor
 
   readonly level: LogLevel
-  readonly messagesOrErrors: any|Error|Array<any|Error>
+  readonly messagesOrErrors: TLogMessageOrArray
   readonly handlersModes: ILogHandlersModes<HandlersNames>
   readonly time: Date
   readonly stack: string
@@ -45,7 +50,7 @@ implements ILogEvent<HandlersNames> {
     this.level = level || LogLevel.Error
     this.messagesOrErrors = messagesOrErrors
     this.handlersModes = handlersModes
-    this.time = time || new Date() // TODO - need UTC
+    this.time = time || new Date()
     this.stack = stack
     this.additionalHashString = additionalHashString
     this.appState = appState

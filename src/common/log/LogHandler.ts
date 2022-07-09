@@ -79,8 +79,7 @@ implements ILogHandler<Name> {
       return
     }
 
-    // noinspection JSIgnoredPromiseFromCall
-    this.handleLogs()
+    void this.handleLogs()
   }
 
   private async handleLogs() {
