@@ -3,6 +3,22 @@ import {subscribeUnhandledErrors} from './subscribeUnhandledErrors'
 import {delay} from './delay'
 import {createTestVariants} from '@flemist/test-variants'
 import {CONSOLE_LEVELS, TConsoleLevel} from './intercept/interceptConsole'
+import {globalScope} from './globalScope'
+
+async function runWithDisabledOnError<T>(func: () => Promise<T>|T): Promise<T> {
+  if (!globalScope?.onerror) {
+    return func()
+  }
+
+  const prevOnError = globalScope.onerror
+  globalScope.onerror = null
+  try {
+    return await func()
+  }
+  finally {
+    globalScope.onerror = prevOnError
+  }
+}
 
 describe('common > main > subscribeUnhandledErrors', function () {
   enum ErrorType {
@@ -21,7 +37,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
     // ErrorType.PromiseCreateRejected,
     // ErrorType.PromiseReject,
     // ErrorType.PromiseRejectComplex,
-    // ErrorType.SetTimeout,
+    ErrorType.SetTimeout,
     // ErrorType.BrowserNetwork,
   ]
   if (typeof window === 'undefined') {
@@ -113,10 +129,20 @@ describe('common > main > subscribeUnhandledErrors', function () {
             })
           return delay(0)
         case ErrorType.SetTimeout:
-          setTimeout(() => {
-            throw createError()
-          }, 0)
-          return delay(1)
+          if (catchUnhandled) {
+            setTimeout(() => {
+              throw createError()
+            }, 0)
+            return delay(1)
+          }
+          else {
+            return runWithDisabledOnError(() => {
+              setTimeout(() => {
+                throw createError()
+              }, 0)
+              return delay(1)
+            })
+          }
         case ErrorType.BrowserNetwork:
           document.body.style.backgroundImage = `url(${TEST_ERROR_MESSAGE})`
           return delay(10)
@@ -235,6 +261,14 @@ describe('common > main > subscribeUnhandledErrors', function () {
 
   it('variants', async function () {
     this.timeout(60000)
+
+    // window.onerror = null
+
+    // setTimeout(() => {
+    //   throw new Error()
+    // }, 10)
+    //
+    // return delay(1000)
 
     await testVariants({
       catchUnhandled   : [false, true],

@@ -50,14 +50,12 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
       .on('uncaughtException', processUncaughtExceptionHandler)
   }
 
-  if (typeof globalScope !== 'undefined') {
-    if (globalScope.addEventListener) {
-      globalScope.addEventListener('unhandledrejection', unhandledrejectionHandler)
-      globalScope.onunhandledrejection = unhandledrejectionHandler
-      // see: https://stackoverflow.com/a/28771916/5221762
-      globalScope.addEventListener('error', unhandledErrorHandler, true)
-      globalScope.onerror = unhandledErrorHandler
-    }
+  if (globalScope?.addEventListener) {
+    globalScope.addEventListener('unhandledrejection', unhandledrejectionHandler)
+    globalScope.onunhandledrejection = unhandledrejectionHandler
+    // see: https://stackoverflow.com/a/28771916/5221762
+    globalScope.addEventListener('error', unhandledErrorHandler, true)
+    globalScope.onerror = unhandledErrorHandler
   }
 
   return () => {
@@ -67,12 +65,11 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
         .removeListener('uncaughtException', processUncaughtExceptionHandler)
     }
 
-    if (typeof globalScope !== 'undefined') {
-      if (globalScope.removeEventListener) {
-        globalScope.removeEventListener('unhandledrejection', unhandledrejectionHandler)
-        globalScope.onunhandledrejection = null
-        globalScope.onerror = null
-      }
+    if (globalScope?.removeEventListener) {
+      globalScope.removeEventListener('unhandledrejection', unhandledrejectionHandler)
+      globalScope.onunhandledrejection = null
+      globalScope.removeEventListener('error', unhandledErrorHandler, true)
+      globalScope.onerror = null
     }
   }
 }
