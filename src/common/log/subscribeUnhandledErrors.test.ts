@@ -113,12 +113,12 @@ describe('common > main > subscribeUnhandledErrors', function () {
           return
         case ErrorType.PromiseCreateRejected:
           Promise.reject(createError())
-          return delay(0)
+          return delay(1)
         case ErrorType.PromiseReject:
           new Promise((_, reject) => {
             reject(createError())
           })
-          return delay(0)
+          return delay(1)
         case ErrorType.PromiseRejectComplex:
           Promise
             .resolve()
@@ -131,7 +131,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
             .then(() => {}, o => {
               throw o
             })
-          return delay(0)
+          return delay(1)
         case ErrorType.SetTimeout:
           if (catchUnhandled) {
             setTimeout(() => {
