@@ -1,9 +1,5 @@
 import {objectToString} from './objectToString'
 
-declare const describe: any
-declare const it: any
-declare const assert: any
-
 describe('common > log > objectToString', function () {
   it('base', function () {
     const error: any = new Error('TestError')

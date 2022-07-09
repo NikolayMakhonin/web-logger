@@ -1,7 +1,7 @@
 import {globalScope} from './globalScope'
 import {objectToString} from './objectToString'
 import {catchUnhandledErrors} from './intercept/catchUnhandledErrors'
-import {interceptConsole, consoleOrig, TConsoleHandlerFactory} from './intercept/interceptConsole'
+import {interceptConsole, consoleOrig, TConsoleHandlerFactory, TConsoleLevel} from './intercept/interceptConsole'
 import {catchEvalErrors} from './intercept/interceptEval'
 
 export function subscribeUnhandledErrors({
@@ -15,7 +15,7 @@ export function subscribeUnhandledErrors({
 }: {
   catchUnhandled?: boolean | ((...args: any[]) => boolean|void),
   catchEval?: boolean | ((...args: any[]) => boolean|void),
-  catchConsoleLevels?: string[] | TConsoleHandlerFactory,
+  catchConsoleLevels?: TConsoleLevel[] | TConsoleHandlerFactory,
   filterEval?: (str: string) => boolean,
   alert?: boolean,
   maxLogLength?: number,
