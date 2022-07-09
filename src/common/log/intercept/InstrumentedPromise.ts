@@ -1,7 +1,8 @@
 // from: https://github.com/rtsao/browser-unhandled-rejection
 
 /* eslint-disable no-proto */
-import {globalScope} from 'src/common'
+import {globalScope} from '../globalScope'
+import {isNode} from "src/common/helpers/isNode";
 
 export const OriginalPromise = Promise
 
@@ -87,8 +88,6 @@ function dispatchUnhandledRejectionEvent(promise, reason) {
   globalScope.dispatchEvent(event)
 }
 
-export function needUnhandledRejectionPolyfill() {
-  return typeof globalScope.PromiseRejectionEvent !== 'function'
-    && typeof globalScope.dispatchEvent === 'function'
-    && !(typeof process === 'object' && process + '' === '[object process]')
-}
+export const needUnhandledRejectionPolyfill = typeof globalScope.PromiseRejectionEvent !== 'function'
+  && typeof globalScope.dispatchEvent === 'function'
+  && !isNode

@@ -4,6 +4,7 @@ import {
   needUnhandledRejectionPolyfill,
   OriginalPromise,
 } from 'src/common/log/intercept/InstrumentedPromise'
+import {isNode} from "src/common/helpers/isNode";
 
 function prepareArgs(args: any[]) {
   return args.map(arg => {
@@ -49,11 +50,11 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   const unhandledrejectionHandler = handlerFactory('unhandledrejection')
   const unhandledErrorHandler = handlerFactory('unhandled error')
 
-  if (needUnhandledRejectionPolyfill()) {
+  if (needUnhandledRejectionPolyfill) {
     globalScope.Promise = InstrumentedPromise
   }
 
-  if (typeof process !== 'undefined' && process.on) {
+  if (isNode && process.on) {
     process
       .on('unhandledRejection', processUnhandledRejectionHandler)
       .on('uncaughtException', processUncaughtExceptionHandler)
@@ -68,14 +69,14 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
   }
 
   return () => {
-    if (needUnhandledRejectionPolyfill()) {
+    if (needUnhandledRejectionPolyfill) {
       globalScope.Promise = OriginalPromise
     }
 
-    if (typeof process !== 'undefined' && process.removeListener) {
+    if (isNode && process.off) {
       process
-        .removeListener('unhandledRejection', processUnhandledRejectionHandler)
-        .removeListener('uncaughtException', processUncaughtExceptionHandler)
+        .off('unhandledRejection', processUnhandledRejectionHandler)
+        .off('uncaughtException', processUncaughtExceptionHandler)
     }
 
     if (globalScope.removeEventListener) {

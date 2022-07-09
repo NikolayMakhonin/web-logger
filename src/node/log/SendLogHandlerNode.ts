@@ -1,7 +1,5 @@
 import {ISendLogMessage, SendLogHandler} from '../../common/log/SendLogHandler'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const needle = require('needle')
+import needle from 'needle'
 
 export class SendLogHandlerNode extends SendLogHandler {
   protected sendLog(logUrl: string, message: ISendLogMessage): Promise<{

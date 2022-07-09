@@ -1,4 +1,4 @@
-import {TLogMessageOrArray} from 'src/common'
+import {TLogMessageOrArray} from 'src/common/log/LogEvent'
 
 export enum LogLevel {
   Trace = 1,

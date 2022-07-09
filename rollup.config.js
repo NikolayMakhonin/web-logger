@@ -124,7 +124,7 @@ const nodeConfig = ({
   ]),
 })
 
-const browserConfig = ({input, outputDir, outputFile}) => ({
+const browserConfig = ({name, input, outputDir, outputFile}) => ({
   cache : true,
   input,
   output: {
@@ -134,6 +134,7 @@ const browserConfig = ({input, outputDir, outputFile}) => ({
     entryFileNames: outputFile,
     chunkFileNames: outputFile,
     sourcemap     : dev && 'inline',
+    name,
   },
   plugins: [
     del({ targets: path.join(outputDir, outputFile) }),
@@ -249,11 +250,13 @@ export default [
     extension: 'cjs',
   }),
   browserConfig({
+    name      : 'WebLogger',
     input     : ['src/browser/index.ts'],
     outputDir : 'dist/bundle',
     outputFile: 'web-logger.min.js',
   }),
   browserConfig({
+    name      : 'UnhandledErrors',
     input     : ['src/unhandled-errors.ts'],
     outputDir : 'dist/bundle',
     outputFile: 'unhandled-errors.min.js',
