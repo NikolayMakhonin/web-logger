@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-loop-func */
 import {subscribeUnhandledErrors} from './subscribeUnhandledErrors'
 import {globalScope} from './globalScope'
 import {delay} from './delay'

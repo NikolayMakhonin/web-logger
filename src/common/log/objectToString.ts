@@ -261,6 +261,7 @@ export function objectToString(object: any, {
         }
       }
       else {
+        // eslint-disable-next-line guard-for-in
         for (const key in obj) {
           if (index === 0) {
             appendBuffer('\r\n')
