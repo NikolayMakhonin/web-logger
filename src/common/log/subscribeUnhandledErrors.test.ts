@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import {subscribeUnhandledErrors} from './subscribeUnhandledErrors'
 import {globalScope} from './globalScope'
 import {delay} from './delay'

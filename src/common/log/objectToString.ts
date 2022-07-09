@@ -1,4 +1,3 @@
-/* tslint:disable:no-construct use-primitive-type */
 export function filterDefault(obj) {
   if (
     typeof EventTarget !== 'undefined' && obj instanceof EventTarget
@@ -252,7 +251,6 @@ export function objectToString(object: any, {
           appendBuffer('\r\n')
         }
       } else {
-        // tslint:disable-next-line:forin
         for (const key in obj) {
           if (index === 0) {
             appendBuffer('\r\n')

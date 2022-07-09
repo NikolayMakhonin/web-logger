@@ -1,4 +1,3 @@
-/* tslint:disable:no-var-requires */
 import {ISendLogMessage, SendLogHandler} from '../../common/log/SendLogHandler'
 
 function sendXhr(
@@ -62,7 +61,6 @@ export class SendLogHandlerBrowser extends SendLogHandler {
   protected sendLog(...args): Promise<{
     statusCode: number,
   }> {
-    // tslint:disable-next-line:no-all-duplicated-branches
     return typeof XMLHttpRequest !== 'undefined'
       ? (sendFetch as any)(...args)
       : (sendFetch as any)(...args)

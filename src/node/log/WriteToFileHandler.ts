@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import {ILogEvent, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
 

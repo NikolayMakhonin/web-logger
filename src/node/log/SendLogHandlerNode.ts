@@ -1,4 +1,3 @@
-/* tslint:disable:no-var-requires */
 import {ISendLogMessage, SendLogHandler} from '../../common/log/SendLogHandler'
 
 const needle = require('needle')

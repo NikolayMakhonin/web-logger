@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary,@typescript-eslint/no-shadow */
 import {globalScope} from './globalScope'
 import {objectToString} from './objectToString'
 import {catchUnhandledErrors} from './intercept/catchUnhandledErrors'

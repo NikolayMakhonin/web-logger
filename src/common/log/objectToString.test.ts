@@ -1,4 +1,3 @@
-/* tslint:disable:no-construct use-primitive-type */
 import {objectToString} from './objectToString'
 
 declare const describe: any

@@ -35,7 +35,6 @@ implements ILogHandler<Name>
     this._maxLogSize = maxLogSize || 50000
   }
 
-  // tslint:disable-next-line:no-empty
   public init() {
 
   }

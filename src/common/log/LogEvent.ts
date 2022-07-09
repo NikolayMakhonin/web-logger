@@ -1,4 +1,3 @@
-// tslint:disable-next-line:no-var-requires
 import {ILogEvent, ILogEventParams, ILogHandlersModes, LogLevel, TAppState} from './contracts'
 import {md5} from './helpers'
 import {objectToString} from './objectToString'
