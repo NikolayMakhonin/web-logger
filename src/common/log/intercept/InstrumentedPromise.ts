@@ -21,7 +21,7 @@ export const InstrumentedPromise = function Promise(resolver) {
       void OriginalPromise
         .resolve()
         .then(() => {
-          if (promise._hasDownstreams === undefined) {
+          if (!promise._hasDownstreams) {
             dispatchUnhandledRejectionEvent(promise, arg)
           }
         })

@@ -6,6 +6,7 @@ import {Logger} from '../../common/log/Logger'
 import {WriteToConsoleHandler} from '../../common/log/WriteToConsoleHandler'
 import {SendLogHandlerBrowser} from './SendLogHandlerBrowser'
 import {SendToRemoteHandler} from './SendToRemoteHandler'
+import {globalScope} from 'src/common/log/globalScope'
 
 type HandlersNames = 'writeToConsole' | 'sendToRemote' | 'sendLog' | 'emitEvent'
 
@@ -36,14 +37,10 @@ export class LoggerBrowser extends Logger<HandlersNames> {
     /** Use this only with strict mode */
     interceptEval?: false,
   }) {
-    if (typeof window !== 'undefined') {
-      // @ts-expect-error
-      const {unsubscribeUnhandledErrors} = window
-      if (unsubscribeUnhandledErrors) {
-        // @ts-expect-error
-        window.unsubscribeUnhandledErrors = null
-        unsubscribeUnhandledErrors()
-      }
+    const {unsubscribeUnhandledErrors} = globalScope
+    if (typeof unsubscribeUnhandledErrors === 'function') {
+      globalScope.unsubscribeUnhandledErrors = null
+      unsubscribeUnhandledErrors()
     }
 
     catchUnhandledErrors((...args) => {
