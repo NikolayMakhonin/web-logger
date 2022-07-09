@@ -86,6 +86,7 @@
     "cpy-cli": "=3.1.1",
     "eslint": "8.18.0",
     "eslint-config-pro": "3.0.16",
+    "eslint-nibble": "^8.0.2",
     "fs-extra": "10.1.0",
     "globby": "=11.1.0",
     "karma": "6.4.0",
@@ -112,7 +113,7 @@
   "dependencies": {
     "needle": "2.6.0",
     "spark-md5": "3.0.1",
-    "ua-parser-js": "0.7.28",
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.0",
+    "ua-parser-js": "0.7.28"
   }
 }
