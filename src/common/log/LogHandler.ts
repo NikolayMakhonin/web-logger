@@ -11,9 +11,9 @@ implements ILogHandler<Name> {
   private _inProcess: boolean
   private readonly _maxLogSize: number
   protected readonly _logger: ILogger<Name>
-  public allowLogLevels: LogLevel
-  public name: Name
-  public disabled: boolean
+  allowLogLevels: LogLevel
+  name: Name
+  disabled: boolean
 
   protected constructor({
     name,
@@ -34,7 +34,7 @@ implements ILogHandler<Name> {
     this._maxLogSize = maxLogSize || 50000
   }
 
-  public init() {
+  init() {
 
   }
 
@@ -59,7 +59,7 @@ implements ILogHandler<Name> {
 
   protected abstract handleLog(logEvents: Array<ILogEvent<Name>>): void | Promise<void>
 
-  public enqueueLog(logEvent: ILogEvent<Name>) {
+  enqueueLog(logEvent: ILogEvent<Name>) {
     const canLog = this.canLog(logEvent)
 
     if (!canLog) {

@@ -23,15 +23,15 @@ export class LogEvent<HandlersNames extends string|number>
 implements ILogEvent<HandlersNames> {
   // region constructor
 
-  public readonly level: LogLevel
-  public readonly messagesOrErrors: any|Error|Array<any|Error>
-  public readonly handlersModes: ILogHandlersModes<HandlersNames>
-  public readonly time: Date
-  public readonly stack: string
-  public readonly additionalHashString: string
-  public readonly appState: TAppState
+  readonly level: LogLevel
+  readonly messagesOrErrors: any|Error|Array<any|Error>
+  readonly handlersModes: ILogHandlersModes<HandlersNames>
+  readonly time: Date
+  readonly stack: string
+  readonly additionalHashString: string
+  readonly appState: TAppState
 
-  public constructor({
+  constructor({
     level,
     messagesOrErrors,
     handlersModes,

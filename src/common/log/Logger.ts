@@ -13,18 +13,18 @@ import {catchEvalErrors} from './intercept/interceptEval'
 // region Logger
 
 export class Logger<HandlersNames extends string|number> implements ILogger<HandlersNames> {
-  public handlers: ILogHandlers<HandlersNames>
-  public minTimeBetweenEqualEvents: number = 120000
-  public filter: (logEvent: ILogEvent<HandlersNames>) => boolean
+  handlers: ILogHandlers<HandlersNames>
+  minTimeBetweenEqualEvents: number = 120000
+  filter: (logEvent: ILogEvent<HandlersNames>) => boolean
   private _logEventsTime: {
     [key: string]: number,
   } = {}
 
   // region init
 
-  public appName: string
-  public appVersion: string
-  public appState: TAppState
+  appName: string
+  appVersion: string
+  appState: TAppState
   private _initialized: boolean
 
   protected _init({
@@ -86,44 +86,44 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 
   // region log interface
 
-  public debug(...messagesOrErrors: Array<any|Error>) {
+  debug(...messagesOrErrors: Array<any|Error>) {
     this.log({
       level: LogLevel.Debug,
       messagesOrErrors,
     })
   }
 
-  public info(...messagesOrErrors: Array<any|Error>) {
+  info(...messagesOrErrors: Array<any|Error>) {
     this.log({
       level: LogLevel.Info,
       messagesOrErrors,
     })
   }
 
-  public action(...messagesOrErrors: Array<any|Error>) {
+  action(...messagesOrErrors: Array<any|Error>) {
     this.log({
       level: LogLevel.Action,
       messagesOrErrors,
     })
   }
 
-  public warn(...messagesOrErrors: Array<any|Error>) {
+  warn(...messagesOrErrors: Array<any|Error>) {
     this.log({
       level: LogLevel.Warning,
       messagesOrErrors,
     })
   }
 
-  public error(...messagesOrErrors: Array<any|Error>) {
+  error(...messagesOrErrors: Array<any|Error>) {
     this.log({
       level: LogLevel.Error,
       messagesOrErrors,
     })
   }
 
-  public log(level: LogLevel, ...messagesOrErrors: Array<any|Error>)
-  public log(logEvent: ILogEventParams<HandlersNames>)
-  public log(logEventOrLevel: ILogEventParams<HandlersNames> | LogLevel, ...messagesOrErrors: Array<any|Error>) {
+  log(level: LogLevel, ...messagesOrErrors: Array<any|Error>)
+  log(logEvent: ILogEventParams<HandlersNames>)
+  log(logEventOrLevel: ILogEventParams<HandlersNames> | LogLevel, ...messagesOrErrors: Array<any|Error>) {
     if (logEventOrLevel != null && typeof logEventOrLevel === 'object') {
       this._log(logEventOrLevel instanceof LogEvent
         ? logEventOrLevel
@@ -179,7 +179,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
   // region log event
 
   private _subscribers: Array<ISubscriber<HandlersNames>> = []
-  public subscribe(subscriber: ISubscriber<HandlersNames>): IUnsubscribe {
+  subscribe(subscriber: ISubscriber<HandlersNames>): IUnsubscribe {
     this._subscribers.push(subscriber)
     return () => {
       const index = this._subscribers.indexOf(subscriber)
@@ -189,7 +189,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
     }
   }
 
-  public async onLog(logEvent: ILogEvent<HandlersNames>): Promise<void> {
+  async onLog(logEvent: ILogEvent<HandlersNames>): Promise<void> {
     if (this._subscribers.length) {
       for (let i = 0; i < this._subscribers.length; i++) {
         const subscriber = this._subscribers[i]

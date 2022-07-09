@@ -17,9 +17,9 @@ export interface ISendLogMessage {
 }
 
 export abstract class SendLogHandler extends LogHandler<'sendLog'> {
-  public logUrl: string
+  logUrl: string
 
-  public constructor(logger: ILogger<any>, allowLogLevels: LogLevel, logUrl: string) {
+  constructor(logger: ILogger<any>, allowLogLevels: LogLevel, logUrl: string) {
     super({
       name: 'sendLog',
       logger,

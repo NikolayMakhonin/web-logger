@@ -13,10 +13,10 @@ export class SendToRemoteHandler extends LogHandler<'sendToRemote'> {
   }
 
   private _logFileName: string
-  public get logFileName(): string {
+  get logFileName(): string {
     return this._logFileName
   }
-  public set logFileName(value: string) {
+  set logFileName(value: string) {
     this._logFileName = value
     console.log(`logFileName = ${this._logFileName}`)
     if (typeof window !== 'undefined' && (window as any).remoteLogger) {

@@ -40,8 +40,8 @@ async function autoCutLogFile(filePath: string, maxSize: number, cutToSize: numb
 }
 
 export class WriteToFileHandler extends LogHandler<'writeToFile'> {
-  public logDir: string
-  public logFileName: string
+  logDir: string
+  logFileName: string
 
   constructor(logger: ILogger<any>, allowLogLevels: LogLevel, logDir: string, logFileName: string) {
     super({
@@ -53,7 +53,7 @@ export class WriteToFileHandler extends LogHandler<'writeToFile'> {
     this.logFileName = logFileName
   }
 
-  public get logFilePath(): string {
+  get logFilePath(): string {
     return path.resolve(this.logDir, this.logFileName)
   }
 

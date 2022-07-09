@@ -10,7 +10,7 @@ import {SendToRemoteHandler} from './SendToRemoteHandler'
 type HandlersNames = 'writeToConsole' | 'sendToRemote' | 'sendLog' | 'emitEvent'
 
 export class LoggerBrowser extends Logger<HandlersNames> {
-  public init({
+  init({
     appName,
     appVersion,
     logUrls,

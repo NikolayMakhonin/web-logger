@@ -10,7 +10,7 @@ import {path, WriteToFileHandler} from './WriteToFileHandler'
 type HandlersNames = 'writeToConsole' | 'writeToFile' | 'sendLog' | 'emitEvent'
 
 export class LoggerNode extends Logger<HandlersNames> {
-  public init({
+  init({
     appName,
     appVersion,
     logDir,

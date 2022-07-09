@@ -29,7 +29,7 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
     })
   }
 
-  public init() {
+  init() {
     this.interceptConsole()
   }
 
