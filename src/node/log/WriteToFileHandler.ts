@@ -1,47 +1,24 @@
 import {ILogEvent, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
-import fs from 'fs'
+import fsp from 'fs/promises'
 import path from 'path'
 
-function asPromise<TResult = any>(func: (callback: (err: Error, result?: TResult) => void) => void): Promise<TResult> {
-  return new Promise((resolve, reject) => {
-    func((err, result) => {
-      if (err) {
-        reject(err)
-        return
-      }
-      resolve(result)
-    })
-  })
-}
-
 async function autoCutLogFile(filePath: string, maxSize: number, cutToSize: number) {
-  if (!fs.existsSync(filePath)) {
+  const stat = await fsp.stat(filePath).catch(() => null)
+  if (!stat?.isFile || stat.size < maxSize) {
     return
   }
 
-  const stat = await asPromise(callback => {
-    fs.stat(filePath, callback)
-  })
-  if (!stat.isFile() || stat.size < maxSize) {
-    return
-  }
-
-  const content = await asPromise(callback => {
-    fs.readFile(filePath, {encoding: 'utf8'}, callback)
-  })
+  const content = await fsp.readFile(filePath, {encoding: 'utf8'})
   if (content.length < cutToSize) {
     return
   }
 
-  await asPromise(callback => {
-    fs.writeFile(
-      filePath,
-      content.substring(content.length - cutToSize),
-      {encoding: 'utf8'},
-      callback,
-    )
-  })
+  await fsp.writeFile(
+    filePath,
+    content.substring(content.length - cutToSize),
+    {encoding: 'utf8'},
+  )
 }
 
 export class WriteToFileHandler extends LogHandler<'writeToFile'> {
@@ -77,12 +54,8 @@ export class WriteToFileHandler extends LogHandler<'writeToFile'> {
 
     const {logFilePath} = this
     const dirOutput = path.dirname(logFilePath)
-    await asPromise(callback => {
-      fs.mkdir(dirOutput, {recursive: true}, callback)
-    })
-    await asPromise(callback => {
-      fs.appendFile(logFilePath, logText, callback)
-    })
+    await fsp.mkdir(dirOutput, {recursive: true})
+    await fsp.appendFile(logFilePath, logText)
     await autoCutLogFile(logFilePath, 1000000, 500000)
   }
 }

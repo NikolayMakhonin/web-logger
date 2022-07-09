@@ -5,7 +5,8 @@ import {Logger} from '../../common/log/Logger'
 import {catchUnhandledErrors} from '../../common/log/intercept/catchUnhandledErrors'
 import {WriteToConsoleHandler} from '../../common/log/WriteToConsoleHandler'
 import {SendLogHandlerNode} from './SendLogHandlerNode'
-import {path, WriteToFileHandler} from './WriteToFileHandler'
+import {WriteToFileHandler} from './WriteToFileHandler'
+import path from 'path'
 
 type HandlersNames = 'writeToConsole' | 'writeToFile' | 'sendLog' | 'emitEvent'
 
