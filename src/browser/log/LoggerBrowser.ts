@@ -10,19 +10,19 @@ import {SendToRemoteHandler} from './SendToRemoteHandler'
 type HandlersNames = 'writeToConsole' | 'sendToRemote' | 'sendLog' | 'emitEvent'
 
 export class LoggerBrowser extends Logger<HandlersNames> {
-	public init({
-		appName,
-		appVersion,
-		logUrls,
-		logFileName,
-		sendToRemoteLevels = LogLevel.Any,
-		writeToConsoleLevels = LogLevel.Any,
-		sendLogLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
-		emitEventLevels = LogLevel.Any,
-		filter,
-		appState,
-		interceptEval,
-	}: {
+  public init({
+    appName,
+    appVersion,
+    logUrls,
+    logFileName,
+    sendToRemoteLevels = LogLevel.Any,
+    writeToConsoleLevels = LogLevel.Any,
+    sendLogLevels = LogLevel.Fatal | LogLevel.Error | LogLevel.Warning | LogLevel.UserError | LogLevel.UserWarning,
+    emitEventLevels = LogLevel.Any,
+    filter,
+    appState,
+    interceptEval,
+  }: {
 		appName: string,
 		appVersion: string,
 		logUrls: string[],
@@ -36,34 +36,34 @@ export class LoggerBrowser extends Logger<HandlersNames> {
 		/** Use this only with strict mode */
 		interceptEval?: false,
 	}) {
-		if (typeof window !== 'undefined') {
-			// @ts-ignore
-			const {unsubscribeUnhandledErrors} = window
-			if (unsubscribeUnhandledErrors) {
-				// @ts-ignore
-				window.unsubscribeUnhandledErrors = null
-				unsubscribeUnhandledErrors()
-			}
-		}
+    if (typeof window !== 'undefined') {
+      // @ts-ignore
+      const {unsubscribeUnhandledErrors} = window
+      if (unsubscribeUnhandledErrors) {
+        // @ts-ignore
+        window.unsubscribeUnhandledErrors = null
+        unsubscribeUnhandledErrors()
+      }
+    }
 
-		catchUnhandledErrors((...args) => {
-			this.error(...args)
-		})
+    catchUnhandledErrors((...args) => {
+      this.error(...args)
+    })
 
-		super._init({
-			appName,
-			appVersion,
-			handlers: [
-				new WriteToConsoleHandler(this, writeToConsoleLevels),
-				logUrls && logUrls.length && new CombineLogHandlers(this,
-					...logUrls.map(logUrl => new SendLogHandlerBrowser(this, sendLogLevels, logUrl))),
-				new EmitEventHandler(this, emitEventLevels),
-				new SendToRemoteHandler(this, sendToRemoteLevels, logFileName),
-			],
-			filter,
-			appState,
-		})
-	}
+    super._init({
+      appName,
+      appVersion,
+      handlers: [
+        new WriteToConsoleHandler(this, writeToConsoleLevels),
+        logUrls && logUrls.length && new CombineLogHandlers(this,
+          ...logUrls.map(logUrl => new SendLogHandlerBrowser(this, sendLogLevels, logUrl))),
+        new EmitEventHandler(this, emitEventLevels),
+        new SendToRemoteHandler(this, sendToRemoteLevels, logFileName),
+      ],
+      filter,
+      appState,
+    })
+  }
 }
 
 export const logger = new LoggerBrowser()

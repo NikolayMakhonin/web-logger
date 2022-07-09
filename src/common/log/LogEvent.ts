@@ -5,264 +5,264 @@ import {objectToString} from './objectToString'
 
 function getStackTraceCountFrames(level: LogLevel): number
 {
-	switch (level)
-	{
-		case LogLevel.Error:
-			return 50
-		case LogLevel.Fatal:
-			return 100
-		case LogLevel.UserError:
-			return 10
-		case LogLevel.UserWarning:
-			return 10
-		case LogLevel.Warning:
-			return 5
-		default:
-			return 0
-	}
+  switch (level)
+  {
+    case LogLevel.Error:
+      return 50
+    case LogLevel.Fatal:
+      return 100
+    case LogLevel.UserError:
+      return 10
+    case LogLevel.UserWarning:
+      return 10
+    case LogLevel.Warning:
+      return 5
+    default:
+      return 0
+  }
 }
 
 export class LogEvent<HandlersNames extends string|number>
-	implements ILogEvent<HandlersNames>
+implements ILogEvent<HandlersNames>
 {
-	// region constructor
+  // region constructor
 
-	public readonly level: LogLevel
-	public readonly messagesOrErrors: any|Error|Array<any|Error>
-	public readonly handlersModes: ILogHandlersModes<HandlersNames>
-	public readonly time: Date
-	public readonly stack: string
-	public readonly additionalHashString: string
-	public readonly appState: TAppState
+  public readonly level: LogLevel
+  public readonly messagesOrErrors: any|Error|Array<any|Error>
+  public readonly handlersModes: ILogHandlersModes<HandlersNames>
+  public readonly time: Date
+  public readonly stack: string
+  public readonly additionalHashString: string
+  public readonly appState: TAppState
 
-	public constructor({
-		level,
-		messagesOrErrors,
-		handlersModes,
-		time,
-		stack,
-		additionalHashString,
-		appState,
-	}: {
+  public constructor({
+    level,
+    messagesOrErrors,
+    handlersModes,
+    time,
+    stack,
+    additionalHashString,
+    appState,
+  }: {
 		appState?: TAppState,
 	} & ILogEventParams<HandlersNames>)
-	{
-		this.level = level || LogLevel.Error
-		this.messagesOrErrors = messagesOrErrors
-		this.handlersModes = handlersModes
-		this.time = time || new Date() // TODO - need UTC
-		this.stack = stack
-		this.additionalHashString = additionalHashString
-		this.appState = appState
+  {
+    this.level = level || LogLevel.Error
+    this.messagesOrErrors = messagesOrErrors
+    this.handlersModes = handlersModes
+    this.time = time || new Date() // TODO - need UTC
+    this.stack = stack
+    this.additionalHashString = additionalHashString
+    this.appState = appState
 
-		if (!this.stack) {
-			const stackTraceCountFrames = getStackTraceCountFrames(this.level)
-			if (stackTraceCountFrames > 0) {
-				this.stack = new Error('StackTrace').stack
-			}
-		}
-	}
+    if (!this.stack) {
+      const stackTraceCountFrames = getStackTraceCountFrames(this.level)
+      if (stackTraceCountFrames > 0) {
+        this.stack = new Error('StackTrace').stack
+      }
+    }
+  }
 
-	// endregion
+  // endregion
 
-	// region calculable
+  // region calculable
 
-	// region messages
+  // region messages
 
-	private _messages: string[]
-	get messages(): string[] {
-		if (this._messages == null) {
-			this._messages = this.messagesOrErrors
-				? (Array.isArray(this.messagesOrErrors)
-					? this.messagesOrErrors
-					: [this.messagesOrErrors])
-					.filter(o => !(o instanceof Error))
-					.map(o => o
-						? (typeof o === 'object'
-							? objectToString(o)
-							: o.toString())
-						: o + '')
-				: []
-		}
-		return this._messages
-	}
+  private _messages: string[]
+  get messages(): string[] {
+    if (this._messages == null) {
+      this._messages = this.messagesOrErrors
+        ? (Array.isArray(this.messagesOrErrors)
+          ? this.messagesOrErrors
+          : [this.messagesOrErrors])
+          .filter(o => !(o instanceof Error))
+          .map(o => o
+            ? (typeof o === 'object'
+              ? objectToString(o)
+              : o.toString())
+            : o + '')
+        : []
+    }
+    return this._messages
+  }
 
-	private _messagesString
-	get messagesString(): string {
-		if (this._messagesString == null) {
-			this._messagesString = this.messages.join('\r\n\r\n')
-		}
-		return this._messagesString
-	}
+  private _messagesString
+  get messagesString(): string {
+    if (this._messagesString == null) {
+      this._messagesString = this.messages.join('\r\n\r\n')
+    }
+    return this._messagesString
+  }
 
-	// endregion
+  // endregion
 
-	// region errors
+  // region errors
 
-	private _errors: Error[]
-	get errors(): Error[] {
-		if (this._errors == null) {
-			this._errors = this.messagesOrErrors
-				? (Array.isArray(this.messagesOrErrors)
-					? this.messagesOrErrors
-					: [this.messagesOrErrors])
-					.filter(o => o instanceof Error) as Error[]
-				: []
-		}
-		return this._errors
-	}
+  private _errors: Error[]
+  get errors(): Error[] {
+    if (this._errors == null) {
+      this._errors = this.messagesOrErrors
+        ? (Array.isArray(this.messagesOrErrors)
+          ? this.messagesOrErrors
+          : [this.messagesOrErrors])
+          .filter(o => o instanceof Error) as Error[]
+        : []
+    }
+    return this._errors
+  }
 
-	private _errorsString
-	get errorsString(): string {
-		if (this._errorsString == null) {
-			this._errorsString = this.errors
-				.map(objectToString as any)
-				.join('\r\n\r\n')
-		}
-		return this._errorsString
-	}
+  private _errorsString
+  get errorsString(): string {
+    if (this._errorsString == null) {
+      this._errorsString = this.errors
+        .map(objectToString as any)
+        .join('\r\n\r\n')
+    }
+    return this._errorsString
+  }
 
-	// endregion
+  // endregion
 
-	// region console
+  // region console
 
-	get consoleLevel() {
-		switch (this.level) {
-			case LogLevel.None:
-			case LogLevel.Trace:
-			case LogLevel.Debug:
-				return 'debug'
-			case LogLevel.Info:
-				return 'info'
-			case LogLevel.UserAction:
-			case LogLevel.Action:
-				return 'log'
-			case LogLevel.UserWarning:
-			case LogLevel.UserError:
-			case LogLevel.Warning:
-				return 'warn'
-			case LogLevel.Error:
-			case LogLevel.Fatal:
-			default:
-				return 'error'
-		}
-	}
+  get consoleLevel() {
+    switch (this.level) {
+      case LogLevel.None:
+      case LogLevel.Trace:
+      case LogLevel.Debug:
+        return 'debug'
+      case LogLevel.Info:
+        return 'info'
+      case LogLevel.UserAction:
+      case LogLevel.Action:
+        return 'log'
+      case LogLevel.UserWarning:
+      case LogLevel.UserError:
+      case LogLevel.Warning:
+        return 'warn'
+      case LogLevel.Error:
+      case LogLevel.Fatal:
+      default:
+        return 'error'
+    }
+  }
 
-	private _consoleString
-	get consoleString(): string {
-		if (this._consoleString == null) {
-			this._consoleString = `\r\n[${
-				this.dateString
-			}][${
-				LogLevel[this.level]
-			}]: ${
-				this.bodyString
-			}`
-		}
-		return this._consoleString
-	}
+  private _consoleString
+  get consoleString(): string {
+    if (this._consoleString == null) {
+      this._consoleString = `\r\n[${
+        this.dateString
+      }][${
+        LogLevel[this.level]
+      }]: ${
+        this.bodyString
+      }`
+    }
+    return this._consoleString
+  }
 
-	// endregion
+  // endregion
 
-	// region time
+  // region time
 
-	private _timeString
-	get dateString(): string {
-		if (this._timeString == null) {
-			this._timeString = this.time.toISOString().replace('T', ' ').replace('Z', '')
-		}
-		return this._timeString
-	}
+  private _timeString
+  get dateString(): string {
+    if (this._timeString == null) {
+      this._timeString = this.time.toISOString().replace('T', ' ').replace('Z', '')
+    }
+    return this._timeString
+  }
 
-	// endregion
+  // endregion
 
-	// region stack
+  // region stack
 
-	private _stackString
-	get stackString(): string {
-		if (this._stackString == null) {
-			this._stackString = this.stack || ''
-		}
-		return this._stackString
-	}
+  private _stackString
+  get stackString(): string {
+    if (this._stackString == null) {
+      this._stackString = this.stack || ''
+    }
+    return this._stackString
+  }
 
-	// endregion
+  // endregion
 
-	// region appInfo
+  // region appInfo
 
-	private _appInfo
-	get appInfo(): string {
-		if (this._appInfo == null) {
-			const {appState} = this
-			this._appInfo = appState ? JSON.stringify(appState, null, 4) : ''
-		}
-		return this._appInfo
-	}
+  private _appInfo
+  get appInfo(): string {
+    if (this._appInfo == null) {
+      const {appState} = this
+      this._appInfo = appState ? JSON.stringify(appState, null, 4) : ''
+    }
+    return this._appInfo
+  }
 
-	// endregion
+  // endregion
 
-	// region md5Hash
+  // region md5Hash
 
-	private _md5Hash: string
-	get md5Hash(): string {
-		if (!this._md5Hash) {
-			const buffer = []
-			if (this.additionalHashString) {
-				buffer.push(this.additionalHashString)
-			}
-			const errors = this.errors
-			if (errors) {
-				for (let i = 0, len = errors.length; i < len; i++) {
-					const error = errors[i]
-					let str = error.stack || error.toString()
-					if (str) {
-						const index = str.indexOf('\n')
-						if (index >= 0) {
-							str = str.substring(index + 1, str.length)
-						}
-					}
-					buffer.push(str)
-				}
-			}
-			if (this.stack) {
-				buffer.push(this.stack)
-			}
-			if (this.appInfo) {
-				buffer.push(this.appInfo)
-			}
-			// if (!buffer.length && this.messagesString) {
-			// 	buffer.push(this.messagesString)
-			// }
-			const hashString = buffer.join('\r\n')
+  private _md5Hash: string
+  get md5Hash(): string {
+    if (!this._md5Hash) {
+      const buffer = []
+      if (this.additionalHashString) {
+        buffer.push(this.additionalHashString)
+      }
+      const errors = this.errors
+      if (errors) {
+        for (let i = 0, len = errors.length; i < len; i++) {
+          const error = errors[i]
+          let str = error.stack || error.toString()
+          if (str) {
+            const index = str.indexOf('\n')
+            if (index >= 0) {
+              str = str.substring(index + 1, str.length)
+            }
+          }
+          buffer.push(str)
+        }
+      }
+      if (this.stack) {
+        buffer.push(this.stack)
+      }
+      if (this.appInfo) {
+        buffer.push(this.appInfo)
+      }
+      // if (!buffer.length && this.messagesString) {
+      // 	buffer.push(this.messagesString)
+      // }
+      const hashString = buffer.join('\r\n')
 
-			this._md5Hash = md5(hashString)
-		}
-		return this._md5Hash
-	}
+      this._md5Hash = md5(hashString)
+    }
+    return this._md5Hash
+  }
 
-	// endregion
+  // endregion
 
-	// region bodyString
+  // region bodyString
 
-	private _bodyString: string
-	get bodyString(): string {
-		if (!this._bodyString) {
-			const buffer = []
-			if (this.messagesString) {
-				buffer.push(this.messagesString)
-			}
-			if (this.errorsString) {
-				buffer.push(this.errorsString)
-			}
-			if (this.stackString) {
-				buffer.push(this.stackString)
-			}
-			this._bodyString = buffer.join('\r\n\r\n')
-		}
-		return this._bodyString
-	}
+  private _bodyString: string
+  get bodyString(): string {
+    if (!this._bodyString) {
+      const buffer = []
+      if (this.messagesString) {
+        buffer.push(this.messagesString)
+      }
+      if (this.errorsString) {
+        buffer.push(this.errorsString)
+      }
+      if (this.stackString) {
+        buffer.push(this.stackString)
+      }
+      this._bodyString = buffer.join('\r\n\r\n')
+    }
+    return this._bodyString
+  }
 
-	// endregion
+  // endregion
 
-	// endregion
+  // endregion
 }
