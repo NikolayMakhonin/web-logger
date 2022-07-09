@@ -25,9 +25,9 @@ const onwarnRollup = (warning, onwarn) => {
   // if ( warning.code === 'THIS_IS_UNDEFINED' ) {
   //   return false
   // }
-  // if ( warning.code === 'EVAL' ) {
-  //   return false
-  // }
+  if (warning.code === 'EVAL') {
+    return false
+  }
   // if ( warning.code === 'SOURCEMAP_ERROR' ) {
   //   return false
   // }
@@ -181,7 +181,7 @@ const browserTestsConfig = {
   input: [
     'node_modules/@flemist/test-utils/dist/lib/register/show-useragent.mjs',
     'node_modules/@flemist/test-utils/dist/lib/register/register.mjs',
-    'src/**/*.test.ts',
+    'src/{common,browser}/**/*.test.ts',
   ],
   output: {
     dir      : 'dist/bundle',
