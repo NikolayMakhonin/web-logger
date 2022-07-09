@@ -1,5 +1,4 @@
-// @ts-expect-error
-import {SparkMD5} from './helpers-cjs'
+import {SparkMD5} from './spark-md5.cjs'
 
 export function md5(str: string): string {
   const spark = new SparkMD5()

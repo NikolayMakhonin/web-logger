@@ -2,9 +2,25 @@
   "name": "@flemist/web-logger",
   "version": "1.0.1",
   "description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
-  "main": "dist/lib/index.cjs",
-  "module": "dist/lib/index.mjs",
-  "types": "dist/lib/index.d.ts",
+  "main": "dist/lib/common/index.cjs",
+  "module": "dist/lib/common/index.mjs",
+  "types": "dist/lib/common/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/lib/common/index.d.ts",
+      "import": "./dist/lib/common/index.mjs",
+      "require": "./dist/lib/common/index.cjs",
+      "browser": {
+        "import": "./dist/lib/browser/index.mjs",
+        "require": "./dist/lib/browser/index.cjs"
+      },
+      "node": {
+        "import": "./dist/lib/node/index.mjs",
+        "require": "./dist/lib/node/index.cjs"
+      }
+    }
+  },
   "engines": {
     "node": ">=9.3.0",
     "pnpm": "^7.1.6"

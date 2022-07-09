@@ -249,9 +249,14 @@ export default [
     extension: 'cjs',
   }),
   browserConfig({
-    input     : ['src/index.ts'],
+    input     : ['src/browser/index.ts'],
     outputDir : 'dist/bundle',
-    outputFile: 'browser.js',
+    outputFile: 'web-logger.min.js',
+  }),
+  browserConfig({
+    input     : ['src/unhandled-errors.ts'],
+    outputDir : 'dist/bundle',
+    outputFile: 'unhandled-errors.min.js',
   }),
   browserTestsConfig,
 ]
