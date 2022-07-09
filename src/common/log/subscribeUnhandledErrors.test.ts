@@ -50,6 +50,13 @@ describe('common > main > subscribeUnhandledErrors', function () {
       + (consoleErrorLevel ? '.' + consoleErrorLevel : '')
       + ': TEST ERROR'
 
+    function createError() {
+      function TEST_THROW() {
+        return new Error(TEST_ERROR_MESSAGE)
+      }
+      return TEST_THROW()
+    }
+
     function filterEval(str: string) {
       return !str.includes('EXCLUDED')
     }
@@ -78,36 +85,36 @@ describe('common > main > subscribeUnhandledErrors', function () {
           }
         case ErrorType.Eval:
           try {
-            eval(`throw new Error('${TEST_ERROR_MESSAGE}')` + (catchEvalType === 'excluded' ? '; "EXCLUDED"' : ''))
+            eval(`(function TEST_THROW() { throw new Error('${TEST_ERROR_MESSAGE}') })()` + (catchEvalType === 'excluded' ? '; "EXCLUDED"' : ''))
           }
           catch (e) {
             // empty
           }
           return
         case ErrorType.PromiseCreateRejected:
-          Promise.reject(new Error(TEST_ERROR_MESSAGE))
+          Promise.reject(createError())
           return delay(0)
         case ErrorType.PromiseReject:
           new Promise((_, reject) => {
-            reject(new Error(TEST_ERROR_MESSAGE))
+            reject(createError())
           })
           return delay(0)
         case ErrorType.PromiseRejectComplex:
           Promise
             .resolve()
             .then(o => {
-              throw new Error(TEST_ERROR_MESSAGE)
+              throw createError()
             })
             .catch(o => {
-              throw TEST_ERROR_MESSAGE
+              throw o
             })
             .then(() => {}, o => {
-              throw new Error(TEST_ERROR_MESSAGE)
+              throw o
             })
           return delay(0)
         case ErrorType.SetTimeout:
           setTimeout(() => {
-            throw new Error(TEST_ERROR_MESSAGE)
+            throw createError()
           }, 0)
           return delay(1)
         case ErrorType.BrowserNetwork:
@@ -118,28 +125,49 @@ describe('common > main > subscribeUnhandledErrors', function () {
       }
     }
 
-    function getShouldCatchError() {
+    type ExpectedBehavior = {
+      catchError: boolean,
+      hasStackTrace: boolean,
+    }
+
+    function getExpectedBehavior(): ExpectedBehavior {
       switch (errorType) {
         case ErrorType.Console:
           switch (catchConsoleType) {
             case null:
             case 'empty':
             case 'excluded':
-              return false
+              return {
+                catchError   : false,
+                hasStackTrace: false,
+              }
             case 'included':
             case 'all':
-              return true
+              return {
+                catchError   : true,
+                hasStackTrace: false,
+              }
             default:
               throw new Error('Unknown ErrorType: ' + errorType)
           }
         case ErrorType.Eval:
-          return catchEvalType === true
+          return {
+            catchError   : catchEvalType === true,
+            hasStackTrace: true,
+          }
         case ErrorType.PromiseCreateRejected:
         case ErrorType.PromiseReject:
         case ErrorType.PromiseRejectComplex:
         case ErrorType.SetTimeout:
+          return {
+            catchError   : catchUnhandled,
+            hasStackTrace: true,
+          }
         case ErrorType.BrowserNetwork:
-          return catchUnhandled
+          return {
+            catchError   : catchUnhandled,
+            hasStackTrace: false,
+          }
         default:
           throw new Error('Unknown ErrorType: ' + errorType)
       }
@@ -162,7 +190,7 @@ describe('common > main > subscribeUnhandledErrors', function () {
       }
     }
 
-    const shouldCatchError = getShouldCatchError()
+    const expectedBehavior = getExpectedBehavior()
     const catchConsoleLevels = getCatchConsoleLevels()
     const logs: string[] = []
 
@@ -182,12 +210,17 @@ describe('common > main > subscribeUnhandledErrors', function () {
     await generateError()
 
     // check
-    if (shouldCatchError) {
+    if (expectedBehavior.catchError) {
       if (logs.length !== 1) {
         console.log('logs:\r\n' + logs.join('\r\n'))
         assert.strictEqual(logs.length, 1)
       }
       assert.ok(logs[0].includes(TEST_ERROR_MESSAGE), logs[0])
+      assert.strictEqual(
+        logs[0].includes('TEST_THROW'),
+        expectedBehavior.hasStackTrace,
+        logs[0],
+      )
       logs.length = 0
     }
     else {

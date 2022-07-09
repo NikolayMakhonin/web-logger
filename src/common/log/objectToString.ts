@@ -168,7 +168,12 @@ export function objectToString(object: any, {
     }
 
     if (obj instanceof Error) {
-      (obj as any)._stack = obj.stack || obj.toString()
+      obj = {
+        constructor: obj.constructor,
+        message    : obj.message,
+        stack      : obj.stack || obj.toString(),
+        ...obj,
+      } as any
     }
 
     if (typeof obj === 'object') {
