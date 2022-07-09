@@ -12,7 +12,7 @@ export function filterDefault(obj) {
 function getEventTargets(event: Event): any[] {
   const elements = []
   function _push(target: any|any[]) {
-    if (!target || elements.indexOf(target) >= 0) {
+    if (!target || elements.includes(target)) {
       return
     }
     elements.push(target)

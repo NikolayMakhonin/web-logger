@@ -1,4 +1,11 @@
-import {ActionMode, ILogEvent, ILogEventParams, ILogger, ILogHandler, LogLevel} from './contracts'
+import {
+  ActionMode,
+  ILogEvent,
+  ILogEventParams,
+  ILogger,
+  ILogHandler,
+  LogLevel,
+} from './contracts'
 
 export function canDoAction(actionMode: ActionMode, allowedLevels: LogLevel, level: LogLevel) {
   return actionMode === ActionMode.Always

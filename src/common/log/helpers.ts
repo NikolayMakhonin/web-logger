@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import {SparkMD5} from './helpers-cjs'
 
 export function md5(str: string): string {

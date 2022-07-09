@@ -49,8 +49,10 @@ export class LoggerNode extends Logger<HandlersNames> {
       handlers: [
         new WriteToConsoleHandler(this, writeToConsoleLevels),
         logDir && new WriteToFileHandler(this, writeToFileLevels, path.resolve(logDir), logFileName),
-        logUrls && logUrls.length && new CombineLogHandlers(this,
-          ...logUrls.map(logUrl => new SendLogHandlerNode(this, sendLogLevels, logUrl))),
+        logUrls && logUrls.length && new CombineLogHandlers(
+          this,
+          ...logUrls.map(logUrl => new SendLogHandlerNode(this, sendLogLevels, logUrl)),
+        ),
         new EmitEventHandler(this, emitEventLevels),
       ],
       filter,

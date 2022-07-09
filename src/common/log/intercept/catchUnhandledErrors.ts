@@ -33,7 +33,7 @@ export function catchUnhandledErrors(errorHandler: TErrorHandler) {
 
       handled = true
       setTimeout(() => {
-        handled = false 
+        handled = false
       })
       errorHandler(message, ...prepareArgs(args))
     }

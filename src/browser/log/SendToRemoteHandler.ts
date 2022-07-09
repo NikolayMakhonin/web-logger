@@ -16,6 +16,7 @@ export class SendToRemoteHandler extends LogHandler<'sendToRemote'> {
   get logFileName(): string {
     return this._logFileName
   }
+
   set logFileName(value: string) {
     this._logFileName = value
     console.log(`logFileName = ${this._logFileName}`)

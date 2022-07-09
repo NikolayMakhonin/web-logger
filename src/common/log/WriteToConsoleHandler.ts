@@ -45,7 +45,7 @@ export class WriteToConsoleHandler extends LogHandler<'writeToConsole'> {
         self._logger.log({
           level,
           messagesOrErrors: args,
-          handlersModes: {
+          handlersModes   : {
             writeToConsole,
           } as any,
         })

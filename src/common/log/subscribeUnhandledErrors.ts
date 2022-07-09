@@ -44,7 +44,7 @@ export function subscribeUnhandledErrors({
           return handler
         }
       }
-      else if (Array.isArray(catchConsoleLevels) && catchConsoleLevels.indexOf(level) < 0) {
+      else if (Array.isArray(catchConsoleLevels) && !catchConsoleLevels.includes(level)) {
         return null
       }
 

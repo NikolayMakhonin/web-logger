@@ -16,7 +16,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
   handlers: ILogHandlers<HandlersNames>
   minTimeBetweenEqualEvents: number = 120000
   filter: (logEvent: ILogEvent<HandlersNames>) => boolean
-  private _logEventsTime: {
+  private readonly _logEventsTime: {
     [key: string]: number,
   } = {}
 
@@ -178,7 +178,7 @@ export class Logger<HandlersNames extends string|number> implements ILogger<Hand
 
   // region log event
 
-  private _subscribers: Array<ISubscriber<HandlersNames>> = []
+  private readonly _subscribers: Array<ISubscriber<HandlersNames>> = []
   subscribe(subscriber: ISubscriber<HandlersNames>): IUnsubscribe {
     this._subscribers.push(subscriber)
     return () => {

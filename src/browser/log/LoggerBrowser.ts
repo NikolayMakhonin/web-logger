@@ -37,10 +37,10 @@ export class LoggerBrowser extends Logger<HandlersNames> {
     interceptEval?: false,
   }) {
     if (typeof window !== 'undefined') {
-      // @ts-ignore
+      // @ts-expect-error
       const {unsubscribeUnhandledErrors} = window
       if (unsubscribeUnhandledErrors) {
-        // @ts-ignore
+        // @ts-expect-error
         window.unsubscribeUnhandledErrors = null
         unsubscribeUnhandledErrors()
       }
@@ -55,8 +55,10 @@ export class LoggerBrowser extends Logger<HandlersNames> {
       appVersion,
       handlers: [
         new WriteToConsoleHandler(this, writeToConsoleLevels),
-        logUrls && logUrls.length && new CombineLogHandlers(this,
-          ...logUrls.map(logUrl => new SendLogHandlerBrowser(this, sendLogLevels, logUrl))),
+        logUrls && logUrls.length && new CombineLogHandlers(
+          this,
+          ...logUrls.map(logUrl => new SendLogHandlerBrowser(this, sendLogLevels, logUrl)),
+        ),
         new EmitEventHandler(this, emitEventLevels),
         new SendToRemoteHandler(this, sendToRemoteLevels, logFileName),
       ],
