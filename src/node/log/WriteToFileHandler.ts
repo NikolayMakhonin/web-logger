@@ -20,22 +20,28 @@ async function autoCutLogFile(filePath: string, maxSize: number, cutToSize: numb
     return
   }
 
-  const stat = await asPromise(callback => fs.stat(filePath, callback))
+  const stat = await asPromise(callback => {
+    fs.stat(filePath, callback)
+  })
   if (!stat.isFile() || stat.size < maxSize) {
     return
   }
 
-  const content = await asPromise(callback => fs.readFile(filePath, {encoding: 'utf8'}, callback))
+  const content = await asPromise(callback => {
+    fs.readFile(filePath, {encoding: 'utf8'}, callback)
+  })
   if (content.length < cutToSize) {
     return
   }
 
-  await asPromise(callback => fs.writeFile(
-    filePath,
-    content.substring(content.length - cutToSize),
-    {encoding: 'utf8'},
-    callback,
-  ))
+  await asPromise(callback => {
+    fs.writeFile(
+      filePath,
+      content.substring(content.length - cutToSize),
+      {encoding: 'utf8'},
+      callback,
+    )
+  })
 }
 
 export class WriteToFileHandler extends LogHandler<'writeToFile'> {
@@ -71,8 +77,12 @@ export class WriteToFileHandler extends LogHandler<'writeToFile'> {
 
     const {logFilePath} = this
     const dirOutput = path.dirname(logFilePath)
-    await asPromise(callback => fs.mkdir(dirOutput, {recursive: true}, callback))
-    await asPromise(callback => fs.appendFile(logFilePath, logText, callback))
+    await asPromise(callback => {
+      fs.mkdir(dirOutput, {recursive: true}, callback)
+    })
+    await asPromise(callback => {
+      fs.appendFile(logFilePath, logText, callback)
+    })
     await autoCutLogFile(logFilePath, 1000000, 500000)
   }
 }
