@@ -95,8 +95,8 @@ describe('common > main > subscribeUnhandledErrors', function () {
         throw 'Test Error'
       },
       checkSubscribed: {
-        unhandledErrors: [[/[\w\.]*?(unhandledRejection)[\w\.]*?/i, 'Test Error', false]],
-        logs           : [/"([\w\.]*?(unhandled|uncaught)[\w\.]*?)"\n"Test Error"/],
+        unhandledErrors: [[/[\w.]*?(unhandledRejection)[\w.]*?/i, 'Test Error', false]],
+        logs           : [/"([\w.]*?(unhandled|uncaught)[\w.]*?)"\n"Test Error"/],
       },
       checkUnsubscribed: {
       },

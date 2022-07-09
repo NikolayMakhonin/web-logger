@@ -11,13 +11,13 @@ export function filterDefault(obj) {
 
 function getEventTargets(event: Event): any[] {
   const elements = []
-  function _push(target: any|any[]) {
+  function _push(target: any) {
     if (!target || elements.includes(target)) {
       return
     }
     elements.push(target)
   }
-  function push(target: any|any[]) {
+  function push(target: any) {
     if (Array.isArray(target)) {
       for (let i = 0, len = target.length; i < len; i++) {
         _push(target[i])
@@ -35,7 +35,9 @@ function getEventTargets(event: Event): any[] {
     try {
       push(event.composedPath())
     }
-    catch (err) { }
+    catch (err) {
+      // empty
+    }
   }
 
   return elements
@@ -129,6 +131,7 @@ export function objectToString(object: any, {
     if (resultSize >= maxResultSize) {
       buffer.push('...')
       resultSize += 3
+      // eslint-disable-next-line @typescript-eslint/no-throw-literal
       throw OVERFLOW
     }
   }

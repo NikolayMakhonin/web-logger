@@ -1,8 +1,7 @@
 import {ILogEvent, ILogger, LogLevel} from '../../common/log/contracts'
 import {LogHandler} from '../../common/log/LogHandler'
-
-const fs = require('fs')
-export const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 function asPromise<TResult = any>(func: (callback: (err: Error, result?: TResult) => void) => void): Promise<TResult> {
   return new Promise((resolve, reject) => {

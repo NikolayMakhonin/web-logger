@@ -1,3 +1,5 @@
+import {TLogMessageOrArray} from 'src/common'
+
 export enum LogLevel {
   Trace = 1,
   Debug = 2,
@@ -26,7 +28,7 @@ export type ILogHandlersModes<Name extends string|number> = {
 
 export interface ILogEventParams<HandlersNames extends string|number> {
   level: LogLevel
-  messagesOrErrors: any | Error | Array<any | Error>
+  messagesOrErrors: TLogMessageOrArray
   handlersModes?: ILogHandlersModes<HandlersNames>
   time?: Date
   stack?: string
