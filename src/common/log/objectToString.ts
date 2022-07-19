@@ -27,9 +27,8 @@ function getEventTargets(event: Event): any[] {
       _push(target)
     }
   }
-  push(event.target)
+  push(event.target || event.srcElement)
   push(event.currentTarget)
-  push(event.srcElement)
   push((event as any).path)
   if (typeof event.composedPath === 'function') {
     try {
@@ -164,6 +163,31 @@ export function objectToString(object: any, {
     if (obj instanceof Date) {
       appendBuffer('<Date> ')
       appendBuffer(Number.isNaN(obj.getTime()) ? 'NaN' : obj.toISOString())
+      return
+    }
+
+    if (obj instanceof Element) {
+      appendBuffer('<')
+      appendBuffer(obj.constructor.name)
+      appendBuffer('> ')
+
+      appendBuffer('<')
+      appendBuffer(obj.tagName.toLowerCase())
+      const attrNames = obj.getAttributeNames()
+      for (let i = 0, len = attrNames.length; i < len; i++) {
+        const name = attrNames[i]
+        const value = obj.getAttribute(name)
+        appendBuffer(' ')
+        appendBuffer(name)
+        appendBuffer('="')
+        appendBuffer(value)
+        appendBuffer('"')
+      }
+
+      // const html = obj.outerHTML
+      // const tagEnd = html.indexOf('>')
+      // appendBuffer(html.substring(0, tagEnd + 1))
+
       return
     }
 
