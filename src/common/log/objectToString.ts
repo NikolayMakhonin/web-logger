@@ -166,7 +166,7 @@ export function objectToString(object: any, {
       return
     }
 
-    if (obj instanceof Element) {
+    if (typeof Element !== 'undefined' && obj instanceof Element) {
       appendBuffer('<')
       appendBuffer(obj.constructor.name)
       appendBuffer('> ')
