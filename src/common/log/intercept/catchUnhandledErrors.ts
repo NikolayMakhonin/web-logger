@@ -4,7 +4,7 @@ import {
   needUnhandledRejectionPolyfill,
   OriginalPromise,
 } from 'src/common/log/intercept/InstrumentedPromise'
-import {isNode} from "src/common/helpers/isNode";
+import {isNode} from 'src/common/helpers/isNode'
 
 function prepareArgs(args: any[]) {
   return args.map(arg => {

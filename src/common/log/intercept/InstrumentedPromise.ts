@@ -2,7 +2,7 @@
 
 /* eslint-disable no-proto */
 import {globalScope} from '../globalScope'
-import {isNode} from "src/common/helpers/isNode";
+import {isNode} from 'src/common/helpers/isNode'
 
 export const OriginalPromise = Promise
 
