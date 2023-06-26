@@ -1,6 +1,6 @@
 {
   "name": "@flemist/web-logger",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Powerful NodeJS logger on server and client side with PHP / MySQL logs collector",
   "main": "dist/lib/common/index.cjs",
   "module": "dist/lib/common/index.mjs",
@@ -57,8 +57,7 @@
     }
   },
   "engines": {
-    "node": ">=9.3.0",
-    "pnpm": "^7.1.6"
+    "node": ">=9.3.0"
   },
   "repository": {
     "type": "git",

@@ -195,6 +195,7 @@ const browserTestsConfig = {
     'node_modules/@flemist/test-utils/dist/lib/register/show-useragent.mjs',
     'node_modules/@flemist/test-utils/dist/lib/register/register.mjs',
     'src/{common,browser}/**/*.test.ts',
+    '!**/-deprecated/**',
   ],
   output: {
     dir      : 'dist/bundle',
